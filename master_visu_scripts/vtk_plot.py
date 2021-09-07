@@ -20,8 +20,9 @@ def plot(file,field,bounds,ax=None,contours=False,
     Parameters
     ----------
     file : VTU or PVTU file to plot
-    field : Field to use for color. The default is 'density'.
-    bounds : Bounds by which to clip the plot. The default is None.
+    field : Field to use for color.
+    bounds : Bounds by which to clip the plot.
+    ax: Matplotlib axes on which to plot results. The default is None.
     contours : Boolean for whether to add temperature contours. 
         The default is False.
     cfields : Names of compositional fields to use if field is 'comp_field.' 
@@ -31,7 +32,7 @@ def plot(file,field,bounds,ax=None,contours=False,
 
     Returns
     -------
-    ax: Matplotlib Axes with results plotted.
+    ax: Matplotlib axes with results plotted.
 
     """
     
