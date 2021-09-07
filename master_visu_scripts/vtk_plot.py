@@ -11,19 +11,11 @@ import pyvista as pv
 from tqdm import tqdm
 from cmcrameri import cm
 
-def plot(file,field='density',bounds=None,contours=False,
+def plot(file,field,bounds,ax=None,contours=False,
          cfields=['crust_upper','crust_lower','mantle_lithosphere'],
-         null_field='asthenosphere',off_screen=True,output='img.png',
-         camera=None,plot_scalar_bar=True,**kwargs):
+         null_field='asthenosphere',plot_scalar_bar=True,**kwargs):
     """
     Plot 2D ASPECT results using Pyvista.
-    
-    Best practice is to employ this function twice, once to determine the
-    appropriate camera value with off_screen=False and camera=None, and a
-    second time with off_screen=True and the camera specified. Off_screen=
-    False triggers an interactive window where the camera can be adjusted.
-    Specifying bounds will clip the image and can help ensure that the camera
-    position is correct; some trial and error may be necessary.
 
     Parameters
     ----------
@@ -36,23 +28,19 @@ def plot(file,field='density',bounds=None,contours=False,
         The default is ['crust_upper','crust_lower','mantle_lithosphere'].
     null_field : Null field if field is 'comp_field.'
         The default is 'asthenosphere'.
-    off_screen : Boolean for whether Pyvista plotting occurs off-screen.
-        The default is True.
-    output : Name of image file to output screenshot
-    camera : Position for Pyvista camera. Needs to be a list
-        with focal point, position, and viewup. The default is None.
 
     Returns
     -------
-    cpos: Camera position if plotting onscreen [focal point, position,viewup]
-    img : img object that can be saved or plotted.
+    ax: Matplotlib Axes with results plotted.
 
     """
     
     mesh = pv.read(file)
     
-    if bounds is not None:
-        mesh = mesh.clip_box(bounds=bounds,invert=False)
+    km2m = 1000
+    bounds_m = [bound*km2m for bound in bounds] # Convert bounds to m
+    bounds_3D = bounds_m + [0,0]
+    mesh = mesh.clip_box(bounds=bounds_3D,invert=False)
     
     if field=='comp_field':
         mesh = comp_field_vtk(mesh,fields=cfields,null_field=null_field)
@@ -83,7 +71,7 @@ def plot(file,field='density',bounds=None,contours=False,
         font_family="arial",
     )
 
-    plotter = pv.Plotter(off_screen=off_screen)
+    plotter = pv.Plotter(off_screen=True)
 
     # Select color map and color bar title for each field.
     # Also set the min/max limits for the color bar, change as needed.
@@ -145,20 +133,40 @@ def plot(file,field='density',bounds=None,contours=False,
         plotter.add_mesh(cntrs,color='black',line_width=5)
     
     plotter.view_xy()
+    
+    # Calculate Camera Position from Bounds
+    bounds_array = np.array(bounds_m)
+    xmag = float(abs(bounds_array[1] - bounds_array[0]))
+    ymag = float(abs(bounds_array[3] - bounds_array[2]))
+    aspect_ratio = ymag/xmag
+    
+    plotter.window_size = (1024,int(1024*aspect_ratio))
+    
+    xmid = xmag/2 + bounds_array[0] # X midpoint
+    ymid = ymag/2 + bounds_array[2] # Y midpoint
+    zoom = xmag*aspect_ratio*1.875 # Zoom level - not sure why 1.875 works
 
-#    plotter.window_size = 1200,660
-    plotter.window_size = 300,300
-
-    if camera is not None:
-        plotter.camera_position = camera
-        plotter.camera_set = True
-    if off_screen==False:
-        cpos = plotter.show(screenshot='output')
-        return(cpos)
-    else:
-        img = plotter.screenshot(output,transparent_background=True,
+    position = (xmid,ymid,zoom)
+    focal_point = (xmid,ymid,0)
+    viewup = (0,1,0)
+    
+    camera = [position,focal_point,viewup]
+    
+    plotter.camera_position = camera
+    plotter.camera_set = True
+    
+    # Create image
+    img = plotter.screenshot(transparent_background=True,
                              return_img=True)
-        return(img)
+    
+    # Plot using imshow
+    if ax is None:
+        ax = plt.gca()
+    
+    ax.imshow(img,aspect='equal',extent=bounds)
+    
+    return(ax)
+
 
 def add_contours(mesh,field='T',values=np.arange(500,1700,200)):
     """
