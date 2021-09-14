@@ -56,9 +56,11 @@ position = (50000,50000,-300000)
 viewup = (0,1,0)
 camera = [position,focal_point,viewup]
 
-# List of bounds to clip model [xmin,xmax,ymin,ymax,zmin,zmax].
+# List of bounds to clip model:
+# [xmin,xmax,ymin,ymax] for 2D and
+# [xmin,xmax,ymin,ymax,zmin,zmax] for 3D.
 # Note that 0 indicates bottom.
-bounds = [0,100000,0,100000,0,0]
+bounds = [0,100000,0,100000]
 
 # We plot the xx element of the stress tensor.
 field = 've_stress_xx'
@@ -70,7 +72,7 @@ field = 've_stress_xx'
 for x in range(len(axs.flat)):
     img = vp.plot(files[x],field=field,
                          bounds=bounds,
-                         off_screen=True,camera=camera, plot_scalar_bar=False)
+                         plot_scalar_bar=False)
     axs.flat[x].imshow(img,aspect='equal',extent=[0,100,0,100])
     axs.flat[x].annotate(labels[x]+' t'+str(x),xy=(0.1,0.9),xycoords='axes fraction')
     # Maybe set separate titles for each subplot
