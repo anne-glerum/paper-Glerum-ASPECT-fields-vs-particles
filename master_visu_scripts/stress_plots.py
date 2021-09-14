@@ -70,10 +70,10 @@ field = 've_stress_xx'
 # Subplot lables include the timestep number in the top left corner.
 # Use plot_scalar_bar=False to not plot the color bar.
 for x in range(len(axs.flat)):
-    img = vp.plot(files[x],field=field,
-                         bounds=bounds,
-                         plot_scalar_bar=False)
-    axs.flat[x].imshow(img,aspect='equal',extent=[0,100,0,100])
+    vp.plot(files[x],field=field,
+            bounds=bounds,
+            ax=axs.flat[x],
+            plot_scalar_bar=False)
     axs.flat[x].annotate(labels[x]+' t'+str(x),xy=(0.1,0.9),xycoords='axes fraction')
     # Maybe set separate titles for each subplot
     #axs.flat[x].set_title(f'Name {x}')
