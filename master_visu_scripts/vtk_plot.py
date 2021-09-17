@@ -63,8 +63,8 @@ def plot(file,field,bounds,ax=None,contours=False,
     pv.global_theme.colorbar_horizontal.position_y = 0.01
 
     color_bar_args = dict(
-        title_font_size=12,
-        label_font_size=10,
+        title_font_size=40,
+        label_font_size=36,
         shadow=False,
         n_labels=3,
         italic=False,
