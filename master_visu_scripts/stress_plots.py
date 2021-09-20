@@ -56,9 +56,12 @@ position = (50000,50000,-300000)
 viewup = (0,1,0)
 camera = [position,focal_point,viewup]
 
-# List of bounds to clip model [xmin,xmax,ymin,ymax,zmin,zmax].
-# Note that 0 indicates bottom.
-bounds = [0,100000,0,100000,0,0]
+# List of bounds to clip model:
+# [xmin,xmax,ymin,ymax] for 2D and
+# [xmin,xmax,ymin,ymax,zmin,zmax] for 3D.
+# Note that 0 indicates bottom and that the
+# unit is km.
+bounds = [0,100,0,100]
 
 # We plot the xx element of the stress tensor.
 field = 've_stress_xx'
@@ -66,12 +69,15 @@ field = 've_stress_xx'
 # Loop over all solution files
 # and create the subplots.
 # Subplot lables include the timestep number in the top left corner.
-# Use plot_scalar_bar=False to not plot the color bar.
+# We plot the color bar only once.
+plot_bar=False
 for x in range(len(axs.flat)):
-    img = vp.plot(files[x],field=field,
-                         bounds=bounds,
-                         off_screen=True,camera=camera, plot_scalar_bar=False)
-    axs.flat[x].imshow(img,aspect='equal',extent=[0,100,0,100])
+    if x == len(axs.flat)-1:
+        plot_bar=True
+    vp.plot(files[x],field=field,
+            bounds=bounds,
+            ax=axs.flat[x],
+            plot_scalar_bar=plot_bar)
     axs.flat[x].annotate(labels[x]+' t'+str(x),xy=(0.1,0.9),xycoords='axes fraction')
     # Maybe set separate titles for each subplot
     #axs.flat[x].set_title(f'Name {x}')
