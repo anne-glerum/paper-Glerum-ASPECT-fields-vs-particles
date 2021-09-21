@@ -32,7 +32,7 @@ six==1.16.0
 tornado==6.1
 tqdm==4.62.2
 transforms3d==0.3.1
-vtk
+vtk==9.0.3
 wheel==0.37.0
 win32-setctime==1.0.3
 zipp==3.5.0
