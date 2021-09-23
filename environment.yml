@@ -1,0 +1,9 @@
+name: glerum-particles
+dependencies:
+  - python=3.9.7
+  - numpy=1.21.2
+  - pyvista=0.31.3
+  - tqdm=4.62.2
+  - pandas=1.3.2
+  - matplotlib=3.4.3
+  - cmcrameri=1.2
