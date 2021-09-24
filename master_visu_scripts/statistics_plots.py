@@ -14,15 +14,15 @@ from cmcrameri import cm
 base = r"/Applications/ASPECT/VisualStudioCode/aspect/benchmarks/viscoelastic_stress_build-up"
 
 # Change file name modifiers as needed depending on your file structure
-tail = r'/viscoelastic_stress_build-up/statistics'
+tail = r"/output-viscoelastic_stress_build-up/statistics"
 
 # Create file path
-paths = [base+tail]
+paths = base+tail
 
 # Read in the time and the minimum xx and yy components of the viscoelastic stress,
 # which are stored on the fields ve_stress_xx and ve_stress_yy.
 # The correct columns are selected with usecols.
-time,stress_xx,stress_yy = np.genfromtxt('/Applications/ASPECT/VisualStudioCode/aspect/benchmarks/viscoelastic_stress_build-up/viscoelastic_stress_build-up/statistics', comments='#', usecols=(1,14,17), unpack=True)
+time,stress_xx,stress_yy = np.genfromtxt(paths, comments='#', usecols=(1,14,17), unpack=True)
 
 # Plot the stress elements in MPa against time in ky in
 # categorical batlow colors.
@@ -32,14 +32,16 @@ plt.plot(time/1e3,-stress_yy/1e6,label="-$\sigma'_{yy}$",color=(0.985066,0.65252
 
 # Also plot the analytical solution
 # 2 * edot_ii * eta * (1 - e^(-mu*t/eta)), 
-# with edot_ii = 1e-14 1/s, eta = 1e22 Pas, mu = 1e10 Pa.
+# with edot_ii = 0.03154/yr_in_secs/model_width 1/s, eta = 1e22 Pas, mu = 1e10 Pa.
 yr_in_secs=3600.0*24.0*365.25
-plt.plot(time/1e3,1e-6*2e-14*1e22*(1.-np.exp(-1e10*time*yr_in_secs/1e22)),label='analytical',color='black',linestyle='dashed')
+edot_ii=0.03154/yr_in_secs/100000.
+plt.plot(time/1e3,1e-6*2*edot_ii*1e22*(1.-np.exp(-1e10*time*yr_in_secs/1e22)),label='analytical',color='black',linestyle='dashed')
 
 # Labelling of plot
 plt.xlabel("Time [ky]")
 plt.ylabel("Deviatoric viscoelastic stress $\sigma'}$ components [MPa]")
-plt.legend()
+# Manually place legend in lower right corner. 
+plt.legend(loc='lower right')
 # Title might not be needed/allowed.
 #plt.title("Deviatoric viscoelastic stress over time")
 plt.grid(axis='x',color='0.95')
