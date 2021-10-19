@@ -99,6 +99,7 @@ ax2.set_xticks([1e22])
 ax2.text(5e21,-5,'(c)',fontsize=15)
 plt.setp(ax2.get_xticklabels(),fontsize=12, visible=True)
 plt.setp(ax2.get_yticklabels(),fontsize=12, visible=False)
+plt.minorticks_off()
 plt.gca().invert_yaxis()
 
 # Anotations in viscosity subplot
