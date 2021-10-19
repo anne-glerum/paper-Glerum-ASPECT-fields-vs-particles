@@ -6,6 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.colors as colors
 from matplotlib.patches import ConnectionPatch
+from cmcrameri import cm
 
 #----------------------------General plotting parameters------------------------------
 
@@ -52,12 +53,13 @@ for i in range(len(M[:,0])):
 fig, (ax,ax1,ax2) = plt.subplots(1,3,figsize=(14,4), gridspec_kw={'width_ratios': [4,0.8,0.8],'wspace':0.07,'hspace':0.25},sharex=False, squeeze=True)
 
 cmap = colors.ListedColormap(['darkblue', 'lightsteelblue', 'pink']) # Create customized discrete colormap
+
 im=ax.imshow(M,extent=[x_left, x_right, z_bottom, z_surface], cmap=cmap)
 ax.spines['top'].set_visible(False)
 ax.set_yticks([25,75,200,670])
 ax.set_xticks([x_left,x_right])
-ax.set_xlabel('$Distance$ $(km)$',fontsize=13)
-ax.set_ylabel('$Depth$ $(km)$',fontsize=13)
+ax.set_xlabel('Distance $[km]$',fontsize=13)
+ax.set_ylabel('Depth $[km]$',fontsize=13)
 ax.set_xlim(x_left,x_right)
 ax.set_ylim(z_bottom,z_surface)
 ax.text(-10,-20,'(a)',fontsize=15)
@@ -76,8 +78,9 @@ ax.text(760,640,'$No$ $Slip$',fontsize=9)
 ax.text(720,-30,'$Free$ $Surface$',fontsize=9)
 
 # Density subplot
-ax1.plot(density,zs,c='C0',linewidth=2)
-ax1.set_xlabel(r'$\rho$ $(kg/m^3)$',fontsize=13)
+cmap_batlow=cm.batlow #Batlow colors
+ax1.plot(density,zs,c=cmap_batlow(0.2),linewidth=2)
+ax1.set_xlabel(r'$\rho$ $[kg/m^3]$',fontsize=13)
 ax1.set_ylim(z_surface,z_upper_mantle)
 ax1.set_xlim(2850,3350)
 ax1.set_yticks([25,75,200])
@@ -87,9 +90,9 @@ plt.setp(ax1.get_xticklabels(),fontsize=13, visible=True)
 plt.setp(ax1.get_yticklabels(),fontsize=13, visible=True)
 
 # Viscosity subplot
-ax2.plot(viscosity,zs,c='k',linewidth=2)
+ax2.plot(viscosity,zs,c=cmap_batlow(0.4),linewidth=2)
 ax2.set_xscale('log')
-ax2.set_xlabel(r'$\eta$ $(Pa \cdot s)$',fontsize=13)
+ax2.set_xlabel(r'$\eta$ $[Pa \cdot s]$',fontsize=13)
 ax2.set_ylim(z_surface,z_upper_mantle)
 ax2.set_xlim(5e18,5e25)
 ax2.set_yticks([25,75,200])
@@ -98,11 +101,11 @@ plt.setp(ax2.get_xticklabels(),fontsize=13, visible=True)
 plt.setp(ax2.get_yticklabels(),fontsize=12, visible=False)
 plt.gca().invert_yaxis()
 
-# Anotations in viscosity subplot
+# Annotations in viscosity subplot
 ax2.plot(np.linspace(5e18,5e25,100),np.ones(100)*25,linestyle='--',c='k',linewidth=1)
 ax2.plot(np.linspace(5e18,5e25,100),np.ones(100)*75,linestyle='--',c='k',linewidth=1)
 ax2.text(2e21,20,'Crust',fontsize=8)
-ax2.text(2e21,72,'Matle\nLithosphere',fontsize=8)
+ax2.text(2e21,72,'Mantle\nLithosphere',fontsize=8)
 ax2.text(2e21,150,'Sublithospheric\nMantle',fontsize=8)
 ax2.text(6e18,34,r'$\mathbf{Moho}$',fontsize=8)
 ax2.text(6e18,84,r'$\mathbf{LAB}$',fontsize=8)
