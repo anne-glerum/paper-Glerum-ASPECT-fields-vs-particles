@@ -72,6 +72,9 @@ ax.arrow(100,40,4,0,width=0.8, clip_on=False, fill=True, facecolor='black')
 ax.arrow(100,60,4,0,width=0.8, clip_on=False, fill=True, facecolor='black')
 ax.arrow(100,80,4,0,width=0.8, clip_on=False, fill=True, facecolor='black')
 ax.text(100,90,'$v_x=3.154$\n  $[cm/yr]$', fontsize=8)
+# Annotations material properties
+ax.text(35,25,r'$\rho=2800$ $kg/m^3$', fontsize=9, ha='left')
+ax.text(35,20,'$\eta_{\mathrm{viscous}}=10^{22} \,Pa \cdot s$\n$\mu=10^{10} \, Pa$', fontsize=9, ha='left')
 
 # Density subplot
 ax1.plot(density,zs,c='C0',linewidth=2)
