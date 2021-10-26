@@ -24,7 +24,7 @@ zs=np.linspace(z_surface,z_bottom,len(M[:,0]))	# Depth array [km]
 density=np.ones(len(zs))			# Density Array [km]
 viscosity=np.ones(len(zs))			# Viscosity Array [km]
 
-# Create setup structure (alternatively can load data)
+# Create setup structure; only one material fills the domain
 for i in range(len(M[:,0])):
 	for j in range(len(M[0,:])):
 			M[i,j]=1
@@ -49,17 +49,11 @@ ax.text(0,-5,'(a)',fontsize=15)
 plt.setp(ax.get_xticklabels(),fontsize=12, visible=True)
 plt.setp(ax.get_yticklabels(),fontsize=12, visible=True)
 
-# Colorbar
-#cb=fig.colorbar(im,ax=ax, orientation='horizontal',aspect=50, fraction=0.031,pad=0.2,ticks=[1.35, 2, 2.65])
-#cb.ax.tick_params(labelsize=10, direction='out',pad=5)
-#cb.ax.set_xticklabels(['$Crust$', '$Mantle$\n $Lithosphere$','$Sublithosphere$\n $Mantle$'])
-
 # Annotations - Boundary Conditions
 ax.text(3,50,'Free\n Slip',fontsize=9)
 ax.text(70,50,'Prescribed $v_x$',fontsize=9)
 ax.text(35,97,'Prescribed $v_y$',fontsize=9)
 ax.text(40,-3,'Free Slip',fontsize=9)
-#ax.annotate('v', (95,105), xytext=(97,105), arrowprops=dict(facecolor='black'), annotation_clip=False)
 # Bottom boundary
 ax.arrow(20,108,0,-4,width=0.8, clip_on=False, fill=True, facecolor='black')
 ax.arrow(40,108,0,-4,width=0.8, clip_on=False, fill=True, facecolor='black')
@@ -102,19 +96,10 @@ plt.setp(ax2.get_yticklabels(),fontsize=12, visible=False)
 plt.minorticks_off()
 plt.gca().invert_yaxis()
 
-# Anotations in viscosity subplot
-#ax2.plot(np.linspace(5e18,5e25,100),np.ones(100)*25,linestyle='--',c='k',linewidth=1)
-#ax2.plot(np.linspace(5e18,5e25,100),np.ones(100)*75,linestyle='--',c='k',linewidth=1)
-#ax2.text(2e21,20,'Crust',fontsize=8)
-#ax2.text(2e21,72,'Matle\nLithosphere',fontsize=8)
-#ax2.text(2e21,150,'Sublithospheric\nMantle',fontsize=8)
-#ax2.text(6e18,34,r'$\mathbf{Moho}$',fontsize=8)
-#ax2.text(6e18,84,r'$\mathbf{LAB}$',fontsize=8)
-
 # Add Connection Patch
 ax.add_patch(ConnectionPatch(xyA=(x_right,z_surface),coordsA='data',xyB=(2850,z_surface),coordsB='data',axesA=ax,axesB=ax1,clip_on=False))
 ax.add_patch(ConnectionPatch(xyA=(x_right,z_bottom),coordsA='data',xyB=(2850,z_bottom),coordsB='data',axesA=ax,axesB=ax1,clip_on=False))
 
 # Save Figure
-plt.savefig('viscoelastic_stress_build-up.pdf',bbox_inches="tight")
+plt.savefig('setup_viscoelastic_stress_build-up.pdf',bbox_inches="tight")
 plt.close()
