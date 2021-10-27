@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 import matplotlib.colors as colors
 from matplotlib.patches import ConnectionPatch
 from cmcrameri import cm
+from matplotlib.collections import LineCollection
+from matplotlib.colors import ListedColormap, BoundaryNorm
 
 #----------------------------General plotting parameters------------------------------
 
@@ -77,9 +79,14 @@ ax.text(1505,330,'$Free$\n $Slip$',fontsize=9)
 ax.text(760,640,'$No$ $Slip$',fontsize=9)
 ax.text(720,-30,'$Free$ $Surface$',fontsize=9)
 
-# Density subplot
-cmap_batlow=cm.batlow #Batlow colors
-ax1.plot(density,zs,c=cmap_batlow(0.2),linewidth=2)
+# Density subplot (create small individual line segments with different colors given by _ colormap)
+points=np.transpose(np.array([density, zs])).reshape(-1, 1, 2)
+segments=np.concatenate([points[:-1], points[1:]], axis=1)
+norm=plt.Normalize(2600, 3250)
+lc=LineCollection(segments, cmap=cm.devon_r, norm=norm,linewidth=2)
+lc.set_array(density)
+ax1.add_collection(lc)
+#ax1.plot(density,zs,c='C0',linewidth=2)
 ax1.set_xlabel(r'$\rho$ $[kg/m^3]$',fontsize=13)
 ax1.set_ylim(z_surface,z_upper_mantle)
 ax1.set_xlim(2850,3350)
@@ -89,8 +96,14 @@ ax1.get_shared_y_axes().join(ax1, ax2) # Share y axis between subplots
 plt.setp(ax1.get_xticklabels(),fontsize=13, visible=True)
 plt.setp(ax1.get_yticklabels(),fontsize=13, visible=True)
 
-# Viscosity subplot
-ax2.plot(viscosity,zs,c=cmap_batlow(0.4),linewidth=2)
+# Viscosity subplot (create small individual line segments with different colors given by _ colormap)
+points=np.transpose(np.array([viscosity, zs])).reshape(-1, 1, 2)
+segments=np.concatenate([points[:-1], points[1:]], axis=1)
+norm=plt.Normalize(19,25)
+lc=LineCollection(segments, cmap=cm.bilbao, norm=norm,linewidth=2)
+lc.set_array(np.log10(viscosity))
+ax2.add_collection(lc)
+#ax2.plot(viscosity,zs,c='k',linewidth=2)
 ax2.set_xscale('log')
 ax2.set_xlabel(r'$\eta$ $[Pa \cdot s]$',fontsize=13)
 ax2.set_ylim(z_surface,z_upper_mantle)
