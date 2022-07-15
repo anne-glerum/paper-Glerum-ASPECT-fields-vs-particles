@@ -18,12 +18,15 @@ names = [
          "surface_topography_diffusion_zero_flux_dt0.002_GR4",
          "surface_topography_diffusion_zero_flux_dt0.002_GR5",
          "surface_topography_diffusion_zero_flux_dt0.002_GR6",
+         "surface_topography_diffusion_zero_flux_dt0.002_GR7",
          "surface_topography_diffusion_zero_flux_dt0.001_GR4",
          "surface_topography_diffusion_zero_flux_dt0.001_GR5",
          "surface_topography_diffusion_zero_flux_dt0.001_GR6",
+         "surface_topography_diffusion_zero_flux_dt0.001_GR7",
          "surface_topography_diffusion_zero_flux_dt0.0005_GR4",
          "surface_topography_diffusion_zero_flux_dt0.0005_GR5",
          "surface_topography_diffusion_zero_flux_dt0.0005_GR6",
+         "surface_topography_diffusion_zero_flux_dt0.0005_GR7",
         ]
 tail = r"/statistics"
 tail_topo = r"/topography"
@@ -33,10 +36,13 @@ labels = [
           'dt = 0.002 s, dh = 0.0625 m',
           'dt = 0.002 s, dh = 0.03125 m',
           'dt = 0.002 s, dh = 0.015625 m',
+          'dt = 0.002 s, dh = 0.0078125 m',
           'dt = 0.001 s, dh = 0.0625 m',
           '',
           '',
+          '',
           'dt = 0.0005 s, dh = 0.0625 m',
+          '',
           '',
           '',
          ]
@@ -45,11 +51,14 @@ labels_error = [
           '',
           '',
           '',
+          '',
           'dt = 0.001 s, dh = 0.03125 m',
           'dt = 0.001 s, dh = 0.015625 m',
+          'dt = 0.001 s, dh = 0.0078125 m',
           '',
           'dt = 0.0005 s, dh = 0.03125 m',
           'dt = 0.0005 s, dh = 0.015625 m',
+          'dt = 0.0005 s, dh = 0.0078125 m',
          ]
 # Set the colors available for plotting
 color1=[0.0051932, 0.098238, 0.34984]
@@ -58,11 +67,11 @@ color3=[0.32701, 0.4579, 0.28638]
 color4=[0.67824, 0.55071, 0.1778]
 color5=[0.97584, 0.63801, 0.50183]
 color6=[0.98447, 0.78462, 0.93553]
-colors = [color1, color3, color5, color1, color3, color5, color1, color3, color5]
+colors = [color1, color3, color4, color5, color1, color3, color4, color5, color1, color3, color4, color5]
 # Set the line styles
-linestyles = ['solid', 'solid', 'solid', 'dashed', 'dashed', 'dashed', 'dotted', 'dotted', 'dotted'] 
+linestyles = ['solid', 'solid', 'solid', 'solid', 'dashed', 'dashed', 'dashed', 'dashed', 'dotted', 'dotted', 'dotted','dotted'] 
 # Set the marker styles (no markers in this case)
-markers = ['', '', '', '', '', '', '', '', ''] 
+markers = ['', '', '', '', '', '', '', '', '', '', '', ''] 
 # Only plot every nth marker
 dmark=15
 
@@ -213,4 +222,4 @@ ax[0].text(0.025,0.039,"t = 1 s", rotation = 3)
 plt.tight_layout()
 
 # Save as pdf
-plt.savefig('10_surface_topography_diffusion_zero_flux.pdf')    
+plt.savefig('10_surface_topography_diffusion_zero_flux_GR4567.pdf')    
