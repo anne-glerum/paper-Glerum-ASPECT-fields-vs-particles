@@ -15,29 +15,29 @@ base = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/HLRN/HLRN/fix_stresses_el
 
 # Change file name modifiers as needed depending on your file structure
 names = [
-         "ve_build-up_dt500_GR0",
-         "ve_build-up_dt500_GR1",
-         "ve_build-up_dt500_GR2",
-         "ve_build-up_dt250_dh10km",
-         "ve_build-up_dt250_dh5km",
-         "ve_build-up_dt250_dh2-5km",
-         "ve_build-up_dt125_dh10km",
-         "ve_build-up_dt125_dh5km",
-         "ve_build-up_dt125_dh2-5km",
+         "ve_build-up_particles_dt500_GR0",
+         "ve_build-up_particles_dt500_GR1",
+         "ve_build-up_particles_dt500_GR2",
+         "ve_build-up_particles_dt250_GR0",
+         "ve_build-up_particles_dt250_GR1",
+         "ve_build-up_particles_dt250_GR2",
+         "ve_build-up_particles_dt125_GR0",
+         "ve_build-up_particles_dt125_GR1",
+         "ve_build-up_particles_dt125_GR2",
         ]
 tail = r"/statistics"
 
 # The labels the graphs will get in the plot
 labels = [
-          'dt = 500 yr, dh = 10 km',
-          'dt = 500 yr, dh = 5 km',
-          'dt = 500 yr, dh = 2.5 km',
-          'dt = 250 yr, dh = 10 km',
-          'dt = 250 yr, dh = 5 km',
-          'dt = 250 yr, dh = 2.5 km',
-          'dt = 125 yr, dh = 10 km',
-          'dt = 125 yr, dh = 5 km',
-          'dt = 125 yr, dh = 2.5 km'
+          'dt = 500 yr, dh = 10 km, part.',
+          'dt = 500 yr, dh = 5 km, part.',
+          'dt = 500 yr, dh = 2.5 km, part.',
+          'dt = 250 yr, dh = 10 km, part.',
+          'dt = 250 yr, dh = 5 km, part.',
+          'dt = 250 yr, dh = 2.5 km, part.',
+          'dt = 125 yr, dh = 10 km, part.',
+          'dt = 125 yr, dh = 5 km, part.',
+          'dt = 125 yr, dh = 2.5 km, part.'
          ]
 # Set the colors available for plotting
 color1=[0.0051932, 0.098238, 0.34984]
@@ -92,7 +92,7 @@ for name in names:
   # Read in the time and the minimum xx component of the viscoelastic stress,
   # which is stored on the field ve_stress_xx.
   # The correct columns are selected with usecols (counting starts from 0).
-  time,stress_xx_min = np.genfromtxt(path, comments='#', usecols=(1,15), unpack=True)
+  time,stress_xx_min = np.genfromtxt(path, comments='#', usecols=(1,12), unpack=True)
 
   # Plot the stress elements in MPa against time in ky in
   # categorical batlow colors.
@@ -139,4 +139,4 @@ ax[1].text(5,-0.13,"dt = 125 yr", rotation = 10)
 plt.tight_layout()
 
 # Save as pdf
-plt.savefig('2_viscoelastic_build-up.pdf')    
+plt.savefig('2_viscoelastic_build-up_particles.pdf')    
