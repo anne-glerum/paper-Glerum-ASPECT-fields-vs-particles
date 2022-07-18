@@ -52,32 +52,18 @@ plt.setp(ax.get_yticklabels(),fontsize=12, visible=True)
 
 # Annotations - Boundary Conditions
 ax.text(-5,50,'Free slip',fontsize=9, rotation = 90, va = 'center', ha = 'center')
-ax.text(95,50,'Prescribed $\mathrm{v_x}$',fontsize=9, rotation = 90, va = 'center', ha = 'center')
-ax.text(50,5,'Prescribed $\mathrm{v_y}$',fontsize=9, va = 'center', ha = 'center')
+ax.text(105,50,'Free slip',fontsize=9, rotation = -90, va = 'center', ha = 'center')
+ax.text(50,-5,'Free slip',fontsize=9, va = 'center', ha = 'center')
 ax.text(50,105,'Free slip',fontsize=9, va = 'center', ha = 'center')
-# Bottom boundary
-ax.arrow(20,-8,0,4,width=0.8, clip_on=False, fill=True, facecolor='black')
-ax.arrow(40,-8,0,4,width=0.8, clip_on=False, fill=True, facecolor='black')
-ax.arrow(60,-8,0,4,width=0.8, clip_on=False, fill=True, facecolor='black')
-ax.arrow(80,-8,0,4,width=0.8, clip_on=False, fill=True, facecolor='black')
-ax.text(5,-17,'$v_y=3.154$\n [cm/yr]', fontsize=8)
-# Right boundary
-ax.arrow(100,20,4,0,width=0.8, clip_on=False, fill=True, facecolor='black')
-ax.arrow(100,40,4,0,width=0.8, clip_on=False, fill=True, facecolor='black')
-ax.arrow(100,60,4,0,width=0.8, clip_on=False, fill=True, facecolor='black')
-ax.arrow(100,80,4,0,width=0.8, clip_on=False, fill=True, facecolor='black')
-ax.text(101,10,'$\mathrm{v_x}=3.154$\n  [cm/yr]', fontsize=8)
 # Annotations material properties
 ax.text(35,75,r'$\rho=2800$ $\mathrm{kg/m^3}$', fontsize=9, ha='left')
+ax.text(35,70,r'$g=10$ $\mathrm{m/s^2}$', fontsize=9, ha='left')
 ax.text(35,80,'$\eta_{\mathrm{viscous}}=10^{22} \,\mathrm{Pa} \cdot s$\n$\mu=10^{10} \, \mathrm{Pa}$', fontsize=9, ha='left')
 # Annotations material properties
-ax.text(35,45,r'$\dot{\epsilon} = \binom{10^{-14} \, \,\,\, 0}{\,\,\,\, 0 \, -10^{-14}}$', fontsize=9, ha='left', va='center')
-ax.text(35,35,r'$\mathrm{W} = \binom{0 \; 0}{0 \; 0}$', fontsize=9, ha='left', va='center')
-
-# Add Connection Patch
-#ax.add_patch(ConnectionPatch(xyA=(x_right,z_surface),coordsA='data',xyB=(2850,z_surface),coordsB='data',axesA=ax,axesB=ax1,clip_on=False))
-#ax.add_patch(ConnectionPatch(xyA=(x_right,z_bottom),coordsA='data',xyB=(2850,z_bottom),coordsB='data',axesA=ax,axesB=ax1,clip_on=False))
+ax.text(35,45,r'$\dot{\epsilon} = \binom{0 \,\,  0}{0 \,\, 0} \, \mathrm{1/s}$', fontsize=9, ha='left', va='center')
+ax.text(35,35,r'$\mathrm{W} = \binom{0 \,\, 0}{0 \,\, 0} \, \mathrm{1/s}$', fontsize=9, ha='left', va='center')
+ax.text(35,25,r'$\tau0(t=0) = \binom{20 \cdot 10^6 \,\,\,\,\,\,\,\,\,\,\,\, 0}{0 \,\,\,\, -20 \cdot 10^6} \, \mathrm{Pa}$', fontsize=9, ha='left', va='center')
 
 # Save Figure
-plt.savefig('setup_viscoelastic_stress_build-up.pdf',bbox_inches="tight")
+plt.savefig('setup_viscoelastic_stress_relaxation.pdf',bbox_inches="tight")
 plt.close()

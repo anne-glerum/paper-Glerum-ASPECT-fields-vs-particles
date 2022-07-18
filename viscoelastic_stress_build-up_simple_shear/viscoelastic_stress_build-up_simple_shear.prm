@@ -64,7 +64,7 @@ end
 
 # Velocity boundary conditions
 subsection Boundary velocity model
-  set Prescribed velocity boundary indicators = 2:function, 3:function, 0:function #, 1:function
+  set Prescribed velocity boundary indicators = 2:function, 3:function, 0:function, 1:function
   set Tangential velocity boundary indicators = 
   subsection Function
         set Variable names      = x,z,t
