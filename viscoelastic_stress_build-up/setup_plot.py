@@ -70,6 +70,9 @@ ax.text(101,10,'$\mathrm{v_x}=3.154$\n  [cm/yr]', fontsize=8)
 # Annotations material properties
 ax.text(35,75,r'$\rho=2800$ $\mathrm{kg/m^3}$', fontsize=9, ha='left')
 ax.text(35,80,'$\eta_{\mathrm{viscous}}=10^{22} \,\mathrm{Pa} \cdot s$\n$\mu=10^{10} \, \mathrm{Pa}$', fontsize=9, ha='left')
+# Annotations material properties
+ax.text(35,45,r'$\dot{\epsilon} = \binom{10^{-14} \, \,\,\, 0}{\,\,\,\, 0 \, -10^{-14}}$', fontsize=9, ha='left', va='center')
+ax.text(35,35,r'$\mathrm{W} = \binom{0 \; 0}{0 \; 0}$', fontsize=9, ha='left', va='center')
 
 # Add Connection Patch
 #ax.add_patch(ConnectionPatch(xyA=(x_right,z_surface),coordsA='data',xyB=(2850,z_surface),coordsB='data',axesA=ax,axesB=ax1,clip_on=False))
