@@ -76,5 +76,5 @@ ax.text(3.5,7.0,r'$g=10$ $\mathrm{m/s^2}$', fontsize=9, ha='left')
 ax.text(3.5,8.0,'$\eta_{\mathrm{viscous}}=10^{20} \,\mathrm{Pa} \cdot s$', fontsize=9, ha='left')
 
 # Save Figure
-plt.savefig('setup_surface_topography_diffusion_constant_h_setup.pdf',bbox_inches="tight")
+plt.savefig('11_surface_topography_diffusion_constant_h_setup.pdf',bbox_inches="tight")
 plt.close()

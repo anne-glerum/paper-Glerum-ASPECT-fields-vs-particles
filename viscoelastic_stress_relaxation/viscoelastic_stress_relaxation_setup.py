@@ -65,5 +65,5 @@ ax.text(35,35,r'$\mathrm{W} = \binom{0 \,\, 0}{0 \,\, 0} \, \mathrm{1/s}$', font
 ax.text(35,25,r'$\tau0(t=0) = \binom{20 \cdot 10^6 \,\,\,\,\,\,\,\,\,\,\,\, 0}{0 \,\,\,\, -20 \cdot 10^6} \, \mathrm{Pa}$', fontsize=9, ha='left', va='center')
 
 # Save Figure
-plt.savefig('setup_viscoelastic_stress_relaxation.pdf',bbox_inches="tight")
+plt.savefig('1_viscoelastic_relaxation_setup.pdf',bbox_inches="tight")
 plt.close()

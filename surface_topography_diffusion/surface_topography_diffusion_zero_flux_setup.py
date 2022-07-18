@@ -73,5 +73,5 @@ ax.text(0.35,0.70,r'$g=1$ $\mathrm{m/s^2}$', fontsize=9, ha='left')
 ax.text(0.35,0.80,'$\eta_{\mathrm{viscous}}=1 \,\mathrm{Pa} \cdot s$', fontsize=9, ha='left')
 
 # Save Figure
-plt.savefig('setup_surface_topography_diffusion_zero_flux_setup.pdf',bbox_inches="tight")
+plt.savefig('10_surface_topography_diffusion_zero_flux_setup.pdf',bbox_inches="tight")
 plt.close()
