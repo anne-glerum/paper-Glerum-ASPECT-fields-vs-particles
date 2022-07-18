@@ -79,5 +79,5 @@ ax.text(35,35,r'$\mathrm{W} = \binom{0 \; 0}{0 \; 0}$', fontsize=9, ha='left', v
 #ax.add_patch(ConnectionPatch(xyA=(x_right,z_bottom),coordsA='data',xyB=(2850,z_bottom),coordsB='data',axesA=ax,axesB=ax1,clip_on=False))
 
 # Save Figure
-plt.savefig('setup_viscoelastic_stress_build-up.pdf',bbox_inches="tight")
+plt.savefig('2_viscoelastic_build-up_setup.pdf',bbox_inches="tight")
 plt.close()
