@@ -57,7 +57,7 @@ ax.text(50,-5,'Free slip',fontsize=9, va = 'center', ha = 'center')
 ax.text(50,105,'Free slip',fontsize=9, va = 'center', ha = 'center')
 # Annotations material properties
 ax.text(35,75,r'$\rho=2800$ $\mathrm{kg/m^3}$', fontsize=9, ha='left')
-ax.text(35,70,r'$g=10$ $\mathrm{m/s^2}$', fontsize=9, ha='left')
+ax.text(35,70,r'$g=0$ $\mathrm{m/s^2}$', fontsize=9, ha='left')
 ax.text(35,80,'$\eta_{\mathrm{viscous}}=10^{22} \,\mathrm{Pa} \cdot s$\n$\mu=10^{10} \, \mathrm{Pa}$', fontsize=9, ha='left')
 # Annotations material properties
 ax.text(35,45,r'$\dot{\epsilon} = \binom{0 \,\,  0}{0 \,\, 0} \, \mathrm{1/s}$', fontsize=9, ha='left', va='center')
