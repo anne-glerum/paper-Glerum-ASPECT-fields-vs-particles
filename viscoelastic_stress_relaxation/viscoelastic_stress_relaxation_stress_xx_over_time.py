@@ -18,10 +18,10 @@ names = [
          "ve_relaxation_dt500yr_dh2-5km",
          "ve_relaxation_dt250yr_dh10km",
          "ve_relaxation_dt250yr_dh5km",
-         "ve_relaxation_dt250yr_dh2-5km",
-         "ve_relaxation_dt125yr_dh10km",
-         "ve_relaxation_dt125yr_dh5km",
-         "ve_relaxation_dt125yr_dh2-5km_"
+         "ve_relaxation_dt250_GR2",
+         "ve_relaxation_dt125_GR0",
+         "ve_relaxation_dt125_GR1",
+         "ve_relaxation_dt125_GR2"
         ]
 tail = r"/statistics"
 
