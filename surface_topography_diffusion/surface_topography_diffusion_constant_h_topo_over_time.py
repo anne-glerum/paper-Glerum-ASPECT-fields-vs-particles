@@ -167,11 +167,11 @@ ax[0].set_xlabel("X [km]")
 ax[0].xaxis.set_label_coords(.5,-0.1)
 ax[0].set_ylabel(r"Topography [m]")
 ax[2].set_xlabel("Time [ky]")
-ax[1].set_ylabel(r"Topography at x = 5 [km]")
+ax[1].set_ylabel(r"Topography at x = 5 km [m]")
 ax[2].set_ylabel(r"Error at x = 5 km [%]")
 # Manually place legend 
 #ax[0].legend(loc='center')
-ax[1].legend(loc='upper right')
+ax[1].legend(loc='upper right',ncol=2)
 #ax[2].legend(loc='upper left')
 # Grid and tickes
 ax[0].grid(axis='x',color='0.95')

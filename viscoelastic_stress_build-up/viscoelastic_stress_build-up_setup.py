@@ -69,6 +69,7 @@ ax.arrow(100,80,4,0,width=0.8, clip_on=False, fill=True, facecolor='black')
 ax.text(101,10,'$\mathrm{v_x}=3.154$\n  [cm/yr]', fontsize=8)
 # Annotations material properties
 ax.text(35,75,r'$\rho=2800$ $\mathrm{kg/m^3}$', fontsize=9, ha='left')
+ax.text(35,70,r'$g=0$ $\mathrm{m/s^2}$', fontsize=9, ha='left')
 ax.text(35,80,'$\eta_{\mathrm{viscous}}=10^{22} \,\mathrm{Pa} \cdot s$\n$\mu=10^{10} \, \mathrm{Pa}$', fontsize=9, ha='left')
 # Annotations material properties
 ax.text(35,45,r'$\dot{\epsilon} = \binom{10^{-14} \, \,\,\, 0}{\,\,\,\, 0 \, -10^{-14}}$', fontsize=9, ha='left', va='center')

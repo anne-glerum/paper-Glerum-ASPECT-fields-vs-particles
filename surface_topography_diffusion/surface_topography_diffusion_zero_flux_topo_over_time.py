@@ -38,24 +38,10 @@ labels = [
           'dt = 0.002 s, dh = 0.015625 m',
           'dt = 0.002 s, dh = 0.0078125 m',
           'dt = 0.001 s, dh = 0.0625 m',
-          '',
-          '',
-          '',
-          'dt = 0.0005 s, dh = 0.0625 m',
-          '',
-          '',
-          '',
-         ]
-labels_error = [
-          '',
-          '',
-          '',
-          '',
-          '',
           'dt = 0.001 s, dh = 0.03125 m',
           'dt = 0.001 s, dh = 0.015625 m',
           'dt = 0.001 s, dh = 0.0078125 m',
-          '',
+          'dt = 0.0005 s, dh = 0.0625 m',
           'dt = 0.0005 s, dh = 0.03125 m',
           'dt = 0.0005 s, dh = 0.015625 m',
           'dt = 0.0005 s, dh = 0.0078125 m',
@@ -86,7 +72,7 @@ zoom_x_min = 0.45
 zoom_x_max = 0.50
 zoom_y_min = 0.057
 zoom_y_max = 0.061
-axins = zoomed_inset_axes(ax[0], 4, loc = "upper right") # zoom = 4
+axins = zoomed_inset_axes(ax[0], 5, loc = "center") # zoom = 5
 axins.set_xlim(zoom_x_min, zoom_x_max)
 axins.set_ylim(zoom_y_min, zoom_y_max)
 mark_inset(ax[0], axins, loc1=1, loc2=4, fc="none", ec="0.5")
@@ -128,13 +114,13 @@ for name in names:
 
   # Plot the topography at the center of the domain against time in s in
   # categorical batlow colors.
-  ax[1].plot(time,max_topo,label=None,color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark)
-  ax[2].plot(time,(max_topo-topo_analytical(0.5,time))/topo_analytical(0.5,time)*100.,label=labels_error[counter],color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark)
+  ax[1].plot(time,max_topo,label=labels[counter],color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark)
+  ax[2].plot(time,(max_topo-topo_analytical(0.5,time))/topo_analytical(0.5,time)*100.,label=None,color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark)
  
   if '0.002' in name:
     x,topo = np.genfromtxt(path_topo+".00000", comments='#', usecols=(0,1), unpack=True)
     # Plot the topography along the surface of the domain, subtract domain height
-    ax[0].plot(x,topo-1,label=labels[counter],color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark)
+    ax[0].plot(x,topo-1,label=None,color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark)
 
     x,topo = np.genfromtxt(path_topo+".00025", comments='#', usecols=(0,1), unpack=True)
     # Plot the topography along the surface of the domain, subtract domain height
@@ -147,7 +133,7 @@ for name in names:
   elif '0.001' in name:
     x,topo = np.genfromtxt(path_topo+".00000", comments='#', usecols=(0,1), unpack=True)
     # Plot the topography along the surface of the domain 
-    ax[0].plot(x,topo-1,label=labels[counter],color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark)
+    ax[0].plot(x,topo-1,label=None,color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark)
 
     x,topo = np.genfromtxt(path_topo+".00050", comments='#', usecols=(0,1), unpack=True)
     # Plot the topography along the surface of the domain 
@@ -160,7 +146,7 @@ for name in names:
   elif '0.0005' in name:
     x,topo = np.genfromtxt(path_topo+".00000", comments='#', usecols=(0,1), unpack=True)
     # Plot the topography along the surface of the domain 
-    ax[0].plot(x,topo-1,label=labels[counter],color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark)
+    ax[0].plot(x,topo-1,label=None,color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark)
 
     x,topo = np.genfromtxt(path_topo+".00100", comments='#', usecols=(0,1), unpack=True)
     # Plot the topography along the surface of the domain 
@@ -184,12 +170,12 @@ ax[0].set_xlabel("X [m]")
 ax[0].xaxis.set_label_coords(.5,-0.1)
 ax[0].set_ylabel(r"Topography [m]")
 ax[2].set_xlabel("Time [s]")
-ax[1].set_ylabel(r"Topography at x = 0.5 [m]")
-ax[2].set_ylabel(r"Error at x = 0.5 [%]")
+ax[1].set_ylabel(r"Topography at x = 0.5 m [m]")
+ax[2].set_ylabel(r"Error at x = 0.5 m [%]")
 # Manually place legend 
-ax[0].legend(loc='lower center')
-ax[1].legend(loc='lower right')
-ax[2].legend(loc='upper left')
+#ax[0].legend(loc='lower center')
+ax[1].legend(loc='lower right',ncol=2)
+#ax[2].legend(loc='upper left')
 # Grid and tickes
 ax[0].grid(axis='x',color='0.95')
 ax[0].grid(axis='y',color='0.95')
@@ -204,7 +190,7 @@ ax[2].grid(axis='y',color='0.95')
 ax[0].set_xlim(0,1) # s
 ax[0].set_ylim(0.0,0.08) # m
 ax[1].set_xlim(0,0.1) # s
-ax[1].set_ylim(0.05,0.08) # m
+ax[1].set_ylim(0.0,0.08) # m
 ax[2].set_xlim(0,0.1) # s
 #ax[2].set_ylim(-0.5,0.5) # %
 
