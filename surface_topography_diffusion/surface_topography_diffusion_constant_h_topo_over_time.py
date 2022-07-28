@@ -8,7 +8,7 @@ from matplotlib import rc
 from mpl_toolkits.axes_grid1.inset_locator import zoomed_inset_axes 
 from mpl_toolkits.axes_grid1.inset_locator import mark_inset
 rc("pdf", fonttype=42)
-rc("lines", linewidth=5, markersize=15)
+rc("lines", linewidth=4, markersize=15)
 
 # Change path as needed
 base = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/HLRN/HLRN/fix_stresses_elasticity/paper_11072022/"
@@ -171,7 +171,7 @@ ax[1].set_ylabel(r"Topography at x = 5 km [m]")
 ax[2].set_ylabel(r"Error at x = 5 km [%]")
 # Manually place legend 
 #ax[0].legend(loc='center')
-ax[1].legend(loc='upper right',ncol=2)
+ax[1].legend(loc='upper right',ncol=2,handlelength=4)
 #ax[2].legend(loc='upper left')
 # Grid and tickes
 ax[0].grid(axis='x',color='0.95')

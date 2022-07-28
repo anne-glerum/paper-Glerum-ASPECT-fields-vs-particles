@@ -8,7 +8,7 @@ from matplotlib import rc
 from mpl_toolkits.axes_grid1.inset_locator import zoomed_inset_axes 
 from mpl_toolkits.axes_grid1.inset_locator import mark_inset
 rc("pdf", fonttype=42)
-rc("lines", linewidth=5, markersize=15)
+rc("lines", linewidth=4, markersize=15)
 
 # Change path as needed
 base = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/HLRN/HLRN/fix_stresses_elasticity/paper_11072022/"
@@ -70,12 +70,14 @@ ax = [fig.add_subplot(3, 1, i) for i in range(1, 4)]
 # Also plot a zoom-in of the topography
 zoom_x_min = 0.45
 zoom_x_max = 0.50
-zoom_y_min = 0.057
-zoom_y_max = 0.061
-axins = zoomed_inset_axes(ax[0], 5, loc = "center") # zoom = 5
+zoom_y_min = 0.058
+zoom_y_max = 0.060
+axins = zoomed_inset_axes(ax[0], 13, loc = "lower center") # zoom = 13
 axins.set_xlim(zoom_x_min, zoom_x_max)
 axins.set_ylim(zoom_y_min, zoom_y_max)
-mark_inset(ax[0], axins, loc1=1, loc2=4, fc="none", ec="0.5")
+axins.set_xticks([0.46,0.47,0.48,0.49])
+axins.tick_params(axis='x', direction='in',top=True, pad=-15)
+mark_inset(ax[0], axins, loc1=2, loc2=1, fc="none", ec="0.5")
 
 counter = 0 
 
@@ -94,6 +96,26 @@ def topo_analytical(xc,time):
     sum = 0.
     for n in range(1, n_max+1):
       sum += np.cos(2.*n*np.pi*x/domain_width) * np.exp(-kappa*4.*n*n*np.pi*np.pi*time/(domain_width*domain_width)) / ((4.*n*n)-1.) * (-4.*amplitude/np.pi);
+      # a0=4A/pi --> a0/2=2A/pi
+    topo = 2. * amplitude / np.pi + sum;
+
+    return topo
+
+# The analytical solution.
+# Return topography in m at time t.
+def topo_analytical_x(x,t):
+    topo = 0
+    amplitude = 0.075
+    domain_width = 1
+    n_max = 5000
+    kappa = 0.25
+    # Fill another array of the size of time
+    # with the x-coordinate so that x and time
+    # have the same dimension.
+    t = np.full((np.size(x)), t)
+    sum = 0.
+    for n in range(1, n_max+1):
+      sum += np.cos(2.*n*np.pi*x/domain_width) * np.exp(-kappa*4.*n*n*np.pi*np.pi*t/(domain_width*domain_width)) / ((4.*n*n)-1.) * (-4.*amplitude/np.pi);
       # a0=4A/pi --> a0/2=2A/pi
     topo = 2. * amplitude / np.pi + sum;
 
@@ -163,7 +185,7 @@ for name in names:
 
 # Plot the analytical solution in Pa.
 ax[1].plot(time,topo_analytical(0.5,time),label='analytical',color='black',linestyle='dashdot')
-#axins.plot(time,topo_analytical(0.5,time),label='analytical',color='black',linestyle='dashdot')
+axins.plot(x,topo_analytical_x(x,0.1),label='analytical',color='black',linestyle='dashdot')
 
 # Labelling of plot
 ax[0].set_xlabel("X [m]")
@@ -174,7 +196,7 @@ ax[1].set_ylabel(r"Topography at x = 0.5 m [m]")
 ax[2].set_ylabel(r"Error at x = 0.5 m [%]")
 # Manually place legend 
 #ax[0].legend(loc='lower center')
-ax[1].legend(loc='lower right',ncol=2)
+ax[1].legend(loc='lower right',ncol=2,handlelength=4)
 #ax[2].legend(loc='upper left')
 # Grid and tickes
 ax[0].grid(axis='x',color='0.95')
@@ -201,8 +223,8 @@ ax[2].text(-0.007,0.3,"c)")
 
 # Add timestep labels
 ax[0].text(0.027,0.001,"t = 0 s", rotation = 37)
-ax[0].text(0.021,0.021,"t = 0.5 s", rotation = 8)
-ax[0].text(0.025,0.039,"t = 1 s", rotation = 3)
+ax[0].text(0.021,0.021,"t = 0.05 s", rotation = 8)
+ax[0].text(0.025,0.039,"t = 0.10 s", rotation = 3)
 
 
 plt.tight_layout()

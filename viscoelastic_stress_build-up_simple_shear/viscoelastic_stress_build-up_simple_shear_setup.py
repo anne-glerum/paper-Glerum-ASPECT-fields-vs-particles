@@ -77,6 +77,7 @@ ax.text(1.01,0.22,'  $\mathrm{v_x}=0.0$ [m/s]', fontsize=8)
 ax.text(1.01,0.15,'$\mathrm{v_y}=0.0$ [m/s]', fontsize=8)
 # Annotations material properties
 ax.text(0.35,0.75,r'$\rho=1$ $\mathrm{kg/m^3}$', fontsize=9, ha='left')
+ax.text(35,70,r'$g=1$ $\mathrm{m/s^2}$', fontsize=9, ha='left')
 ax.text(0.35,0.80,'$\eta_{\mathrm{viscous}}=10^{2} \,\mathrm{Pa} \cdot s$\n$\mu=10^{2} \, \mathrm{Pa}$', fontsize=9, ha='left')
 # Annotations material properties
 ax.text(0.35,0.45,r'$\dot{\epsilon} = \binom{0 \,\,\,\, 0.15}{0.15 \,\,\,\, 0}$', fontsize=9, ha='left', va='center')
