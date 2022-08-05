@@ -3,10 +3,10 @@ from os.path import exists
 
 # Generate a new prm file and jobscript for each refinement level and timestep.
 def generate_and_run( refine, timestep, elastic_timestep ):
-  prmfile = open("viscoelastic_relaxation_particles.prm", "r")
+  prmfile = open("viscoelastic_relaxation_particles_dtc_isnot_dte.prm", "r")
   base_label = "ve_relaxation_particles_qp_"
   label = "dtc" + str(timestep) + "_dte" + str(elastic_timestep) + "_GR" + str(refine) + "_g0"
-  new_prmfile = "viscoelastic_stress_relaxation_" + label + ".prm"
+  new_prmfile = "viscoelastic_stress_relaxation_particles_" + label + ".prm"
   outfile = open(new_prmfile, "w")
   for l in prmfile.readlines():
     if 'Output directory' in l:
@@ -24,6 +24,8 @@ def generate_and_run( refine, timestep, elastic_timestep ):
         outfile.write('    set Function expression = 20e6; -20e6; 0; 20158412; -20158412; 0\n' )
       elif (timestep == 500):
         outfile.write('    set Function expression = 20e6; -20e6; 0; 20318079; -20318079; 0\n' )
+      elif (timestep == 5):
+        outfile.write('    set Function expression = 20e6; -20e6; 0; 20003156; -20003156; 0\n' )
     else:
       outfile.write(l)
   prmfile.close()
@@ -31,13 +33,15 @@ def generate_and_run( refine, timestep, elastic_timestep ):
 
   # Generate a new jobscript file for each refinement level and timestep.
   jobscript = open("jobscript", "r")
-  new_jobscript = "jobscript_"+ label
+  new_jobscript = "jobscript_particles_"+ label
   outjobscript = open(new_jobscript, "w")
   for l in jobscript.readlines():
     if '#SBATCH -J' in l:
       outjobscript.write('#SBATCH -J ' + base_label + label + '\n')
+    elif '#SBATCH --tasks' in l and refine == 2:
+      outjobscript.write('#SBATCH --tasks-per-node 4\n')
     elif 'mpirun' in l:
-      outjobscript.write('mpirun --map-by socket:pe=$OMP_NUM_THREADS /home/bbpanneg/software/aspect/build_release__fix_stresses_elasticity/aspect ' + new_prmfile + ' > /scratch/usr/bbpanneg/runs/fix_stresses_elasticity/paper_11072022/' + base_label + label + '/opla' )
+      outjobscript.write('mpirun --map-by socket:pe=$OMP_NUM_THREADS /home/bbpanneg/software/aspect/build_release__fix_stresses_elasticity_dealii_9.4.0/aspect ' + new_prmfile + ' > /scratch/usr/bbpanneg/runs/fix_stresses_elasticity/paper_11072022/' + base_label + label + '/opla' )
     else:
       outjobscript.write(l)
   jobscript.close()

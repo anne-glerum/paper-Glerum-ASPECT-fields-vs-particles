@@ -24,6 +24,8 @@ def generate_and_run( refine, timestep, elastic_timestep ):
         outfile.write('    set Function expression = 20e6; -20e6; 0; 20158412; -20158412; 0\n' )
       elif (timestep == 500):
         outfile.write('    set Function expression = 20e6; -20e6; 0; 20318079; -20318079; 0\n' )
+      elif (timestep == 5):
+        outfile.write('    set Function expression = 20e6; -20e6; 0; 20003156; -20003156; 0\n' )
     else:
       outfile.write(l)
   prmfile.close()
@@ -36,8 +38,10 @@ def generate_and_run( refine, timestep, elastic_timestep ):
   for l in jobscript.readlines():
     if '#SBATCH -J' in l:
       outjobscript.write('#SBATCH -J ' + base_label + label + '\n')
+    elif '#SBATCH --tasks' in l and refine == 2:
+      outjobscript.write('#SBATCH --tasks-per-node 4\n')
     elif 'mpirun' in l:
-      outjobscript.write('mpirun --map-by socket:pe=$OMP_NUM_THREADS /home/bbpanneg/software/aspect/build_release__fix_stresses_elasticity/aspect ' + new_prmfile + ' > /scratch/usr/bbpanneg/runs/fix_stresses_elasticity/paper_11072022/' + base_label + label + '/opla' )
+      outjobscript.write('mpirun --map-by socket:pe=$OMP_NUM_THREADS /home/bbpanneg/software/aspect/build_release__fix_stresses_elasticity_dealii_9.4.0/aspect ' + new_prmfile + ' > /scratch/usr/bbpanneg/runs/fix_stresses_elasticity/paper_11072022/' + base_label + label + '/opla' )
     else:
       outjobscript.write(l)
   jobscript.close()
@@ -54,8 +58,8 @@ def generate_and_run( refine, timestep, elastic_timestep ):
   print ('Model output in /scratch/usr/bbpanneg/runs/fix_stresses_elasticity/paper_11072022/' + base_label + label)
 
 # Run the model at different refinement levels and timesteps
-refinements = [2]
-timesteps = [250]
+refinements = [0]
+timesteps = [125,250,500]
 elastic_timesteps = [500]
 for r in refinements:
   for t in timesteps:
