@@ -73,6 +73,7 @@ for name in names:
   # find the computational timestep
   dtc = name.split("dtc")[-1].split("_")[0]
   dtcs.append(float(dtc))
+  print (dte, dtc)
 
   # Read in the time and the minimum xx and yy components of the viscoelastic stress,
   # which are stored on the fields ve_stress_xx and ve_stress_yy.
@@ -143,10 +144,11 @@ ax[0].legend(loc='upper right',ncol=1,handlelength=4)
 # Grid and tickes
 ax[0].grid(axis='x',color='0.95')
 ax[0].grid(axis='y',color='0.95')
+ax[0].set_xticks([0,62.5,100,125,200,250,300,400,500])
 ax[0].set_yticks([0,2,4,6,8,10])
 
 # Ranges of the axes
-ax[0].set_xlim(0,550) # yr
+ax[0].set_xlim(550,0) # yr
 ax[0].set_ylim(0,10) # %
 
 # Add labels
@@ -161,22 +163,30 @@ ax[0].plot(dte500_dtc,dte500_error200000,label=labels[2],color=colors[2],linesty
 ax[0].plot(dte250_dtc,dte250_error10000,label=labels[3],color=colors[3],linestyle=linestyles[3],marker=markers[3])
 ax[0].plot(dte250_dtc,dte250_error100000,label=labels[4],color=colors[4],linestyle=linestyles[4],marker=markers[4])
 ax[0].plot(dte250_dtc,dte250_error200000,label=labels[5],color=colors[5],linestyle=linestyles[5],marker=markers[5])
-ax[0].plot(x,y(0.5,0.0005045),label="y=0.5-0.0005045x",color="black",linestyle="dashed",linewidth=1,marker=markers[0])
-ax[0].plot(x,y(5.05,0.0050701),label="y=5.05-0.0050701x",color="black",linestyle="dashed",linewidth=1,marker=markers[1])
-ax[0].plot(x,y(10.3,0.0104757),label="y=10.3-0.0104767x",color="black",linestyle="dashed",linewidth=1,marker=markers[2])
-ax[0].legend(loc='upper right',ncol=1,handlelength=4)
+#ax[0].plot(x,y(0.5,0.0005045),label="y=0.5-0.0005045x",color="black",linestyle="dashed",linewidth=1,marker=markers[0])
+#ax[0].plot(x,y(5.05,0.0050701),label="y=5.05-0.0050701x",color="black",linestyle="dashed",linewidth=1,marker=markers[1])
+#ax[0].plot(x,y(10.3,0.0104757),label="y=10.3-0.0104767x",color="black",linestyle="dashed",linewidth=1,marker=markers[2])
+ax[0].legend(loc='upper left',ncol=1,handlelength=4)
 # Save as png
-plt.savefig('1_viscoelastic_relaxation_dte_isnot_dtc_fields_error_per_timestep.png')    
+plt.savefig('1_viscoelastic_relaxation_dte_isnot_dtc_fields_dtcisnotdte_error_per_timestep.png')    
 
 # Plot on loglog scale
+# B = order
+# A = y0/x0^B
+def f(x, A, B):
+    return A*x**B
+x2 = np.arange(0,1000.0,10.0)
+ax[0].plot(x2,f(x2,4.47,-0.5),label="0.5 order",color="black",linestyle="dotted",linewidth=1)
+ax[0].plot(x2,f(x2,100,-1),label="1st order",color="black",linestyle="dashed",linewidth=1)
+#ax[0].plot(x2,f(x2,50000,-2),label="2nd order",color="black",linestyle="dashed",linewidth=1)
 plt.semilogx()
 plt.semilogy()
 # Place legend
-ax[0].legend(loc='center right',ncol=1,handlelength=4)
+ax[0].legend(loc='center left',ncol=1,handlelength=4)
 ax[0].set_yticks([1e-1,1e0,1e1])
 # Ranges of the axes
-ax[0].set_xlim(3e1,1e3) # yr
+ax[0].set_xlim(1e3,3e1) # yr
 ax[0].set_ylim(1e-1,1e1) # %
 # Save as png
-plt.savefig('1_viscoelastic_relaxation_dte_isnot_dtc_fields_error_per_timestep_loglog.png')    
+plt.savefig('1_viscoelastic_relaxation_dte_isnot_dtc_fields_dtcisnotdte_error_per_timestep_loglog.png')    
 

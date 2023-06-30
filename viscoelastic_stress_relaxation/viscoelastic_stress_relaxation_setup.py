@@ -58,12 +58,12 @@ ax.text(50,105,'Free slip',fontsize=9, va = 'center', ha = 'center')
 # Annotations material properties
 ax.text(35,75,r'$\rho=2800$ $\mathrm{kg/m^3}$', fontsize=9, ha='left')
 ax.text(35,70,r'$g=0$ $\mathrm{m/s^2}$', fontsize=9, ha='left')
-ax.text(35,80,'$\eta_{\mathrm{viscous}}=10^{22} \,\mathrm{Pa} \cdot s$\n$\mu=10^{10} \, \mathrm{Pa}$', fontsize=9, ha='left')
+ax.text(35,80,'$\eta_{\mathrm{viscous}}=10^{22} \,\mathrm{Pa} \cdot s$\n$G=10^{10} \, \mathrm{Pa}$', fontsize=9, ha='left')
 # Annotations material properties
 ax.text(35,45,r'$\dot{\epsilon} = \binom{0 \,\,  0}{0 \,\, 0} \, \mathrm{1/s}$', fontsize=9, ha='left', va='center')
 ax.text(35,35,r'$\mathrm{W} = \binom{0 \,\, 0}{0 \,\, 0} \, \mathrm{1/s}$', fontsize=9, ha='left', va='center')
-ax.text(35,25,r'$\tau0(t=0) = \binom{20 \cdot 10^6 \,\,\,\,\,\,\,\,\,\,\,\, 0}{0 \,\,\,\, -20 \cdot 10^6} \, \mathrm{Pa}$', fontsize=9, ha='left', va='center')
+ax.text(35,25,r'$\tau^{0c}(t=0) = \binom{20 \,\,\,\,\,\,\,\,\,\,\,\, 0}{0 \,\,\,\, -20} \, \mathrm{MPa}$', fontsize=9, ha='left', va='center')
 
 # Save Figure
-plt.savefig('1_viscoelastic_relaxation_setup.pdf',bbox_inches="tight")
+plt.savefig('1_viscoelastic_relaxation_setup.png',bbox_inches="tight")
 plt.close()

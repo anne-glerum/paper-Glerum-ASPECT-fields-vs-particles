@@ -5,7 +5,7 @@ Created on Tue Sep 21 by Anne Glerum
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import rc
-from mpl_toolkits.axes_grid1.inset_locator import zoomed_inset_axes 
+from mpl_toolkits.axes_grid1.inset_locator import zoomed_inset_axes
 from mpl_toolkits.axes_grid1.inset_locator import mark_inset
 rc("pdf", fonttype=42)
 rc("lines", linewidth=3, markersize=3)
@@ -48,11 +48,11 @@ color3=[0.32701, 0.4579, 0.28638]
 color4=[0.67824, 0.55071, 0.1778]
 color5=[0.97584, 0.63801, 0.50183]
 color6=[0.98447, 0.78462, 0.93553]
-colors = [color1, color3, color4, color5, color6, color4, color5, color3, color4, color5]
+colors = [color1, color2, color3, color5, color6, color4, color5, color3, color4, color5]
 # Set the line styles
-linestyles = ['solid', 'solid', 'solid', 'solid', 'solid', 'dashdot', 'dashdot', 'dotted',  'dotted','dotted'] 
+linestyles = ['solid', 'solid', 'solid', 'dotted', 'dotted', 'dashdot', 'dashdot', 'dotted',  'dotted','dotted']
 # Set the marker styles (no markers in this case)
-markers = ['', '', '', '', '', '', '', '', '', '', '', '', '', ''] 
+markers = ['', '', '', '', '', '', '', '', '', '', '', '', '', '']
 
 # Set up a row of two plots, one with absolute stress values
 # and one with the percentage difference to the analytical solution
@@ -64,16 +64,16 @@ zoom_x_min = 20
 zoom_x_max = 25
 zoom_y_min = 9
 zoom_y_max = 11
-#axins = zoomed_inset_axes(ax[0], 6, loc="upper center") 
+#axins = zoomed_inset_axes(ax[0], 6, loc="upper center")
 #axins.set_xlim(zoom_x_min, zoom_x_max)
 #axins.set_ylim(zoom_y_min, zoom_y_max)
 #mark_inset(ax[0], axins, loc1=2, loc2=3, fc="none", ec="0.5")
 
 yr_in_secs = 3600. * 24. * 365.2425
-counter = 0 
+counter = 0
 
 # Create file path
-for name in names: 
+for name in names:
   path = base+name+tail
 
   # Read in the time and the minimum xx and yy components of the viscoelastic stress,
@@ -89,11 +89,11 @@ for name in names:
   ax[0].plot(time/1e3,stress_xx_min/1e6,label=labels[counter],color=colors[counter],linestyle=linestyles[counter],marker=markers[counter])
 #  axins.plot(time/1e3,stress_xx_min/1e6,label=None,color=colors[counter],linestyle=linestyles[counter],marker=markers[counter])
   ax[1].plot(time/1e3,(stress_xx_min-(20e6*np.exp(-1e10*time*yr_in_secs/1e22)))/(20e6*np.exp(-1e10*time*yr_in_secs/1e22))*100.,label=labels[counter],color=colors[counter],linestyle=linestyles[counter],marker=markers[counter])
-  
+
   counter += 1
 
 # Plot the analytical solution
-# tau_xx(t) = tau_xx_t0 * exp(-mu*t/eta_viscous), 
+# tau_xx(t) = tau_xx_t0 * exp(-mu*t/eta_viscous),
 # with tau_xx_t0 = 20 MPa, eta_viscous = 1e22 Pas, mu = 1e10 Pa.
 ax[0].plot(time/1e3,20*np.exp(-1e10*time*yr_in_secs/1e22),label='analytical',color='black',linestyle="dashed")
 
@@ -101,7 +101,7 @@ ax[0].plot(time/1e3,20*np.exp(-1e10*time*yr_in_secs/1e22),label='analytical',col
 ax[1].set_xlabel("Time [ky]")
 ax[0].set_ylabel(r"Viscoelastic stress $\tau_{xx}$ [MPa]")
 ax[1].set_ylabel(r"Error [%]")
-# Manually place legend in lower right corner. 
+# Manually place legend in lower right corner.
 ax[0].legend(loc='upper right',ncol=1,handlelength=4)
 #ax[1].legend(loc='lower right',ncol=2,handlelength=5)
 # Grid and tickes
@@ -131,4 +131,4 @@ ax[1].text(-15,10,"b)")
 #plt.tight_layout()
 
 # Save as pdf
-plt.savefig('1_viscoelastic_relaxation_dte_isnot_dtc_fields_dtcisnotdte.png')    
+plt.savefig('1_viscoelastic_relaxation_dte_isnot_dtc_fields_dtcisnotdte.png')
