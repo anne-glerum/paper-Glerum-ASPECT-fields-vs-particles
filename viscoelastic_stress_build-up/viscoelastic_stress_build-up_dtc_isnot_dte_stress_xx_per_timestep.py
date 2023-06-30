@@ -28,11 +28,11 @@ tail = r"/statistics"
 # The labels the graphs will get in the plot
 labels = [
           't = 10 ky, dte = 500 yr',
+          't = 50 ky, dte = 500 yr',
           't = 100 ky, dte = 500 yr',
-          't = 200 ky, dte = 500 yr',
           't = 10 ky, dte = 250 yr',
           't = 100 ky, dte = 250 yr',
-          't = 200 ky, dte = 250 yr',
+          't = 150 ky, dte = 250 yr',
          ]
 
 # Set the colors available for plotting
@@ -94,11 +94,11 @@ for name in names:
   errors_10000.append(abs(stress_xx_min[index_10000]-tau_xx_analytical(time[index_10000]))/tau_xx_analytical(time[index_10000])*100.)
 
   # Error at t = 100000 yr
-  index_100000 = np.where(time == 100000)[0]
+  index_100000 = np.where(time == 50000)[0]
   errors_100000.append(abs(stress_xx_min[index_100000]-tau_xx_analytical(time[index_100000]))/tau_xx_analytical(time[index_100000])*100.)
 
   # Error at t = 200000 yr
-  index_200000 = np.where(time == 200000)[0]
+  index_200000 = np.where(time == 100000)[0]
   errors_200000.append(abs(stress_xx_min[index_200000]-tau_xx_analytical(time[index_200000]))/tau_xx_analytical(time[index_200000])*100.)
 
 nr_dtes = len(set(dtes)) 
@@ -142,10 +142,11 @@ ax[0].legend(loc='upper right',ncol=1,handlelength=4)
 # Grid and tickes
 ax[0].grid(axis='x',color='0.95')
 ax[0].grid(axis='y',color='0.95')
+ax[0].set_xticks([0,62.5,100,125,200,250,300,400,500])
 ax[0].set_yticks([0,0.5,1,1.5])
 
 # Ranges of the axes
-ax[0].set_xlim(0,550) # yr
+ax[0].set_xlim(550,0) # yr
 ax[0].set_ylim(-0.1,1.5) # %
 
 # Add labels
@@ -161,34 +162,28 @@ ax[0].plot(dte250_dtc,dte250_error10000,label=labels[3],color=colors[3],linestyl
 ax[0].plot(dte250_dtc,dte250_error100000,label=labels[4],color=colors[4],linestyle=linestyles[4],marker=markers[4])
 ax[0].plot(dte250_dtc,dte250_error200000,label=labels[5],color=colors[5],linestyle=linestyles[5],marker=markers[5])
 
-# Compute best fits for the dte500 lines & plot
-theta_10000 = np.polyfit(dte500_dtc,dte500_error10000,1)
-theta_100000 = np.polyfit(dte500_dtc,dte500_error100000,1)
-theta_200000 = np.polyfit(dte500_dtc,dte500_error200000,1)
-ax[0].plot(x,y(theta_10000[1],theta_10000[0]),label="y="+str(theta_10000[1])+"+"+str(theta_10000[0])+"x",color="black",linestyle="dashed",linewidth=1,marker=markers[0])
-ax[0].plot(x,y(theta_100000[1],theta_100000[0]),label="y="+str(theta_100000[1])+"+"+str(theta_100000[0])+"x",color="black",linestyle="dashed",linewidth=1,marker=markers[1])
-ax[0].plot(x,y(theta_200000[1],theta_200000[0]),label="y="+str(theta_200000[1])+"+"+str(theta_200000[0])+"x",color="black",linestyle="dashed",linewidth=1,marker=markers[2])
-
-# Compute best fits for the dte250 lines & plot
-theta_10000_dte250 = np.polyfit(dte250_dtc,dte250_error10000,1)
-theta_100000_dte250 = np.polyfit(dte250_dtc,dte250_error100000,1)
-theta_200000_dte250 = np.polyfit(dte250_dtc,dte250_error200000,1)
-ax[0].plot(x,y(theta_10000_dte250[1],theta_10000_dte250[0]),label="y="+str(theta_10000_dte250[1])+"+"+str(theta_10000_dte250[0])+"x",color="black",linestyle="dashed",linewidth=1,marker=markers[0],fillstyle='none')
-ax[0].plot(x,y(theta_100000_dte250[1],theta_100000_dte250[0]),label="y="+str(theta_100000_dte250[1])+"+"+str(theta_100000_dte250[0])+"x",color="black",linestyle="dashed",linewidth=1,marker=markers[1],fillstyle='none')
-ax[0].plot(x,y(theta_200000_dte250[1],theta_200000_dte250[0]),label="y="+str(theta_200000_dte250[1])+"+"+str(theta_200000_dte250[0])+"x",color="black",linestyle="dashed",linewidth=1,marker=markers[2],fillstyle='none')
-
 # Place legend
 ax[0].legend(loc='upper right',ncol=2,handlelength=4)
 # Save as png
-plt.savefig('2_viscoelastic_build-up_dte_isnot_dtc_fields_error_per_timestep.png')    
+plt.savefig('2_viscoelastic_build-up_dte_isnot_dtc_fields_dtcisnotdte_error_per_timestep.png')    
 
 # Plot on loglog scale
+# B = order
+# A = y0/x0^B
+def f(x, A, B):
+    return A*x**B
+x2 = np.array([5000,2500,500,250,125,62.5,1])
+ax[0].plot(x2,f(x2,5,-0.5),label="-0.5 order",color="black",linestyle="dotted",linewidth=1)
+ax[0].plot(x2,f(x2,250,-1),label="-1 order",color="black",linestyle="dashed",linewidth=1)
+#ax[0].plot(x2,f(x2,625000,-2),label="-2 order",color="black",linestyle="dashdot",linewidth=1)
 plt.semilogx()
 plt.semilogy()
 # Place legend
 ax[0].set_yticks([1e-3,1e-2,1e-1,1e0,1e1])
 # Ranges of the axes
-ax[0].set_xlim(3e1,1e3) # yr
-ax[0].set_ylim(1e-3,5e1) # %
+ax[0].set_xlim(1e3,3e1) # yr
+ax[0].set_ylim(1e-2,5e1) # %
+# Place legend
+ax[0].legend(loc='upper right',ncol=3,handlelength=4)
 # Save as png
-plt.savefig('2_viscoelastic_build-up_dte_isnot_dtc_fields_error_per_timestep_loglog.png')    
+plt.savefig('2_viscoelastic_build-up_dte_isnot_dtc_fields_dtcisnotdte_error_per_timestep_loglog.png')    

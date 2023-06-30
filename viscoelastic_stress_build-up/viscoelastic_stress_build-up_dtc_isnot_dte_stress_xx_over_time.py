@@ -5,39 +5,27 @@ Created on Tue Sep 21 by Anne Glerum
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import rc
-from mpl_toolkits.axes_grid1.inset_locator import zoomed_inset_axes 
+from mpl_toolkits.axes_grid1.inset_locator import zoomed_inset_axes
 from mpl_toolkits.axes_grid1.inset_locator import mark_inset
 rc("pdf", fonttype=42)
-rc("lines", linewidth=5, markersize=15)
+rc("lines", linewidth=3, markersize=15)
 
 # Change path as needed
-base = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/HLRN/HLRN/fix_stresses_elasticity/paper_11072022/"
+base = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/HLRN/HLRN/fix_stresses_elasticity/paper_11072022/BM2/"
 
 # Change file name modifiers as needed depending on your file structure
 names = [
-         "ve_build-up_dtc500_dte500_GR0",
-         "ve_build-up_dtc500_dte500_GR1",
-         "ve_build-up_dtc500_dte500_GR2",
-         "ve_build-up_dtc250_dte500_GR0",
-         "ve_build-up_dtc250_dte500_GR1",
-         "ve_build-up_dtc250_dte500_GR2",
-         "ve_build-up_dtc125_dte500_GR0",
-         "ve_build-up_dtc125_dte500_GR1",
-         "ve_build-up_dtc125_dte500_GR2",
+         "ve_build-up_dtc250_dte250_GR0",
+         "ve_build-up_dtc250_dte250_GR4",
+         "ve_build-up_dtc250_dte250_GR8",
         ]
 tail = r"/statistics"
 
 # The labels the graphs will get in the plot
 labels = [
-          'dtc = dte = 500 yr, dh = 10 km',
-          'dtc = dte = 500 yr, dh = 5 km',
-          'dtc = dte = 500 yr, dh = 2.5 km',
-          'dtc = 250 yr, dte = 500 yr, dh = 10 km',
-          'dtc = 250 yr, dte = 500 yr, dh = 5 km',
-          'dtc = 250 yr, dte = 500 yr, dh = 2.5 km',
-          'dtc = 125 yr, dte = 500 yr, dh = 10 km',
-          'dtc = 125 yr, dte = 500 yr, dh = 5 km',
-          'dtc = 125 yr, dte = 500 yr, dh = 2.5 km',
+          'dtc = dte = 250 yr, dh = 100 km',
+          'dtc = dte = 250 yr, dh = 6.25 km',
+          'dtc = dte = 250 yr, dh = 0.390625 km',
          ]
 # Set the colors available for plotting
 color1=[0.0051932, 0.098238, 0.34984]
@@ -46,14 +34,14 @@ color3=[0.32701, 0.4579, 0.28638]
 color4=[0.67824, 0.55071, 0.1778]
 color5=[0.97584, 0.63801, 0.50183]
 color6=[0.98447, 0.78462, 0.93553]
-colors = [color1, color3, color5, color1, color3, color5, color1, color3, color5]
+colors = [color2, color3, color4, color5, color6, color5, color1, color3, color5]
 # Set the line styles
-linestyles = ['solid', 'solid', 'solid', 'dashed', 'dashed', 'dashed', 'dotted', 'dotted', 'dotted'] 
+linestyles = ['solid', 'solid', 'solid', 'solid', 'solid', 'solid', 'dotted', 'dotted', 'dotted']
 # Set the marker styles (no markers in this case)
-markers = ['|', '', '', 'x', '', '', '', '', ''] 
+markers = ['', '', '', '', '', '', '', '', '']
 
 # Only plot every nth marker
-dmark=35
+dmark=20
 
 # Set up a row of two plots, one with absolute stress values
 # and one with the percentage difference to the analytical solution
@@ -71,10 +59,10 @@ ax = [fig.add_subplot(2, 1, i) for i in range(1, 3)]
 #mark_inset(ax[0], axins, loc1=1, loc2=4, fc="none", ec="0.5")
 
 yr_in_secs = 3600. * 24. * 365.2425
-counter = 0 
+counter = 0
 
 # The analytical solution:
-# 2 * edot_ii * eta * (1 - e^(-mu*t/eta)), 
+# 2 * edot_ii * eta * (1 - e^(-mu*t/eta)),
 # with edot_ii = 0.03154/yr_in_secs/model_width 1/s, eta = 1e22 Pas, mu = 1e10 Pa.
 # Return stress in Pa.
 def tau_xx_analytical(time):
@@ -85,7 +73,7 @@ def tau_xx_analytical(time):
   return 2.*edot_ii*eta*(1.-np.exp(-time*yr_in_secs*mu/eta))
 
 
-for name in names: 
+for name in names:
   # Create file path
   path = base+name+tail
 
@@ -98,8 +86,8 @@ for name in names:
   # categorical batlow colors.
   ax[0].plot(time/1e3,stress_xx_min/1e6,label=labels[counter],color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark)
   #axins.plot(time/1e3,stress_xx_min/1e6,label=labels[counter],color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark)
-  ax[1].plot(time/1e3,(stress_xx_min-tau_xx_analytical(time))/tau_xx_analytical(time)*100.,label=labels[counter],color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark)
-  
+  ax[1].plot(time/1e3,abs((stress_xx_min-tau_xx_analytical(time))/tau_xx_analytical(time)*100.),label=labels[counter],color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark)
+
   counter += 1
 
 # Plot the analytical solution in MPa.
@@ -109,8 +97,8 @@ ax[0].plot(time/1e3,1e-6*tau_xx_analytical(time),label='analytical',color='black
 # Labelling of plot
 ax[1].set_xlabel("Time [ky]")
 ax[0].set_ylabel(r"Viscoelastic stress $\tau0_{xx}$ [MPa]")
-ax[1].set_ylabel(r"Error [%]")
-# Manually place legend in lower right corner. 
+ax[1].set_ylabel(r"Absolute error [%]")
+# Manually place legend in lower right corner.
 ax[0].legend(loc='lower right',handlelength=4)
 # Grid and tickes
 ax[0].grid(axis='x',color='0.95')
@@ -124,19 +112,19 @@ ax[1].grid(axis='y',color='0.95')
 ax[0].set_xlim(0,250) # kyr
 ax[0].set_ylim(0,210) # MPa
 ax[1].set_xlim(0,250) # kyr
-#ax[1].set_ylim(0,0.05) # %
+#ax[1].set_ylim(-0.05,0.5) # %
 
 # Add labels a) and b)
 ax[0].text(-16,208,"a)")
-ax[1].text(-16,-0.05,"b)")
+ax[1].text(-16,0.5,"b)")
 
 # Add timestep labels
-ax[1].text(5,-0.65,"dt = 500 yr", rotation = 25)
-ax[1].text(5,-0.95,"dt = 250 yr", rotation = 34)
-ax[1].text(5,-1.36,"dt = 125 yr", rotation = 38)
+#ax[1].text(5,-0.65,"dt = 500 yr", rotation = 25)
+#ax[1].text(5,-0.95,"dt = 250 yr", rotation = 34)
+#ax[1].text(5,-1.36,"dt = 125 yr", rotation = 38)
 
 
 plt.tight_layout()
 
-# Save as pdf
-plt.savefig('2_viscoelastic_build-up_dtc_isnot_dte.pdf')    
+# Save
+plt.savefig('2_viscoelastic_build-up_dtc_isnot_dte_dh.png')
