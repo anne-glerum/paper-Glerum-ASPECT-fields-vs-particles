@@ -5,39 +5,37 @@ Created on Tue Sep 21 by Anne Glerum
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import rc
-from mpl_toolkits.axes_grid1.inset_locator import zoomed_inset_axes 
+from mpl_toolkits.axes_grid1.inset_locator import zoomed_inset_axes
 from mpl_toolkits.axes_grid1.inset_locator import mark_inset
 rc("pdf", fonttype=42)
-rc("lines", linewidth=5, markersize=15)
+rc("lines", linewidth=3, markersize=8)
 
 # Change path as needed
-base = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/HLRN/HLRN/fix_stresses_elasticity/paper_11072022/"
+base = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/HLRN/HLRN/fix_stresses_elasticity/paper_11072022/BM3/"
 
 # Change file name modifiers as needed depending on your file structure
 names = [
-         "ve_build-up_simple_shear_dt0.002_GR3",
-         "ve_build-up_simple_shear_dt0.002_GR4",
-         "ve_build-up_simple_shear_dt0.002_GR5",
-         "ve_build-up_simple_shear_dt0.001_GR3",
-         "ve_build-up_simple_shear_dt0.001_GR4",
-         "ve_build-up_simple_shear_dt0.001_GR5",
-         "ve_build-up_simple_shear_dt0.0005_GR3",
-         "ve_build-up_simple_shear_dt0.0005_GR4",
-         "ve_build-up_simple_shear_dt0.0005_GR5",
+         "ve_build-up_simple_shear_fixprop_dtc0.02_dte0.02_GR1",
+         "ve_build-up_simple_shear_fixprop_dtc0.01_dte0.01_GR1",
+         "ve_build-up_simple_shear_fixprop_dtc0.01_dte0.01_GR2",
+         "ve_build-up_simple_shear_fixprop_dtc0.005_dte0.005_GR1",
+         "ve_build-up_simple_shear_fixprop_dtc0.001_dte0.001_GR1",
+         "ve_build-up_simple_shear_fixprop_dtc0.0001_dte0.0001_GR1",
+         "SS_test_6",
+         "SS_test_7",
         ]
 tail = r"/statistics"
 
 # The labels the graphs will get in the plot
 labels = [
-          'dt = 0.002 s, dh = 0.125 m',
-          'dt = 0.002 s, dh = 0.0625 m',
-          'dt = 0.002 s, dh = 0.03125 m',
-          'dt = 0.001 s, dh = 0.125 m',
-          'dt = 0.001 s, dh = 0.0625 m',
-          'dt = 0.001 s, dh = 0.03125 m',
-          'dt = 0.0005 s, dh = 0.125 m',
-          'dt = 0.0005 s, dh = 0.0625 m',
-          'dt = 0.0005 s, dh = 0.03125 m',
+          "dtc = dte = 0.02, GR = 1",
+          "dtc = dte = 0.01, GR = 1",
+          "dtc = dte = 0.01, GR = 2",
+          "dtc = dte = 0.005, GR = 1",
+          "dtc = dte = 0.001, GR = 1",
+          "dtc = dte = 0.0001, GR = 1",
+          "dtc = dte = 0.01, W^(t), GR = 0",
+          "dtc = dte = 0.005, W^(t), GR = 0",
          ]
 # Set the colors available for plotting
 color1=[0.0051932, 0.098238, 0.34984]
@@ -46,11 +44,11 @@ color3=[0.32701, 0.4579, 0.28638]
 color4=[0.67824, 0.55071, 0.1778]
 color5=[0.97584, 0.63801, 0.50183]
 color6=[0.98447, 0.78462, 0.93553]
-colors = [color1, color3, color5, color1, color3, color5, color1, color3, color5]
+colors = [color1, color2, color3, color4, color5, color6, 'black', 'red', 'blue',color4, color1, color3, color5]
 # Set the line styles
-linestyles = ['solid', 'solid', 'solid', 'dashed', 'dashed', 'dashed', 'dotted', 'dotted', 'dotted'] 
+linestyles = ['solid', 'solid', 'solid', 'solid', 'solid', 'solid', 'dashed', 'dashed', 'dotted', 'dotted', 'dotted']
 # Set the marker styles (no markers in this case)
-markers = ['', '', '', '', '', '', '', '', ''] 
+markers = ['', '', '|', '', '', '', '|', '', '', '', '', '']
 # Only plot every nth marker
 dmark=35
 
@@ -70,7 +68,7 @@ zoom_y_max = 13
 #mark_inset(ax[0], axins, loc1=1, loc2=4, fc="none", ec="0.5")
 
 yr_in_secs = 3600. * 24. * 365.2425
-counter = 0 
+counter = 0
 
 # The analytical solution:
 # Return stress in Pa.
@@ -86,7 +84,7 @@ def tau_xy_analytical(t):
     return np.where(t<=tmax,(np.exp(-mu/eta_v*t)*(C2*np.cos(V*t/h)-C1*np.sin(V*t/h))-C2),(np.exp(-mu/eta_v*tmax)*(C2*np.cos(V*tmax/h)-C1*np.sin(V*tmax/h))-C2)*np.exp(-mu/eta_v*(t-tmax)))
 
 
-for name in names: 
+for name in names:
   # Create file path
   path = base+name+tail
 
@@ -94,33 +92,34 @@ for name in names:
   # which is stored on the field ve_stress_xy.
   # The correct columns are selected with usecols (counting starts from 0).
   if 'particle' in name:
-    time,stress_xy_min = np.genfromtxt(path, comments='#', usecols=(1,12), unpack=True)
+    time,stress_xy_min = np.genfromtxt(path, comments='#', usecols=(1,22), unpack=True)
   else:
-    time,stress_xy_min = np.genfromtxt(path, comments='#', usecols=(1,24), unpack=True)
+    time,stress_xy_min = np.genfromtxt(path, comments='#', usecols=(1,27), unpack=True)
 
   # Plot the stress elements in Pa against time in s in
   # categorical batlow colors.
-  ax[0].plot(time,stress_xy_min,label=None,color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark)
+  ax[0].plot(time,stress_xy_min,label=labels[counter],color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark)
   #axins.plot(time,stress_xy_min,label=None,color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark)
-  ax[1].plot(time,(stress_xy_min-tau_xy_analytical(time))/tau_xy_analytical(time)*100.,label=labels[counter],color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark)
+  ax[1].plot(time,(stress_xy_min-tau_xy_analytical(time))/tau_xy_analytical(time)*100.,label=None,color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark+counter)
 
   for tau in stress_xy_min:
     if tau > 15:
       print ("Too high tau: ", name)
-  
+
   counter += 1
 
 # Plot the analytical solution in Pa.
-ax[0].plot(time,tau_xy_analytical(time),label='analytical',color='black',linestyle='dashdot')
-#axins.plot(time,1e-6*tau_xy_analytical(time),label='analytical',color='black',linestyle='dashdot')
+ax[0].plot(time,tau_xy_analytical(time),label='analytical',color='black',linestyle='dashed')
+print ("Anal t = 0.01: ", tau_xy_analytical(0.01))
+#axins.plot(time,1e-6*tau_xy_analytical(time),label='analytical',color='black',linestyle='dashed')
 
 # Labelling of plot
 ax[1].set_xlabel("Time [s]")
 ax[0].set_ylabel(r"Viscoelastic stress $\tau0_{xy}$ [Pa]")
 ax[1].set_ylabel(r"Error [%]")
-# Manually place legend in lower right corner. 
-ax[0].legend(loc='lower right')
-ax[1].legend(loc='lower right',ncol=2,handlelength=3)
+# Manually place legend in lower right corner.
+ax[0].legend(loc='upper left',handlelength=4)
+#ax[1].legend(loc='lower right',ncol=1,handlelength=4)
 # Grid and tickes
 ax[0].grid(axis='x',color='0.95')
 ax[0].set_yticks([0,5,10,15])
@@ -133,11 +132,11 @@ ax[1].grid(axis='y',color='0.95')
 ax[0].set_xlim(0,1.) # s
 ax[0].set_ylim(0,15.5) # MPa
 ax[1].set_xlim(0,1.) # s
-ax[1].set_ylim(-0.3,0.3) # %
+ax[1].set_ylim(-1.15,0.15) # %
 
 # Add labels a) and b)
-#ax[0].text(-16,208,"a)")
-#ax[1].text(-16,-0.05,"b)")
+ax[0].text(-0.055,15.5,"a)")
+ax[1].text(-0.07,0.25,"b)")
 
 # Add timestep labels
 #ax[1].text(50,-0.77,"dt = 500 yr", rotation = 20)
@@ -147,5 +146,5 @@ ax[1].set_ylim(-0.3,0.3) # %
 
 plt.tight_layout()
 
-# Save as pdf
-plt.savefig('3_viscoelastic_build-up_simple_shear.pdf')    
+# Save
+plt.savefig('3_viscoelastic_build-up_simple_shear_dtc_isnot_dte_dt_fixprop.png')
