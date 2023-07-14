@@ -77,16 +77,16 @@ ax.text(1.01,0.22,'  $\mathrm{v_x}=0.0$ [m/s]', fontsize=8)
 ax.text(1.01,0.15,'$\mathrm{v_y}=0.0$ [m/s]', fontsize=8)
 # Annotations material properties
 ax.text(0.35,0.75,r'$\rho=1$ $\mathrm{kg/m^3}$', fontsize=9, ha='left')
-ax.text(35,70,r'$g=1$ $\mathrm{m/s^2}$', fontsize=9, ha='left')
-ax.text(0.35,0.80,'$\eta_{\mathrm{viscous}}=10^{2} \,\mathrm{Pa} \cdot s$\n$\mu=10^{2} \, \mathrm{Pa}$', fontsize=9, ha='left')
+ax.text(0.35,0.80,'$\eta_{\mathrm{viscous}}=10^{2} \,\mathrm{Pa} \cdot s$\n$G=10^{2} \, \mathrm{Pa}$', fontsize=9, ha='left')
+
 # Annotations material properties
-ax.text(0.35,0.45,r'$\dot{\epsilon} = \binom{0 \,\,\,\, 0.15}{0.15 \,\,\,\, 0}$', fontsize=9, ha='left', va='center')
-ax.text(0.35,0.35,r'$\mathrm{W} = \binom{0 \,\,\,\, 0.15}{-0.15 \,\,\,\, 0}$', fontsize=9, ha='left', va='center')
+ax.text(0.35,0.45,r'$\dot{\epsilon} = \binom{0 \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, 0.15}{0.15 \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, 0}$ 1/s', fontsize=9, ha='left', va='center')
+ax.text(0.35,0.35,r'$\mathrm{W} = \binom{0 \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, 0.15}{-0.15 \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, 0}$ 1/s', fontsize=9, ha='left', va='center')
 
 # Add Connection Patch
 #ax.add_patch(ConnectionPatch(xyA=(x_right,z_surface),coordsA='data',xyB=(2850,z_surface),coordsB='data',axesA=ax,axesB=ax1,clip_on=False))
 #ax.add_patch(ConnectionPatch(xyA=(x_right,z_bottom),coordsA='data',xyB=(2850,z_bottom),coordsB='data',axesA=ax,axesB=ax1,clip_on=False))
 
 # Save Figure
-plt.savefig('3_viscoelastic_build-up_simple_shear_setup.pdf',bbox_inches="tight")
+plt.savefig('3_viscoelastic_build-up_simple_shear_setup.png',bbox_inches="tight")
 plt.close()
