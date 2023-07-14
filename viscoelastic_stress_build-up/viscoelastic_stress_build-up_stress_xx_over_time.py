@@ -68,7 +68,7 @@ zoom_y_max = 180
 axins = zoomed_inset_axes(ax[0], 3, loc = "center") # zoom = 2
 axins.set_xlim(zoom_x_min, zoom_x_max)
 axins.set_ylim(zoom_y_min, zoom_y_max)
-mark_inset(ax[0], axins, loc1=1, loc2=4, fc="none", ec="0.5")
+mark_inset(ax[0], axins, loc1=2, loc2=3, fc="none", ec="0.5")
 
 yr_in_secs = 3600. * 24. * 365.2425
 counter = 0 
