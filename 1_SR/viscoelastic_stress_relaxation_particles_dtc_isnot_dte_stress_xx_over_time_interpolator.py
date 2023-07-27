@@ -8,26 +8,28 @@ from matplotlib import rc
 from mpl_toolkits.axes_grid1.inset_locator import zoomed_inset_axes 
 from mpl_toolkits.axes_grid1.inset_locator import mark_inset
 rc("pdf", fonttype=42)
-rc("lines", linewidth=3, markersize=10)
+rc("lines", linewidth=3, markersize=5)
 
 # Change path as needed
 base = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/HLRN/HLRN/fix_stresses_elasticity/paper_14072023/BM1/"
 
 # Change file name modifiers as needed depending on your file structure
 names = [
-         "ve_relaxation_particles_bgvel_interpolatorcell_average_dtc250_dte250_GR1_np4_g0",
          "ve_relaxation_particles_bgvel_interpolatorcell_average_dtc250_dte250_GR2_np4_g0",
-         "ve_relaxation_particles_bgvel_interpolatorcell_average_dtc250_dte250_GR3_np4_g0",
-         "ve_relaxation_particles_bgvel_interpolatorcell_average_dtc250_dte250_GR4_np4_g0",
+#         "ve_relaxation_particles_bgvel_interpolatorharmonic_average_dtc250_dte250_GR2_np4_g0",
+         "ve_relaxation_particles_bgvel_interpolatornearest_neighbor_dtc250_dte250_GR2_np4_g0",
+         "ve_relaxation_particles_bgvel_interpolatorbilinear_least_squares_dtc250_dte250_GR2_np4_g0",
+         "ve_relaxation_particles_bgvel_interpolatorquadratic_least_squares_dtc250_dte250_GR2_np4_g0",
         ]
 tail = r"/statistics"
 
 # The labels the graphs will get in the plot
 labels = [
-          'dtc = dte = 250 yr, dh = 50 km',
-          'dtc = dte = 250 yr, dh = 25 km',
-          'dtc = dte = 250 yr, dh = 12.5 km',
-          'dtc = dte = 250 yr, dh = 6.25 km',
+          'dtc = dte = 250 yr, dh = 25 km, CA',
+#          'dtc = dte = 250 yr, dh = 25 km, HA',
+          'dtc = dte = 250 yr, dh = 25 km, NN',
+          'dtc = dte = 250 yr, dh = 25 km, BLS',
+          'dtc = dte = 250 yr, dh = 25 km, QLS',
          ]
 # Set the colors available for plotting
 color1=[0.0051932, 0.098238, 0.34984]
@@ -40,8 +42,9 @@ colors = [color2, color3, color4, color5, color6, color4, color5, color3, color4
 # Set the line styles
 linestyles = ['solid', 'solid', 'solid', 'solid', 'solid', 'dashed', 'dashed', 'dashdot', 'dashdot', 'dashdot', 'dotted',  'dotted','dotted'] 
 # Set the marker styles (no markers in this case)
-markers = ['|', 'x', 'o', '', '', '', '', '', '', '', '', '', '', '', ''] 
-dmark=100
+markers = ['|', 'x', 'o', '', '', '', '', '', '', '', '', '', '', ''] 
+dmark = 100
+smark = 10
 
 # Set up a row of two plots, one with absolute stress values
 # and one with the percentage difference to the analytical solution
@@ -72,9 +75,9 @@ for name in names:
 
   # Plot the stress elements in MPa against time in ky in
   # categorical batlow colors.
-  ax[0].plot(time/1e3,stress_xx_min/1e6,label=labels[counter],color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark,fillstyle='none')
+  ax[0].plot(time/1e3,stress_xx_min/1e6,label=labels[counter],color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark,fillstyle='none',markersize=smark)
 #  axins.plot(time/1e3,stress_xx_min/1e6,label=None,color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=20)
-  ax[1].plot(time/1e3,(stress_xx_min-(20e6*np.exp(-1e10*time*yr_in_secs/1e22)))/(20e6*np.exp(-1e10*time*yr_in_secs/1e22))*100.,label=labels[counter],color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark,fillstyle='none')
+  ax[1].plot(time/1e3,(stress_xx_min-(20e6*np.exp(-1e10*time*yr_in_secs/1e22)))/(20e6*np.exp(-1e10*time*yr_in_secs/1e22))*100.,label=labels[counter],color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark,fillstyle='none',markersize=smark)
   
   counter += 1
 
@@ -117,4 +120,4 @@ ax[1].text(-15,4,"b)")
 #plt.tight_layout()
 
 # Save as png
-plt.savefig('1_viscoelastic_relaxation_particles_dte_isnot_dtc_dh.png')    
+plt.savefig('1_viscoelastic_relaxation_particles_dte_isnot_dtc_interpolator.png')    
