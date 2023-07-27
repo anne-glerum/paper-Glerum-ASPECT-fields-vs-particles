@@ -15,10 +15,10 @@ base = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/HLRN/HLRN/fix_stresses_el
 
 # Change file name modifiers as needed depending on your file structure
 names = [
-         "ve_relaxation_dtc250_dte250_GR1_g0",
-         "ve_relaxation_dtc250_dte250_GR2_g0",
-         "ve_relaxation_dtc250_dte250_GR3_g0",
-         "ve_relaxation_dtc250_dte250_GR4_g0",
+         "ve_relaxation_bgvel_dtc250_dte250_GR1_g0",
+         "ve_relaxation_bgvel_dtc250_dte250_GR2_g0",
+         "ve_relaxation_bgvel_dtc250_dte250_GR3_g0",
+         "ve_relaxation_bgvel_dtc250_dte250_GR4_g0",
         ]
 tail = r"/statistics"
 
