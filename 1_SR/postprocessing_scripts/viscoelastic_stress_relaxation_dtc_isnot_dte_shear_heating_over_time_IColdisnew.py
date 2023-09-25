@@ -38,7 +38,7 @@ color3=[0.32701, 0.4579, 0.28638]
 color4=[0.67824, 0.55071, 0.1778]
 color5=[0.97584, 0.63801, 0.50183]
 color6=[0.98447, 0.78462, 0.93553]
-colors = [color2, color4, color6, color5, color6, color4, color5, color3, color4, color5]
+colors = [color2, color3, color4, color5, color6, color4, color5, color3, color4, color5]
 # Set the line styles
 linestyles = ['solid', 'solid', 'solid', 'solid', 'solid', 'dashdot', 'dashdot', 'dotted',  'dotted','dotted'] 
 # Set the marker styles (no markers in this case)
@@ -47,7 +47,7 @@ markers = ['', '', '', '', '', '', '', '', '', '', '', '', '', '']
 # Set up a row of two plots, one with heating rates
 # and one with the percentage difference of tau^0_c to the analytical solution
 fig = plt.figure(figsize=(10, 6))
-ax = [fig.add_subplot(2, 1, i) for i in range(1, 3)]
+ax = [fig.add_subplot(2, 1, i) for i in range(1, 2)]
 
 # y-locations of text labels
 y=[2.5e-8,2.0e-8,1.5e-8,1.0e-8,0.5e-8]
@@ -77,7 +77,7 @@ for name in names:
   print ("Time-integrated released energy density: ", area, " J/m3")
   ax[0].text(135,y[counter],"Time-int. released energy density: " + "%.2f" % area + " J/m3",color=colors[counter])
   # Plot the error between ve_stress_xx and the analytical solution in %.
-  ax[1].plot(time/1e3,(stress_xx_min-(20e6*np.exp(-1e10*time*yr_in_secs/1e22)))/(20e6*np.exp(-1e10*time*yr_in_secs/1e22))*100.,label=labels[counter],color=colors[counter],linestyle=linestyles[counter],marker=markers[counter])
+#  ax[1].plot(time/1e3,(stress_xx_min-(20e6*np.exp(-1e10*time*yr_in_secs/1e22)))/(20e6*np.exp(-1e10*time*yr_in_secs/1e22))*100.,label=labels[counter],color=colors[counter],linestyle=linestyles[counter],marker=markers[counter])
   
   counter += 1
 
@@ -108,26 +108,26 @@ for timestep in dt:
   counter += 1
 
 # Labelling of plot
-ax[1].set_xlabel("Time [ky]")
+ax[0].set_xlabel("Time [ky]")
 ax[0].set_ylabel(r"Shear heating rate [J/m3/s]")
-ax[1].set_ylabel(r"Error for $\tau_{xx}$ [%]")
+#ax[1].set_ylabel(r"Error for $\tau_{xx}$ [%]")
 # Manually place legend in lower right corner. 
 ax[0].legend(loc='upper right',ncol=2,handlelength=4)
 # Grid and tickes
 ax[0].grid(axis='x',color='0.95')
 ax[0].grid(axis='y',color='0.95')
-ax[1].grid(axis='x',color='0.95')
-ax[1].grid(axis='y',color='0.95')
-ax[1].set_yticks([0,2,4,6,8,10])
+#ax[1].grid(axis='x',color='0.95')
+#ax[1].grid(axis='y',color='0.95')
+#ax[1].set_yticks([0,2,4,6,8,10])
 
 # Ranges of the axes
 ax[0].set_xlim(0,250) # kyr
-ax[1].set_xlim(0,250) # kyr
-ax[1].set_ylim(0,10) # %
+#ax[1].set_xlim(0,250) # kyr
+#ax[1].set_ylim(0,10) # %
 
 # Add labels a) and b)
-ax[0].text(-15,4.2e-8,"a)")
-ax[1].text(-15,10,"b)")
+#ax[0].text(-15,4.2e-8,"a)")
+#ax[1].text(-15,10,"b)")
 
 # Save as png
 png_name = '1_viscoelastic_relaxation_dte_isnot_dtc_fields_dtcdte_IColdisnew_shear_heating_fixedE.png'
