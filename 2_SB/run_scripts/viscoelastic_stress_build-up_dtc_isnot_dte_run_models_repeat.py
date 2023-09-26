@@ -2,10 +2,10 @@ import os
 from os.path import exists
 
 # Generate a new prm file and jobscript for each refinement level and timestep.
-def generate_and_run( refine, timestep, elastic_timestep ):
+def generate_and_run( refine, timestep, elastic_timestep, reps):
   prmfile = open("viscoelastic_stress_build-up_dtc_isnot_dte.prm", "r")
   base_label = "ve_build-up_"
-  label = "dtc" + str(timestep) + "_dte" + str(elastic_timestep) + "_GR" + str(refine)
+  label = "dtc" + str(timestep) + "_dte" + str(elastic_timestep) + "_GR" + str(refine) + "_" + str(reps)
   new_prmfile = "viscoelastic_stress_build-up_" + label + ".prm"
   outfile = open(new_prmfile, "w")
   for l in prmfile.readlines():
@@ -53,9 +53,11 @@ def generate_and_run( refine, timestep, elastic_timestep ):
 
 # Run the model at different refinement levels and timesteps
 refinements = [2]
-elastic_timesteps = [62.5]
-timesteps = [62.5]
+elastic_timesteps = [500]
+timesteps = [500]
+repeats = [1,2,3] 
 for r in refinements:
   for et in elastic_timesteps:
     for t in timesteps:
-      generate_and_run(r,t,et)
+      for reps in repeats:
+        generate_and_run(r,t,et,reps)
