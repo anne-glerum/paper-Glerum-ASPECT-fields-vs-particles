@@ -78,21 +78,18 @@ for name in names:
   # Create file path
   path = base+name+tail
 
-  # Read in the time and the minimum xx component of the viscoelastic stress,
+  # Read in the time and the average value of the xy component of the viscoelastic stress,
   # which is stored on the field ve_stress_xy.
   # The correct columns are selected with usecols (counting starts from 0).
-  if 'particle' in name:
-    time,stress_xy_min = np.genfromtxt(path, comments='#', usecols=(1,21), unpack=True)
-  else:
-    time,stress_xy_min = np.genfromtxt(path, comments='#', usecols=(1,27), unpack=True)
+  time,stress_xy_ave = np.genfromtxt(path, comments='#', usecols=(1,22), unpack=True)
 
   # Plot the stress elements in Pa against time in s in
   # categorical batlow colors.
-  ax[0].plot(time,stress_xy_min,label=labels[counter],color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark,fillstyle='none')
-  #axins.plot(time,stress_xy_min,label=None,color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark)
-  ax[1].plot(time,(stress_xy_min-tau_xy_analytical(time))/tau_xy_analytical(time)*100.,label=None,color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark,fillstyle='none')
+  ax[0].plot(time,stress_xy_ave,label=labels[counter],color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark,fillstyle='none')
+  #axins.plot(time,stress_xy_ave,label=None,color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark)
+  ax[1].plot(time,(stress_xy_ave-tau_xy_analytical(time))/tau_xy_analytical(time)*100.,label=None,color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark,fillstyle='none')
 
-  for tau in stress_xy_min:
+  for tau in stress_xy_ave:
     if tau > 15:
       print ("Too high tau: ", name)
   
