@@ -27,7 +27,7 @@ labels = [
           'dtc = dte = 0.02 s',
           'dtc = dte = 0.01 s',
           'dtc = dte = 0.005 s',
-          'dtc = dte = 0.001 s',
+          'dtc = dte = 0.0025 s',
          ]
 # Set the colors available for plotting
 color1=[0.0051932, 0.098238, 0.34984]
@@ -36,7 +36,7 @@ color3=[0.32701, 0.4579, 0.28638]
 color4=[0.67824, 0.55071, 0.1778]
 color5=[0.97584, 0.63801, 0.50183]
 color6=[0.98447, 0.78462, 0.93553]
-colors = [color2, color3, color4, color5, color6, color5, color1, color3, color5]
+colors = [color1, color2, color3, color4, color5, color6, color5, color1, color3, color5]
 # Set the line styles
 linestyles = ['solid', 'solid', 'solid', 'solid', 'solid', 'solid', 'dotted', 'dotted', 'dotted'] 
 # Set the marker styles (no markers in this case)
@@ -120,11 +120,11 @@ ax[1].grid(axis='y',color='0.95')
 ax[0].set_xlim(0,1.) # s
 ax[0].set_ylim(0,15.5) # MPa
 ax[1].set_xlim(0,1.) # s
-ax[1].set_ylim(-1.,0.25) # %
+ax[1].set_ylim(-1.,0.22) # %
 
 # Add labels a) and b)
 ax[0].text(-0.055,15.5,"a)")
-ax[1].text(-0.07,0.25,"b)")
+ax[1].text(-0.07,0.22,"b)")
 
 # Add timestep labels
 #ax[1].text(50,-0.77,"dt = 500 yr", rotation = 20)

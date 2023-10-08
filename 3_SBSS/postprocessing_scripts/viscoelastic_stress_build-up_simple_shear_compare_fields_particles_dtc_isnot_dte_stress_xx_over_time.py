@@ -16,16 +16,18 @@ base = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/HLRN/HLRN/fix_stresses_el
 # Change file name modifiers as needed depending on your file structure
 names = [
          "ve_build-up_simple_shear_dtc0.01_dte0.01_GR2_1",
-#         "ve_build-up_simple_shear_dtc0.01_dte0.01_GR4_1",
-         "ve_build-up_simple_shear_particles_periodic_interpolatorcell_average_dtc0.01_dte0.01_GR2_np4",
+         "ve_build-up_simple_shear_dtc0.01_dte0.01_GR4_1",
+         "ve_build-up_simple_shear_particles_periodic_interpolatorcell_average_dtc0.01_dte0.01_GR2_np4_1",
+         "ve_build-up_simple_shear_particles_periodic_interpolatorcell_average_dtc0.01_dte0.01_GR4_np4_1",
         ]
 tail = r"/statistics"
 
 # The labels the graphs will get in the plot
 labels = [
           'fields, dtc = dte = 0.01 s, dh = 0.25 m',
-#          'fields, dh = 0.0625 m',
+          'fields, dtc = dte = 0.01 s, dh = 0.0625 m',
           'particles, dtc = dte = 0.01 s, dh = 0.25 m',
+          'particles, dtc = dte = 0.01 s, dh = 0.0625 m',
          ]
 # Set the colors available for plotting
 color1=[0.0051932, 0.098238, 0.34984]
@@ -34,7 +36,7 @@ color3=[0.32701, 0.4579, 0.28638]
 color4=[0.67824, 0.55071, 0.1778]
 color5=[0.97584, 0.63801, 0.50183]
 color6=[0.98447, 0.78462, 0.93553]
-colors = [color1, color4, color3, color4, color5, color6, color5, color1, color3, color5]
+colors = [color1, color2, color3, color4, color5, color6, color5, color1, color3, color5]
 # Set the line styles
 linestyles = ['solid', 'solid', 'dashed', 'dashed', 'solid', 'solid', 'dotted', 'dotted', 'dotted'] 
 # Set the marker styles (no markers in this case)

@@ -120,11 +120,11 @@ ax[1].set_yticks([0,-0.2,-0.4,0.2])
 ax[0].set_xlim(0,1.) # s
 ax[0].set_ylim(0,15.5) # MPa
 ax[1].set_xlim(0,1.) # s
-ax[1].set_ylim(-0.55,0.3) # %
+ax[1].set_ylim(-0.55,0.22) # %
 
 # Add labels a) and b)
 ax[0].text(-0.055,15.5,"a)")
-ax[1].text(-0.07,0.25,"b)")
+ax[1].text(-0.07,0.22,"b)")
 
 # Add timestep labels
 #ax[1].text(50,-0.77,"dt = 500 yr", rotation = 20)

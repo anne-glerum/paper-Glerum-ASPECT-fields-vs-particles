@@ -15,10 +15,10 @@ base = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/HLRN/HLRN/fix_stresses_el
 
 # Change file name modifiers as needed depending on your file structure
 names = [
-         "ve_build-up_simple_shear_particles_interpolatorcell_average_dtc0.02_dte0.02_GR2_np4_1",
-         "ve_build-up_simple_shear_particles_interpolatorcell_average_dtc0.01_dte0.01_GR2_np4_1",
-         "ve_build-up_simple_shear_particles_interpolatorcell_average_dtc0.005_dte0.005_GR2_np4_1",
-         "ve_build-up_simple_shear_particles_interpolatorcell_average_dtc0.0025_dte0.0025_GR2_np4_1",
+         "ve_build-up_simple_shear_particles_periodic_interpolatorcell_average_dtc0.02_dte0.02_GR2_np4_1",
+         "ve_build-up_simple_shear_particles_periodic_interpolatorcell_average_dtc0.01_dte0.01_GR2_np4_1",
+         "ve_build-up_simple_shear_particles_periodic_interpolatorcell_average_dtc0.005_dte0.005_GR2_np4_1",
+         "ve_build-up_simple_shear_particles_periodic_interpolatorcell_average_dtc0.0025_dte0.0025_GR2_np4_1",
         ]
 tail = r"/statistics"
 
@@ -120,11 +120,11 @@ ax[1].grid(axis='y',color='0.95')
 ax[0].set_xlim(0,1.) # s
 ax[0].set_ylim(0,15.5) # MPa
 ax[1].set_xlim(0,1.) # s
-ax[1].set_ylim(-1.25,0.5) # %
+ax[1].set_ylim(-1.,0.22) # %
 
 # Add labels a) and b)
 ax[0].text(-0.055,15.5,"a)")
-ax[1].text(-0.07,0.5,"b)")
+ax[1].text(-0.07,0.22,"b)")
 
 # Add timestep labels
 #ax[1].text(50,-0.77,"dt = 500 yr", rotation = 20)
