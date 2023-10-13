@@ -71,12 +71,12 @@ ax.text(3050,600,r'$\rho=2800$ $\mathrm{kg/m^3}$', fontsize=9, ha='left')
 ax.text(700,1800,r'$\eta_{\mathrm{viscous}}=10^{24} \,\mathrm{Pa} \cdot s$', fontsize=9, ha='left')
 ax.text(700,1500,r'$G=10^{10} \, \mathrm{Pa}$', fontsize=9, ha='left')
 ax.text(700,1200,r'$\rho=3300$ $\mathrm{kg/m^3}$', fontsize=9, ha='left')
-ax.arrow(690,1900,100,500,width=6,head_width=0, clip_on=False, fill=True, facecolor='black')
+ax.arrow(690,1900,100,500,width=5,head_width=0, clip_on=False, fill=True, facecolor='black')
 
 # Add Connection Patch
 #ax.add_patch(ConnectionPatch(xyA=(x_right,z_surface),coordsA='data',xyB=(2850,z_surface),coordsB='data',axesA=ax,axesB=ax1,clip_on=False))
 #ax.add_patch(ConnectionPatch(xyA=(x_right,z_bottom),coordsA='data',xyB=(2850,z_bottom),coordsB='data',axesA=ax,axesB=ax1,clip_on=False))
 
 # Save Figure
-plt.savefig('5_viscoelastic_bending_beam_setup.png',bbox_inches="tight")
+plt.savefig('5_viscoelastic_bending_beam_setup.png',bbox_inches="tight",dpi=300)
 plt.close()
