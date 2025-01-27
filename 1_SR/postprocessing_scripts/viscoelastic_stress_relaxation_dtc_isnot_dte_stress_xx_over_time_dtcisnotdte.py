@@ -26,12 +26,12 @@ tail = r"/statistics"
 
 # The labels the graphs will get in the plot
 labels = [
-          'dtc = 500 yr, dte = 500 yr, dh = 25 km',
-          'dtc = 250 yr, dte = 500 yr, dh = 25 km',
-          'dtc = 125 yr, dte = 500 yr, dh = 25 km',
-          'dtc = 250 yr, dte = 250 yr, dh = 25 km',
-          'dtc = 125 yr, dte = 250 yr, dh = 25 km',
-          'dtc = 62.5 yr, dte = 250 yr, dh = 25 km',
+          'dtc = 500 yr, dte = 500 yr',
+          'dtc = 250 yr, dte = 500 yr',
+          'dtc = 125 yr, dte = 500 yr',
+          'dtc = 250 yr, dte = 250 yr',
+          'dtc = 125 yr, dte = 250 yr',
+          'dtc = 62.5 yr, dte = 250 yr',
          ]
 # Set the colors available for plotting
 color1=[0.0051932, 0.098238, 0.34984]
@@ -92,10 +92,10 @@ ax[0].plot(time/1e3,20*np.exp(-1e10*time*yr_in_secs/1e22),label='analytical',col
 # Labelling of plot
 ax[1].set_xlabel("Time [ky]")
 ax[0].set_ylabel(r"Viscoelastic stress $\tau_{xx}$ [MPa]")
-ax[1].set_ylabel(r"Error [%]")
+ax[1].set_ylabel(r"Error E [%]")
 # Manually place legend in lower right corner.
-ax[0].legend(loc='upper right',ncol=1,handlelength=4)
-#ax[1].legend(loc='lower right',ncol=2,handlelength=5)
+#ax[0].legend(loc='upper right',ncol=1,handlelength=4)
+ax[1].legend(loc='upper left',ncol=1,handlelength=4)
 # Grid and tickes
 ax[0].grid(axis='x',color='0.95')
 ax[0].set_yticks([0,5,10,15,20])
@@ -111,8 +111,8 @@ ax[1].set_xlim(0,250) # kyr
 ax[1].set_ylim(0,12) # %
 
 # Add labels a) and b)
-ax[0].text(-15,21,"a)")
-ax[1].text(-15,12,"b)")
+ax[0].text(-15,21,"c)")
+ax[1].text(-15,12,"c)")
 
 # Add timestep labels
 #ax[1].text(150,4.1,"dt = 500 yr", rotation = 13)
@@ -123,4 +123,4 @@ ax[1].text(-15,12,"b)")
 #plt.tight_layout()
 
 # Save as pdf
-plt.savefig('1_viscoelastic_relaxation_dte_isnot_dtc_fields_dtcisnotdte.png')
+plt.savefig('1_viscoelastic_relaxation_dte_isnot_dtc_fields_dtcisnotdte_dh25km.png',dpi=300)

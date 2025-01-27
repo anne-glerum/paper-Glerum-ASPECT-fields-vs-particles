@@ -71,11 +71,11 @@ for name in names:
   # by the model domain area, as the heating term is
   # integrated over the domain (J/s=W).
   ax[0].plot(time/1e3,shear_heating/1e10,label=labels[counter],color=colors[counter],linestyle=linestyles[counter],marker=markers[counter])
-  print ("Heating t=0: ", shear_heating[0]/1e10, " J/m3/s")
+  print ("Heating t=0: ", shear_heating[0]/1e10, " $\mathrm{Jm^{-3}s^1$")
   # Compute and plot the total integrated energy density (the area under the shear heating, i.e., integrated energy density, curve)
   area = trapz(shear_heating/1e10,time*yr_in_secs)
-  print ("Time-integrated released energy density: ", area, " J/m3")
-  ax[0].text(135,y[counter],"Time-int. released energy density: " + "%.2f" % area + " J/m3",color=colors[counter])
+  print (r"Time-integrated released energy density: ", area, " J/m3")
+  ax[0].text(135,y[counter],r"Released $\mathcal{E}$ density: " + "%.2f" % area + r" $\mathrm{Jm^{-3}}$",color=colors[counter])
   # Plot the error between ve_stress_xx and the analytical solution in %.
 #  ax[1].plot(time/1e3,(stress_xx_min-(20e6*np.exp(-1e10*time*yr_in_secs/1e22)))/(20e6*np.exp(-1e10*time*yr_in_secs/1e22))*100.,label=labels[counter],color=colors[counter],linestyle=linestyles[counter],marker=markers[counter])
   
@@ -99,7 +99,7 @@ for timestep in dt:
   E = np.einsum("ij,ij->",A,B)
   
   print ("Total stored elastic energy E: ", E, " J/m3 for dt = ", timestep/yr_in_secs)
-  ax[0].text(25,y[counter],"Stored elastic energy density t0: " + "%.2f" % E + " J/m3",color=colors[counter])
+  ax[0].text(25,y[counter],r"Stored $\mathcal{E}_{el}$ density t0: " + "%.2f" % E + r" $\mathrm{Jm^{-3}}$",color=colors[counter])
   
   # Also compute what heating statistics *should* output
   eps_vp = eps_T - ((tau - tau0c)/(2.*timestep*mu))
@@ -109,7 +109,7 @@ for timestep in dt:
 
 # Labelling of plot
 ax[0].set_xlabel("Time [ky]")
-ax[0].set_ylabel(r"Shear heating rate [J/m3/s]")
+ax[0].set_ylabel(r"Shear heating rate [$\mathrm{Jm^{-3}s^{-1}}$]")
 #ax[1].set_ylabel(r"Error for $\tau_{xx}$ [%]")
 # Manually place legend in lower right corner. 
 ax[0].legend(loc='upper right',ncol=2,handlelength=4)
@@ -126,10 +126,10 @@ ax[0].set_xlim(0,250) # kyr
 #ax[1].set_ylim(0,10) # %
 
 # Add labels a) and b)
-#ax[0].text(-15,4.2e-8,"a)")
+ax[0].text(-15,4.2e-8,"d)")
 #ax[1].text(-15,10,"b)")
 
 # Save as png
-png_name = '1_viscoelastic_relaxation_dte_isnot_dtc_fields_dtcdte_IColdisnew_shear_heating_fixedE.png'
-plt.savefig(png_name)    
+png_name = '1_viscoelastic_relaxation_dte_isnot_dtc_fields_dtcdte_IColdisnew_shear_heating_fixedE_dh25km.png'
+plt.savefig(png_name,dpi=300)
 print ('Plot can be found in: ', png_name)

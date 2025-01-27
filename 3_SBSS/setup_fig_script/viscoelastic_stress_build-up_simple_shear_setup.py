@@ -92,5 +92,5 @@ ax.text(0.35,0.21,r'  $\mathrm{W} = \binom{0 \,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\, 0}
 #ax.add_patch(ConnectionPatch(xyA=(x_right,z_bottom),coordsA='data',xyB=(2850,z_bottom),coordsB='data',axesA=ax,axesB=ax1,clip_on=False))
 
 # Save Figure
-plt.savefig('3_viscoelastic_build-up_simple_shear_setup.png',bbox_inches="tight")
+plt.savefig('3_viscoelastic_build-up_simple_shear_setup.png',bbox_inches="tight",dpi=300)
 plt.close()

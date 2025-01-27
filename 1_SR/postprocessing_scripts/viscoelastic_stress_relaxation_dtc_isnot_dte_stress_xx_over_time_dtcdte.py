@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Tue Sep 21 by Anne Glerum
-"""
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import rc
@@ -24,10 +21,10 @@ tail = r"/statistics"
 
 # The labels the graphs will get in the plot
 labels = [
-          'dtc = dte = 500 yr, dh = 25 km',
-          'dtc = dte = 250 yr, dh = 25 km',
-          'dtc = dte = 125 yr, dh = 25 km',
-          'dtc = dte = 62.5 yr, dh = 25 km',
+          'dtc = dte = 500 yr',
+          'dtc = dte = 250 yr',
+          'dtc = dte = 125 yr',
+          'dtc = dte = 62.5 yr',
          ]
 # Set the colors available for plotting
 color1=[0.0051932, 0.098238, 0.34984]
@@ -88,7 +85,7 @@ ax[0].plot(time/1e3,20*np.exp(-1e10*time*yr_in_secs/1e22),label='analytical',col
 # Labelling of plot
 ax[1].set_xlabel("Time [ky]")
 ax[0].set_ylabel(r"Viscoelastic stress $\tau_{xx}$ [MPa]")
-ax[1].set_ylabel(r"Error [%]")
+ax[1].set_ylabel(r"Error E [%]")
 # Manually place legend in lower right corner. 
 ax[0].legend(loc='upper right',ncol=1,handlelength=4)
 #ax[1].legend(loc='lower right',ncol=2,handlelength=5)
@@ -102,7 +99,7 @@ ax[1].set_yticks([0,2,4,6,8,10])
 
 # Ranges of the axes
 ax[0].set_xlim(0,250) # kyr
-ax[0].set_ylim(0,21) # MPa
+ax[0].set_ylim(-1,21) # MPa
 ax[1].set_xlim(0,250) # kyr
 ax[1].set_ylim(0,10) # %
 
@@ -119,4 +116,4 @@ ax[1].text(-15,10,"b)")
 #plt.tight_layout()
 
 # Save as pdf
-plt.savefig('1_viscoelastic_relaxation_dte_isnot_dtc_fields_dtcdte.png')    
+plt.savefig('1_viscoelastic_relaxation_dte_isnot_dtc_fields_dtcdte_dh25km.png',dpi=300)
