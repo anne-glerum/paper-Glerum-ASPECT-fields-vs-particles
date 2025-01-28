@@ -16,25 +16,26 @@ base = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/HLRN/HLRN/fix_stresses_el
 # Change file name modifiers as needed depending on your file structure
 # Always start with largest dte, largest dtc
 names = [
-         "ve_build-up_dtc500_dte500_GR2_1",
+#         "ve_build-up_dtc500_dte500_GR2_1",
          "ve_build-up_dtc250_dte500_GR2",
-         "ve_build-up_dtc125_dte500_GR2",
          "ve_build-up_dtc250_dte250_GR2_1",
+         "ve_build-up_dtc125_dte500_GR2",
          "ve_build-up_dtc125_dte250_GR2",
-         "ve_build-up_dtc62.5_dte250_GR2",
-         "ve_build-up_dtc31.25_dte250_GR2",
-         "ve_build-up_dtc15.625_dte250_GR2",
+         "ve_build-up_dtc125_dte125_GR2",
+#         "ve_build-up_dtc62.5_dte250_GR2",
+#         "ve_build-up_dtc31.25_dte250_GR2",
+#         "ve_build-up_dtc15.625_dte250_GR2",
         ]
 tail = r"/statistics"
 
 # The labels the graphs will get in the plot
 labels = [
-          't = 10 ky, dte = 500 yr',
-          't = 50 ky, dte = 500 yr',
-          't = 100 ky, dte = 500 yr',
-          't = 10 ky, dte = 250 yr',
-          't = 50 ky, dte = 250 yr',
-          't = 100 ky, dte = 250 yr',
+          't = 10 ky, dtc = 250 yr',
+          't = 50 ky, dtc = 250 yr',
+          't = 100 ky, dtc = 250 yr',
+          't = 10 ky, dtc = 125 yr',
+          't = 50 ky, dtc = 125 yr',
+          't = 100 ky, dtc = 125 yr',
          ]
 
 # Set the colors available for plotting
@@ -103,40 +104,40 @@ for name in names:
   index_200000 = np.where(time == 100000)[0]
   errors_200000.append(abs(stress_xx_min[index_200000]-tau_xx_analytical(time[index_200000]))/tau_xx_analytical(time[index_200000])*100.)
 
-nr_dtes = len(set(dtes)) 
-unique_dtes = set(dtes)
+nr_dtcs = len(set(dtcs)) 
+unique_dtcs = set(dtcs)
 counter = 0
-prev_dte = dtes[0]
-n_dte500 = dtes.count(500)
-n_dte250 = dtes.count(250)
-print ("dtes", dtes)
-print ("Occurrences of dte500", n_dte500)
-print ("Occurrences of dte250", n_dte250)
-dte500_dtc = []
-dte500_error10000 = []
-dte500_error100000 = []
-dte500_error200000 = []
-dte250_dtc = []
-dte250_error10000 = []
-dte250_error100000 = []
-dte250_error200000 = []
-for i in np.arange(0,n_dte500):
-  dte500_dtc.append(dtcs[i])
-  dte500_error10000.append(errors_10000[i])
-  dte500_error100000.append(errors_100000[i])
-  dte500_error200000.append(errors_200000[i])
-for i in np.arange(n_dte500,n_dte500+n_dte250):
-  dte250_dtc.append(dtcs[i])
-  dte250_error10000.append(errors_10000[i])
-  dte250_error100000.append(errors_100000[i])
-  dte250_error200000.append(errors_200000[i])
+prev_dtc = dtcs[0]
+n_dtc250 = dtcs.count(250)
+n_dtc125 = dtcs.count(125)
+print ("dtcs", dtcs)
+print ("Occurrences of dtc250", n_dtc250)
+print ("Occurrences of dtc125", n_dtc125)
+dtc250_dte = []
+dtc250_error10000 = []
+dtc250_error100000 = []
+dtc250_error200000 = []
+dtc125_dte = []
+dtc125_error10000 = []
+dtc125_error100000 = []
+dtc125_error200000 = []
+for i in np.arange(0,n_dtc250):
+  dtc250_dte.append(dtes[i])
+  dtc250_error10000.append(errors_10000[i])
+  dtc250_error100000.append(errors_100000[i])
+  dtc250_error200000.append(errors_200000[i])
+for i in np.arange(n_dtc250,n_dtc250+n_dtc125):
+  dtc125_dte.append(dtes[i])
+  dtc125_error10000.append(errors_10000[i])
+  dtc125_error100000.append(errors_100000[i])
+  dtc125_error200000.append(errors_200000[i])
    
 x = np.array([62.5,125,250,500])
 def y(a,b):
   return a+b*x
 
 # Labelling of plot
-ax[0].set_xlabel("Computational timestep size [yr]")
+ax[0].set_xlabel("Elastic timestep size [yr]")
 ax[0].set_ylabel(r"Error E [%]")
 #ax[0].set_title(r"BM2: Error per computational timestep size for different elastic timestep sizes and at different timesteps")
 # Place legend
@@ -144,12 +145,12 @@ ax[0].legend(loc='upper right',ncol=1,handlelength=4)
 # Grid and tickes
 ax[0].grid(axis='x',color='0.95')
 ax[0].grid(axis='y',color='0.95')
-ax[0].set_xticks([0,15.625,31.25,62.5,100,125,200,250,300,400,500])
+ax[0].set_xticks([100,125,200,250,300,400,500])
 ax[0].set_yticks([0,0.5,1,1.5])
 
 # Ranges of the axes
-ax[0].set_xlim(550,0) # yr
-ax[0].set_ylim(-0.1,1.5) # %
+ax[0].set_xlim(550,100) # yr
+ax[0].set_ylim(-0.15,1.5) # %
 
 # Add labels
 #ax[0].text(-15,21,"a)")
@@ -157,37 +158,37 @@ ax[0].set_ylim(-0.1,1.5) # %
 #plt.tight_layout()
 
 # Also plot on normal scale instead of loglog
-ax[0].plot(dte500_dtc,dte500_error10000,label=labels[0],color=colors[0],linestyle=linestyles[0],marker=markers[0])
-ax[0].plot(dte500_dtc,dte500_error100000,label=labels[1],color=colors[1],linestyle=linestyles[1],marker=markers[1])
-ax[0].plot(dte500_dtc,dte500_error200000,label=labels[2],color=colors[2],linestyle=linestyles[2],marker=markers[2])
-ax[0].plot(dte250_dtc,dte250_error10000,label=labels[3],color=colors[3],linestyle=linestyles[3],marker=markers[3])
-ax[0].plot(dte250_dtc,dte250_error100000,label=labels[4],color=colors[4],linestyle=linestyles[4],marker=markers[4])
-ax[0].plot(dte250_dtc,dte250_error200000,label=labels[5],color=colors[5],linestyle=linestyles[5],marker=markers[5])
+ax[0].plot(dtc250_dte,dtc250_error10000,label=labels[0],color=colors[0],linestyle=linestyles[0],marker=markers[0])
+ax[0].plot(dtc250_dte,dtc250_error100000,label=labels[1],color=colors[1],linestyle=linestyles[1],marker=markers[1])
+ax[0].plot(dtc250_dte,dtc250_error200000,label=labels[2],color=colors[2],linestyle=linestyles[2],marker=markers[2])
+ax[0].plot(dtc125_dte,dtc125_error10000,label=labels[3],color=colors[3],linestyle=linestyles[3],marker=markers[3])
+ax[0].plot(dtc125_dte,dtc125_error100000,label=labels[4],color=colors[4],linestyle=linestyles[4],marker=markers[4])
+ax[0].plot(dtc125_dte,dtc125_error200000,label=labels[5],color=colors[5],linestyle=linestyles[5],marker=markers[5])
 
 # Place legend
 ax[0].legend(loc='upper right',ncol=2,handlelength=4)
 # Save as png
-plt.savefig('2_viscoelastic_build-up_dte_isnot_dtc_fields_dtcisnotdte_error_per_timestep.png', dpi=300)
+plt.savefig('2_viscoelastic_build-up_dte_isnot_dtc_fields_dtcisnotdte_error_per_comp_timestep.png', dpi=300)
 
 # Plot on loglog scale
 # B = order
 # A = y0/x0^B
 def f(x, A, B):
     return A*x**B
-x2 = np.array([5000,2500,500,250,125,62.5,31.25,15.625,1])
-ax[0].plot(x2,f(x2,5,-0.5),label="-0.5 order",color="black",linestyle="dotted",linewidth=1)
-ax[0].plot(x2,f(x2,250,-1),label="-1 order",color="black",linestyle="dashed",linewidth=1)
-#ax[0].plot(x2,f(x2,625000,-2),label="-2 order",color="black",linestyle="dashdot",linewidth=1)
+x2 = np.array([1000,500,250,125,62.5,10])
+ax[0].plot(x2,f(x2,4e-2,0.5),label="0.5 order",color="black",linestyle="dotted",linewidth=1)
+ax[0].plot(x2,f(x2,8e-4,1),label="1 order",color="black",linestyle="dashed",linewidth=1)
+ax[0].plot(x2,f(x2,5e-7,2),label="2 order",color="black",linestyle="dashdot",linewidth=1)
 plt.semilogx()
 plt.semilogy()
 # Place legend
 ax[0].set_yticks([1e-3,1e-2,1e-1,1e0,1e1])
 # Ranges of the axes
-ax[0].set_xlim(1e3,1e1) # yr
-ax[0].set_ylim(1e-2,5e1) # %
+ax[0].set_xlim(1e3,10) # yr
+ax[0].set_ylim(1e-2,1e1) # %
 # Place legend
 ax[0].legend(loc='upper right',ncol=3,handlelength=4)
 # Add labels
-ax[0].text(1350,50,"b)")
+ax[0].text(1350,10,"c)")
 # Save as png
-plt.savefig('2_viscoelastic_build-up_dte_isnot_dtc_fields_dtcisnotdte_error_per_timestep_loglog.png',dpi=300)
+plt.savefig('2_viscoelastic_build-up_dte_isnot_dtc_fields_dtcisnotdte_error_per_comp_timestep_loglog.png',dpi=300)

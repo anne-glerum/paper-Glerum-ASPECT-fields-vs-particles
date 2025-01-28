@@ -52,8 +52,8 @@ plt.setp(ax.get_yticklabels(),fontsize=12, visible=True)
 
 # Annotations - Boundary Conditions
 ax.text(-5,50,'Free slip',fontsize=9, rotation = 90, va = 'center', ha = 'center')
-ax.text(95,50,'Prescribed $\mathrm{v_x}$',fontsize=9, rotation = 90, va = 'center', ha = 'center')
-ax.text(50,5,'Prescribed $\mathrm{v_y}$',fontsize=9, va = 'center', ha = 'center')
+ax.text(95,50,'Prescribed $\mathrm{v_x}$, $\mathrm{v_y}$ free',fontsize=9, rotation = 90, va = 'center', ha = 'center')
+ax.text(50,5,'Prescribed $\mathrm{v_y}$, $\mathrm{v_x}$ free',fontsize=9, va = 'center', ha = 'center')
 ax.text(50,105,'Free slip',fontsize=9, va = 'center', ha = 'center')
 # Bottom boundary
 ax.arrow(20,-8,0,4,width=0.8, clip_on=False, fill=True, facecolor='black')

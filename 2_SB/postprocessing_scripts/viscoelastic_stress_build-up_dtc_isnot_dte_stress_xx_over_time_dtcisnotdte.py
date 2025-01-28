@@ -15,7 +15,7 @@ base = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/HLRN/HLRN/fix_stresses_el
 
 # Change file name modifiers as needed depending on your file structure
 names = [
-         "ve_build-up_dtc500_dte500_GR2",
+         "ve_build-up_dtc500_dte500_GR2_1",
          "ve_build-up_dtc250_dte500_GR2",
          "ve_build-up_dtc125_dte500_GR2",
          "ve_build-up_dtc250_dte250_GR2",
@@ -103,9 +103,9 @@ ax[0].plot(time/1e3,1e-6*tau_xx_analytical(time),label='analytical',color='black
 # Labelling of plot
 ax[1].set_xlabel("Time [ky]")
 ax[0].set_ylabel(r"Viscoelastic stress $\tau0_{\mathrm{c}xx}$ [MPa]")
-ax[1].set_ylabel(r"Error [%]")
+ax[1].set_ylabel(r"Error E [%]")
 # Manually place legend in lower right corner.
-ax[0].legend(loc='lower right',handlelength=4)
+ax[1].legend(loc='lower right',handlelength=4)
 # Grid and tickes
 ax[0].grid(axis='x',color='0.95')
 ax[0].set_yticks([0,50,100,150,200])
@@ -118,11 +118,11 @@ ax[1].grid(axis='y',color='0.95')
 ax[0].set_xlim(0,250) # kyr
 ax[0].set_ylim(0,210) # MPa
 ax[1].set_xlim(0,250) # kyr
-ax[1].set_ylim(-1.5,0.25) # %
+ax[1].set_ylim(-1.5,0.15) # %
 
 # Add labels a) and b)
-ax[0].text(-16,208,"a)")
-ax[1].text(-16,0.25,"b)")
+ax[0].text(-18,215,"c)")
+ax[1].text(-18,0.15,"c)")
 
 # Add timestep labels
 #ax[1].text(5,-0.65,"dt = 500 yr", rotation = 25)
@@ -130,7 +130,7 @@ ax[1].text(-16,0.25,"b)")
 #ax[1].text(5,-1.36,"dt = 125 yr", rotation = 38)
 
 
-plt.tight_layout()
+#plt.tight_layout()
 
 # Save
-plt.savefig('2_viscoelastic_build-up_dtc_isnot_dte_dtcisnotdte.png')
+plt.savefig('2_viscoelastic_build-up_dtc_isnot_dte_dtcisnotdte_dh25km.png',dpi=300)

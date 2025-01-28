@@ -137,7 +137,7 @@ def y(a,b):
 
 # Labelling of plot
 ax[0].set_xlabel("Computational = elastic timestep size [yr]")
-ax[0].set_ylabel(r"Error [%]")
+ax[0].set_ylabel(r"Error E [%]")
 #ax[0].set_title(r"BM2: Error per computational timestep size for different elastic timestep sizes and at different timesteps")
 # Place legend
 ax[0].legend(loc='upper right',ncol=1,handlelength=4)
@@ -184,5 +184,7 @@ ax[0].legend(loc='upper right',ncol=1,handlelength=4)
 # Ranges of the axes
 ax[0].set_xlim(1e3,1e1) # yr
 ax[0].set_ylim(8e-4,2e0) # %
+# Add labels
+ax[0].text(1350,2,"a)")
 # Save as png
 plt.savefig('2_viscoelastic_build-up_dte_isnot_dtc_fields_dtcisdte_error_per_timestep_loglog.png', dpi=300)
