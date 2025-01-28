@@ -38,7 +38,7 @@ color5=[0.97584, 0.63801, 0.50183]
 color6=[0.98447, 0.78462, 0.93553]
 colors = [color1, color2, color3, color4, color5, color6, color5, color1, color3, color5]
 # Set the line styles
-linestyles = ['solid', 'solid', 'dashed', 'dashed', 'solid', 'solid', 'dotted', 'dotted', 'dotted'] 
+linestyles = ['solid', 'dashed', 'dashdot', 'dotted', 'solid', 'solid', 'dotted', 'dotted', 'dotted'] 
 # Set the marker styles (no markers in this case)
 markers = ['', '', '', '', '', '', '', '', ''] 
 # Only plot every nth marker
@@ -82,7 +82,7 @@ for name in names:
   # categorical batlow colors.
   ax[0].plot(time,stress_xy_ave,label=labels[counter],color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark)
 
-  ax[1].plot(time,(stress_xy_ave-tau_xy_analytical(time))/tau_xy_analytical(time)*100.,label=None,color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark)
+  ax[1].plot(time,(stress_xy_ave-tau_xy_analytical(time))/tau_xy_analytical(time)*100.,label=labels[counter],color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark)
 
   for tau in stress_xy_ave:
     if tau > 15:
@@ -96,27 +96,28 @@ ax[0].plot(time,tau_xy_analytical(time),label='analytical',color='black',linesty
 # Labelling of plot
 ax[1].set_xlabel("Time [s]")
 ax[0].set_ylabel(r"Viscoelastic stress $\tau0_{cxy}$ [Pa]")
-ax[1].set_ylabel(r"Error [%]")
+ax[1].set_ylabel(r"Error E [%]")
 # Manually place legend in lower right corner. 
-ax[0].legend(loc='upper left',handlelength=4)
-#ax[1].legend(loc='lower right',ncol=1,handlelength=4)
+#ax[0].legend(loc='upper left',handlelength=4)
+ax[1].legend(loc='upper left',ncol=1,handlelength=4)
 # Grid and tickes
 ax[0].grid(axis='x',color='0.95')
 ax[0].set_yticks([0,5,10,15])
 ax[0].grid(axis='y',color='0.95')
 ax[1].grid(axis='x',color='0.95')
 ax[1].grid(axis='y',color='0.95')
-#ax[1].set_yticks([0,0.1,0.2,0.3,0.4,0.5])
+ax[0].set_xticks([0,0.2,0.4,0.5,0.6,0.8,1.0])
+ax[1].set_xticks([0,0.2,0.4,0.5,0.6,0.8,1.0])
 
 # Ranges of the axes
 ax[0].set_xlim(0,1.) # s
 ax[0].set_ylim(0,15.5) # MPa
 ax[1].set_xlim(0,1.) # s
-ax[1].set_ylim(-0.75,0.0) # %
+ax[1].set_ylim(-0.55,-0.05) # %
 
 # Add labels a) and b)
-ax[0].text(-0.055,15.5,"a)")
-ax[1].text(-0.07,0.0,"b)")
+ax[0].text(-0.055,15.5,"c)")
+ax[1].text(-0.07,-0.05,"d)")
 
 # Add timestep labels
 #ax[1].text(50,-0.77,"dt = 500 yr", rotation = 20)
@@ -124,7 +125,7 @@ ax[1].text(-0.07,0.0,"b)")
 #ax[1].text(5,-0.1,"dt = 125 yr", rotation = 3)
 
 
-plt.tight_layout()
+#plt.tight_layout()
 
 # Save
-plt.savefig('3_viscoelastic_build-up_simple_shear_fields_particles_dtcisdte.png')    
+plt.savefig('3_viscoelastic_build-up_simple_shear_fields_particles_dtcisdte.png',dpi=300)
