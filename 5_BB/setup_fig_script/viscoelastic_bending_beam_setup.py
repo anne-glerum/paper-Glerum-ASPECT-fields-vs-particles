@@ -61,17 +61,17 @@ ax.text(3750,4700,'Free slip',fontsize=9, va = 'center', ha = 'center')
 # Annotations material properties
 # Medium
 ax.text(3050,4100,'$\mathrm{if} \, (t \leq 50000 \, \mathrm{yr})$', fontsize=9, ha='left')
-ax.text(3050,3800,'  $\mathrm{g}= 10 \, \mathrm{m/s^2}$', fontsize=9)
+ax.text(3050,3800,'  $g= 10 \, \mathrm{m/s^2}$', fontsize=9)
 ax.text(3050,3500,'$\mathrm{else}$', fontsize=9, ha='left')
-ax.text(3050,3200,'  $\mathrm{g}= 0 \, \mathrm{m/s^2}$', fontsize=9)
-ax.text(3050,1200,r'$\eta_{\mathrm{viscous}}=10^{18} \,\mathrm{Pa} \cdot s$', fontsize=9, ha='left')
-ax.text(3050,900,r'$G=10^{11} \, \mathrm{Pa}$', fontsize=9, ha='left')
-ax.text(3050,600,r'$\rho=2800$ $\mathrm{kg/m^3}$', fontsize=9, ha='left')
+ax.text(3050,3200,'  $g= 0 \, \mathrm{m/s^2}$', fontsize=9)
+ax.text(3050,1800,r'$\eta_{\mathrm{viscous}}=10^{18} \,\mathrm{Pa} \cdot \mathrm{s}$', fontsize=9, ha='left')
+ax.text(3050,1500,r'$G=10^{11} \, \mathrm{Pa}$', fontsize=9, ha='left')
+ax.text(3050,1200,r'$\rho=2800$ $\mathrm{kg/m^3}$', fontsize=9, ha='left')
 # Beam
-ax.text(700,1800,r'$\eta_{\mathrm{viscous}}=10^{24} \,\mathrm{Pa} \cdot s$', fontsize=9, ha='left')
-ax.text(700,1500,r'$G=10^{10} \, \mathrm{Pa}$', fontsize=9, ha='left')
-ax.text(700,1200,r'$\rho=3300$ $\mathrm{kg/m^3}$', fontsize=9, ha='left')
-ax.arrow(690,1900,100,500,width=5,head_width=0, clip_on=False, fill=True, facecolor='black')
+ax.text(680,1800,r'$\eta_{\mathrm{viscous}}=10^{24} \,\mathrm{Pa} \cdot \mathrm{s}$', fontsize=9, ha='left')
+ax.text(680,1500,r'$G=10^{10} \, \mathrm{Pa}$', fontsize=9, ha='left')
+ax.text(680,1200,r'$\rho=3300$ $\mathrm{kg/m^3}$', fontsize=9, ha='left')
+ax.arrow(670,1900,100,500,width=5,head_width=0, clip_on=False, fill=True, facecolor='black')
 
 # Add Connection Patch
 #ax.add_patch(ConnectionPatch(xyA=(x_right,z_surface),coordsA='data',xyB=(2850,z_surface),coordsB='data',axesA=ax,axesB=ax1,clip_on=False))
