@@ -15,10 +15,11 @@ base = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/HLRN/HLRN/fix_stresses_el
 
 # Change file name modifiers as needed depending on your file structure
 names = [
-         'RL9_viscoelastic_bending_beam_particles_Newton_avegeometric_intcell_average_limTrue_dtc500_dte500_IGR2_IAR0_np4',
-         'RL9_viscoelastic_bending_beam_particles_Newton_avegeometric_intnearest_neighbor_limTrue_dtc500_dte500_IGR2_IAR0_np4',
-         'RL9_viscoelastic_bending_beam_particles_Newton_avegeometric_intbilinear_least_squares_limTrue_dtc500_dte500_IGR2_IAR0_np4',
-         'RL9_viscoelastic_bending_beam_particles_Newton_avegeometric_intquadratic_least_squares_limTrue_dtc500_dte500_IGR2_IAR0_np4',
+         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intcell_average_limTrue_dtc500_dte500_IGR2_IAR0_np4',
+         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intnearest_neighbor_limTrue_dtc500_dte500_IGR2_IAR0_np4',
+         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intbilinear_least_squares_limTrue_dtc500_dte500_IGR2_IAR0_np4',
+         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intquadratic_least_squares_limTrue_dtc500_dte500_IGR2_IAR0_np4',
+         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intdistance_weighted_average_limTrue_dtc500_dte500_IGR2_IAR0_np4',
         ]
 tail = r"/statistics"
 
@@ -28,6 +29,7 @@ labels = [
           'PI = NN',
           'PI = BLS',
           'PI = QLS',
+          'PI = DWA',
          ]
 # Set the colors available for plotting
 color1=[0.0051932, 0.098238, 0.34984]
@@ -36,7 +38,7 @@ color3=[0.32701, 0.4579, 0.28638]
 color4=[0.67824, 0.55071, 0.1778]
 color5=[0.97584, 0.63801, 0.50183]
 color6=[0.98447, 0.78462, 0.93553]
-colors = [color1, color3, color4, color6, color5, color6, 'black', 'blue', color3, color4, color5]
+colors = [color1, color3, color4, color5, color6, color6, 'black', 'blue', color3, color4, color5]
 # Set the line styles
 linestyles = ['solid', 'solid', 'solid', 'solid', 'solid', 'solid', 'solid','dashdot', 'dashdot', 'dotted',  'dotted','dotted'] 
 # Set the marker styles (no markers in this case)
@@ -69,21 +71,21 @@ for name in names:
   counter += 1
 
 # Plot horizontal line at initial depth
-ax[0].hlines(2800,0,50000,color='black',linestyle='dashed',label='original max depth',linewidth=2)
+ax[0].hlines(2812.5,0,50000,color='black',linestyle='dashed',label='original max depth',linewidth=1)
 
 # Plot horizontal line at maximum analytical depth
 # Equation 3.85 of Turcotte and Schubert 2002
 # for G = 1e10 Pa
-# L = 4800 m
-# h = 600 m
+# L = 4800 m (4812.5 m for a smooth beam with dx = 25 m)
+# h = 600 m (625 m for a smooth beam with dx = 25 m)
 # E 3G Pa
-# D = 72e6 G
+# D = 72e6 G = (E h^3) / (12(1-v^2))
 # q = 3e6 kg/(ms^2)
 # The maximum deflection at x = 4800 is therefore 276.48 m.
 #ax[0].hlines(3076.48,0,50,color='black',linestyle='dashed')
 
 # Plot vertical line at t=50 ky, when gravity is switched off.
-ax[0].vlines(50,4000,2000,color='black',linestyle='dotted',linewidth=2)
+ax[0].vlines(50,4000,2000,color='black',linestyle='dotted',linewidth=1,label='gravity off')
 
 # Labelling of plot
 ax[1].set_xlabel("Time [ky]")
@@ -100,14 +102,14 @@ ax[1].grid(axis='y',color='0.95')
 #ax[1].set_yticks([0,2,4,6,8,10])
 
 # Ranges of the axes
-ax[0].set_xlim(0,500) # kyr
-ax[0].set_ylim(3200,2700) # m
-ax[1].set_xlim(0,500) # kyr
-ax[1].set_ylim(-1e9,1e9) # %
+ax[0].set_xlim(0,350) # kyr
+ax[0].set_ylim(3150,2750) # m
+ax[1].set_xlim(0,350) # kyr
+ax[1].set_ylim(-0.75e9,0.75e9) # %
 
 # Add labels a) and b)
-ax[0].text(-34,2700,"a)")
-ax[1].text(-34,1e9,"b)")
+ax[0].text(-25,2750,"a)")
+ax[1].text(-25,0.75e9,"b)")
 
 plt.tight_layout()
 

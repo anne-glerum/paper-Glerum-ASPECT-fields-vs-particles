@@ -15,10 +15,10 @@ base = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/HLRN/HLRN/fix_stresses_el
 
 # Change file name modifiers as needed depending on your file structure
 names = [
-         "RL9_viscoelastic_bending_beam_DGlimiter_dtc500_dte500_averaginggeometric_IGR2_IAR0",
-         "RL9_viscoelastic_bending_beam_DGlimiter_dtc250_dte250_averaginggeometric_IGR2_IAR0",
-         "RL9_viscoelastic_bending_beam_DGlimiter_dtc125_dte125_averaginggeometric_IGR2_IAR0",
-         "RL9_viscoelastic_bending_beam_DGlimiter_dtc62.5_dte62.5_averaginggeometric_IGR2_IAR0",
+         "RL9_viscoelastic_bending_beam_smooth25m_DGlimiter_Newton_dtc500_dte500_averaginggeometric_IGR2_IAR0",
+         "RL9_viscoelastic_bending_beam_smooth25m_DGlimiter_Newton_dtc250_dte250_averaginggeometric_IGR2_IAR0",
+         "RL9_viscoelastic_bending_beam_smooth25m_DGlimiter_Newton_dtc125_dte125_averaginggeometric_IGR2_IAR0",
+         "RL9_viscoelastic_bending_beam_smooth25m_DGlimiter_Newton_dtc62.5_dte62.5_averaginggeometric_IGR2_IAR0",
         ]
 tail = r"/statistics"
 
@@ -69,7 +69,7 @@ for name in names:
   counter += 1
 
 # Plot horizontal line at initial depth
-ax[0].hlines(2800,0,50000,color='black',linestyle='dashed',label='original max depth',linewidth=2)
+ax[0].hlines(2812.5,0,50000,color='black',linestyle='dashed',label='original max depth',linewidth=1)
 
 # Plot horizontal line at maximum analytical depth
 # Equation 3.85 of Turcotte and Schubert 2002
@@ -80,12 +80,13 @@ ax[0].hlines(2800,0,50000,color='black',linestyle='dashed',label='original max d
 # D = 72e6 G
 # q = 3e6 kg/(ms^2)
 # The maximum deflection at x = 4800 is therefore 276.48 m.
-#ax[0].hlines(3076.48,0,50,color='black',linestyle='dashed')
+#ax[0].hlines(3076.48,0,500000,color='black',linestyle='dashdot',label='analytical max depth',linewidth=1)
 
 # Plot vertical line at t=50 ky, when gravity is switched off.
-ax[0].vlines(50,4000,2000,color='black',linestyle='dotted',linewidth=2)
+ax[0].vlines(50,4000,2000,color='black',linestyle='dotted',label='gravity off',linewidth=1)
 
 # Labelling of plot
+ax[0].set_xlabel("Time [ky]")
 ax[1].set_xlabel("Time [ky]")
 ax[0].set_ylabel(r"Maximum beam depth [m]")
 ax[1].set_ylabel(r"$\tau^0_{cxx}$ min/max [Pa s]")
@@ -100,18 +101,18 @@ ax[1].grid(axis='y',color='0.95')
 #ax[1].set_yticks([0,2,4,6,8,10])
 
 # Ranges of the axes
-ax[0].set_xlim(0,500) # kyr
-ax[0].set_ylim(3200,2700) # m
-ax[1].set_xlim(0,500) # kyr
-ax[1].set_ylim(-1e9,1e9) # %
+ax[0].set_xlim(0,350) # kyr
+ax[0].set_ylim(3150,2750) # m
+ax[1].set_xlim(0,350) # kyr
+ax[1].set_ylim(-0.75e9,0.75e9) # %
 
 # Add labels a) and b)
-ax[0].text(-34,2700,"a)")
-ax[1].text(-34,1e9,"b)")
+ax[0].text(-25,2750,"a)")
+ax[1].text(-25,0.75e9,"b)")
 
 plt.tight_layout()
 
 # Save as pdf
-filename = '5_viscoelastic_bending_beam_dte_isnot_dtc_depth_dtcisdte.png'
+filename = '5_viscoelastic_bending_beam_smooth25_dte_isnot_dtc_depth_dtcisdte.png'
 plt.savefig(filename, dpi=300)
 print ('Plot in: ' + filename)
