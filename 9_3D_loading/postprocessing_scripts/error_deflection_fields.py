@@ -127,18 +127,24 @@ for model_index, name in enumerate(names):
 
   print ("Model: ", base+name)
 
-  if 'dtc5.0' in name:
+  if 'dtc5' in name:
     dtc = 5.0
-  elif 'dtc10.0' in name:
+    dt_output = 5.0
+  elif 'dtc10' in name:
     dtc = 10.0
-  elif 'dtc15.0' in name:
+    dt_output = 10.0
+  elif 'dtc15' in name:
     dtc = 15.0
-  elif 'dtc20.0' in name:
+    dt_output = 15.0
+  elif 'dtc20' in name:
     dtc = 20.0
+    dt_output = 20.0
 
   n_output = int(end_time / dt_output) + 1
   max_deflection = np.zeros(n_output)
   print ("N output steps: ", n_output)
+  print ("Output timestep size: ", dt_output)
+  print ("Timestep size: ", dtc)
   time = np.arange(0,end_time + dt_output, dt_output)
 
   # Loop over all topo files and get the max deflection at each output timestep
@@ -159,15 +165,17 @@ for model_index, name in enumerate(names):
 
   # Plot the difference in maximum deflection between ASPECT and TABOO in % 
   # against time in yr in categorical batlow colors.
-  # First get the TABOO deflection at the same timesteps (dt_output).
-  sampled_taboo_max_deflection = taboo_max_deflection[0::int(dt_output/dtc)].copy()
+  # First get the TABOO deflection at the same timesteps (dt_output),
+  # instead of at every 2.5 yr.
+  sampled_taboo_max_deflection = taboo_max_deflection[0::int(dt_output/2.5)].copy()
   print ("Max TABOO deflection: ", np.min(sampled_taboo_max_deflection[:,1]))
   ax[1].plot(time,(max_deflection - sampled_taboo_max_deflection[:,1])/sampled_taboo_max_deflection[:,1]*100,label="vs TABOO",color=colors[model_index],linestyle="solid",marker=markers[model_index],markevery=dmark+model_index)
 
   # Plot the difference in maximum deflection between ASPECT and Abaqus in % 
   # against time in yr in categorical batlow colors.
-  # Abaqus output is already at every 5 yr.
-  ax[1].plot(time,(max_deflection - abaqus_max_deflection)/abaqus_max_deflection*100,label="vs Abaqus",color=colors[model_index],linestyle="dashed",marker=markers[model_index],markevery=dmark+model_index)
+  # Abaqus output is at every 5 yr.
+  sampled_abaqus_max_deflection = abaqus_max_deflection[0::int(dt_output/5)].copy()
+  ax[1].plot(time,(max_deflection - sampled_abaqus_max_deflection)/sampled_abaqus_max_deflection*100,label="vs Abaqus",color=colors[model_index],linestyle="dashed",marker=markers[model_index],markevery=dmark+model_index)
 
 # Plot horizontal line at initial depth
 ax[0].hlines(0,-100,500,color='black',linestyle='dashed',label=None,linewidth=1)
