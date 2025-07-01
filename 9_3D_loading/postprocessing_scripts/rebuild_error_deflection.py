@@ -96,6 +96,7 @@ for i, time in enumerate(abaqus_time):
   abaqus_max_deflection[i] = np.min(abaqus_displacement[:,2])
   # check that the maximum deflection is always in the center:
   #print("Index Abaqus min: ", i, np.argmin(abaqus_displacement[:,2]))
+print ("Max Abaqus deflection: ", np.min(abaqus_max_deflection))
 
 ############# END ABAQUS #############
 
@@ -150,7 +151,12 @@ for model_index, name in enumerate(names):
   # First get the TABOO deflection at the same timesteps (dt_output).
   sampled_taboo_max_deflection = taboo_max_deflection[0::int(dt_output/dtc)].copy()
   print ("Max TABOO deflection: ", np.min(sampled_taboo_max_deflection[:,1]))
-  ax[1].plot(time,(max_deflection - sampled_taboo_max_deflection[:,1])/sampled_taboo_max_deflection[:,1]*100,label=labels[model_index],color=colors[model_index],linestyle=linestyles[model_index],marker=markers[model_index],markevery=dmark+model_index)
+  ax[1].plot(time,(max_deflection - sampled_taboo_max_deflection[:,1])/sampled_taboo_max_deflection[:,1]*100,label="vs TABOO",color=colors[model_index],linestyle="solid",marker=markers[model_index],markevery=dmark+model_index)
+
+  # Plot the difference in maximum deflection between ASPECT and Abaqus in % 
+  # against time in yr in categorical batlow colors.
+  # Abaqus output is already at every 5 yr.
+  ax[1].plot(time,(max_deflection - abaqus_max_deflection)/abaqus_max_deflection*100,label="vs Abaqus",color=colors[model_index],linestyle="dashed",marker=markers[model_index],markevery=dmark+model_index)
 
 # Plot horizontal line at initial depth
 ax[0].hlines(0,-100,500,color='black',linestyle='dashed',label='surface t = 0 yr',linewidth=1)
@@ -168,9 +174,10 @@ ax[0].plot(abaqus_time,abaqus_max_deflection,label="Abaqus",color="green",linest
 ax[0].set_xlabel("Time [yr]")
 ax[1].set_xlabel("Time [yr]")
 ax[0].set_ylabel(r"Maximum deflection [m]")
-ax[1].set_ylabel(r"Error maximum deflection")
+ax[1].set_ylabel(r"Error maximum deflection [%]")
 # Place legend
 ax[0].legend(loc='center right',ncol=2,handlelength=4)
+ax[1].legend(loc='lower right',ncol=2,handlelength=4)
 # Grid and tickes
 ax[0].grid(which='major')
 ax[0].grid(axis='x',color='0.95')
@@ -184,11 +191,11 @@ ax[1].grid(axis='y',color='0.95')
 ax[0].set_xlim(-5,205) # yr
 ax[0].set_ylim(-0.85,0.05) # m
 ax[1].set_xlim(-5,205) # yr
-ax[1].set_ylim(-0.3,5) # %
+ax[1].set_ylim(-0.3,7) # %
 
 # Add labels a) and b)
 ax[0].text(-20,0.05,"a)")
-ax[1].text(-20,3,"b)")
+ax[1].text(-20,7,"b)")
 
 plt.tight_layout()
 
