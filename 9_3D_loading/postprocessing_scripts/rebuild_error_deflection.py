@@ -15,18 +15,21 @@ rc("legend", fontsize=8)
 base = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/Papers/Glerum_LD_ASPECT/repo/9_3D_loading/postprocessing_scripts/"
 
 names = [
+         "RL9_viscoelastic_3D_loading_particles_AMG_avegeometric_intcell_average_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
+         #"RL9_viscoelastic_3D_loading_particles_AMG_avegeometric_intnearest_neighbor_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
+         "RL9_viscoelastic_3D_loading_particles_AMG_avegeometric_intdistance_weighted_average_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
          "RL9_viscoelastic_3D_loading_particles_AMG_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
+         "RL9_viscoelastic_3D_loading_particles_AMG_avegeometric_intquadratic_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
         ]
 tail = r"/topography"
 
 # The labels the graphs will get in the plot
 labels = [
+          'AMG, geom, CA, dtc = dte = 2.5 yr',
+          #'AMG, geom, NN, dtc = dte = 2.5 yr',
+          'AMG, geom, DWA, dtc = dte = 2.5 yr',
           'AMG, geom, BLS, dtc = dte = 2.5 yr',
-          'dtc = 250 yr, dte = 500 yr',
-          'dtc = 125 yr, dte = 500 yr',
-          'dtc = 250 yr, dte = 250 yr',
-          'dtc = 125 yr, dte = 250 yr',
-          'dtc = 62.5 yr, dte = 250 yr',
+          'AMG, geom, QLS, dtc = dte = 2.5 yr',
          ]
 # Set the colors available for plotting
 color1=[0.0051932, 0.098238, 0.34984]
@@ -105,7 +108,6 @@ print ("Max Abaqus deflection: ", np.min(abaqus_max_deflection))
 fig = plt.figure(figsize=(10, 6))
 ax = [fig.add_subplot(2, 1, i) for i in range(1, 3)]
 
-counter = 0 
 dtc = 2.5
 end_time = 200
 dt_output = 5
@@ -165,10 +167,10 @@ ax[0].hlines(0,-100,500,color='black',linestyle='dashed',label='surface t = 0 yr
 ax[0].vlines(100,-10,10,color='black',linestyle='dotted',label='end increase load',linewidth=1)
 
 # Plot TABOO max deflection over time.
-ax[0].plot(1000*taboo_max_deflection[:,0],taboo_max_deflection[:,1],label="TABOO",color="blue",linestyle="dashed",marker='^',markevery=10,markersize=6,linewidth=1)
+ax[0].plot(1000*taboo_max_deflection[:,0],taboo_max_deflection[:,1],label="TABOO",color="lightsteelblue",linestyle="dashed",marker='^',markevery=10,markersize=6,linewidth=1)
 
 # Plot Abaqus max deflection over time.
-ax[0].plot(abaqus_time,abaqus_max_deflection,label="Abaqus",color="green",linestyle="dashed",marker='+',markevery=10,markersize=6,linewidth=1)
+ax[0].plot(abaqus_time,abaqus_max_deflection,label="Abaqus",color="bisque",linestyle="dashed",marker='+',markevery=7,markersize=6,linewidth=1)
 
 # Labelling of plot
 ax[0].set_xlabel("Time [yr]")
@@ -176,8 +178,8 @@ ax[1].set_xlabel("Time [yr]")
 ax[0].set_ylabel(r"Maximum deflection [m]")
 ax[1].set_ylabel(r"Error maximum deflection [%]")
 # Place legend
-ax[0].legend(loc='center right',ncol=2,handlelength=4)
-ax[1].legend(loc='lower right',ncol=2,handlelength=4)
+ax[0].legend(loc='lower left',ncol=2,handlelength=4)
+ax[1].legend(loc='upper center',ncol=2,handlelength=4)
 # Grid and tickes
 ax[0].grid(which='major')
 ax[0].grid(axis='x',color='0.95')
@@ -189,9 +191,9 @@ ax[1].grid(axis='y',color='0.95')
 
 # # Ranges of the axes
 ax[0].set_xlim(-5,205) # yr
-ax[0].set_ylim(-0.85,0.05) # m
+ax[0].set_ylim(-1.2,0.05) # m
 ax[1].set_xlim(-5,205) # yr
-ax[1].set_ylim(-0.3,7) # %
+ax[1].set_ylim(-0.3,47) # %
 
 # Add labels a) and b)
 ax[0].text(-20,0.05,"a)")
