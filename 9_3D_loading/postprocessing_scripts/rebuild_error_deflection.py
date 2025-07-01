@@ -42,6 +42,35 @@ linestyles = ['solid', 'solid', 'solid', 'dashed', 'dashed', 'dashed', 'dashed',
 markers = ['', '', '', '', '', '', '', '', '', '', '', '', '', ''] 
 dmark = 100
 
+# Set parameters for loading analytical TABOO data
+# For different pairs of (lon, colat), the radial
+# displacement u_rad [m] is listed for each 2.5 yr 
+# (0.0025 ky; 1st column) as the 2nd column.
+R = 6371.0 # Earth radius analytical model [km]
+
+t_start = 0.0 # start time [ka]
+t_end   = 0.2 # end time [ka]
+t_step  = 0.0025 # time step size [ka]
+n_taboo_time = int(t_end / t_step + 1)
+print ("Nr of TABOO timesteps: ", n_taboo_time)
+
+# The center of the load is at (lon,colat) = (0,0).
+colat_start = 0.0  # start observer locations co-latitude [degree]
+colat_end   = 5.0  # end observer locations co-latitude [degree]
+colat_step  = 0.01 # observer locations co-latitude step size
+
+taboo_time = np.arange(t_start,t_end+t_step,t_step)
+taboo_colat = np.arange(colat_start,colat_end+colat_step,colat_step) # observer locations co-latitude [degree]
+taboo_loc = taboo_colat/360.*2.*np.pi*R # observer locations distance from pole [km]
+
+# load analytical data TABOO
+print ("Loading TABOO data")
+taboo_dir = base + "ABAQUS_TABOO/taboo/disp.his"
+taboo_displacement = np.genfromtxt(taboo_dir,comments='#', usecols=(0,1))
+# reorder to get the maximum deflection at each timestep,
+# i.e. the deflection at (0,0) over time. 
+taboo_max_deflection =  taboo_displacement[0:n_taboo_time]
+
 # Set up a row of two plots, one with the maximum beam depth
 # and one with the min and max ve_stress_xx
 fig = plt.figure(figsize=(10, 6))
@@ -88,10 +117,13 @@ for model_index, name in enumerate(names):
   ax[0].plot(time,max_deflection,label=labels[model_index],color=colors[model_index],linestyle=linestyles[model_index],marker=markers[model_index],markevery=dmark+model_index)
 
 # Plot horizontal line at initial depth
-ax[0].hlines(0,0,500,color='black',linestyle='dashed',label='surface t = 0 yr',linewidth=1)
+ax[0].hlines(0,-100,500,color='black',linestyle='dashed',label='surface t = 0 yr',linewidth=1)
 
 # Plot vertical line at t=50 ky, when gravity is switched off.
 ax[0].vlines(100,-10,10,color='black',linestyle='dotted',label='end increase load',linewidth=1)
+
+# Plot TABOO max deflection over time.
+ax[0].plot(1000*taboo_max_deflection[:,0],taboo_max_deflection[:,1],label="TABOO",color="blue",linestyle="dashed",marker='^',markevery=10,markersize=6,linewidth=1)
 
 # Labelling of plot
 ax[0].set_xlabel("Time [yr]")
