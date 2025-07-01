@@ -42,6 +42,8 @@ linestyles = ['solid', 'solid', 'solid', 'dashed', 'dashed', 'dashed', 'dashed',
 markers = ['', '', '', '', '', '', '', '', '', '', '', '', '', ''] 
 dmark = 100
 
+############# START TABOO #############
+
 # Set parameters for loading analytical TABOO data
 # For different pairs of (lon, colat), the radial
 # displacement u_rad [m] is listed for each 2.5 yr 
@@ -67,9 +69,13 @@ taboo_loc = taboo_colat/360.*2.*np.pi*R # observer locations distance from pole 
 print ("Loading TABOO data")
 taboo_dir = base + "ABAQUS_TABOO/taboo/disp.his"
 taboo_displacement = np.genfromtxt(taboo_dir,comments='#', usecols=(0,1))
-# reorder to get the maximum deflection at each timestep,
+# Get the maximum deflection at each timestep,
 # i.e. the deflection at (0,0) over time. 
+# NB the max deflection of -0.7514 m at 200 yr is actually at
+# (0,0.04). The deflection at (0,0) at that time is -0.7505. IGNORE.
 taboo_max_deflection =  taboo_displacement[0:n_taboo_time]
+
+############# END TABOO #############
 
 # Set up a row of two plots, one with the maximum beam depth
 # and one with the min and max ve_stress_xx
@@ -111,10 +117,18 @@ for model_index, name in enumerate(names):
 
     topography = np.genfromtxt(file_path, comments='#', usecols=(3), unpack=True)
     max_deflection[i] = np.min(topography)
+  print ("Max ASPECT deflection: ", np.min(max_deflection))
 
   # Plot the maximum deflection in m against time in yr in
   # categorical batlow colors.
   ax[0].plot(time,max_deflection,label=labels[model_index],color=colors[model_index],linestyle=linestyles[model_index],marker=markers[model_index],markevery=dmark+model_index)
+
+  # Plot the difference in maximum deflection between ASPECT and TABOO in % 
+  # against time in yr in categorical batlow colors.
+  # First get the TABOO deflection at the same timesteps (dt_output).
+  sampled_taboo_max_deflection = taboo_max_deflection[0::int(dt_output/dtc)].copy()
+  print ("Max TABOO deflection: ", np.min(sampled_taboo_max_deflection[:,1]))
+  ax[1].plot(time,(max_deflection - sampled_taboo_max_deflection[:,1])/sampled_taboo_max_deflection[:,1]*100,label=labels[model_index],color=colors[model_index],linestyle=linestyles[model_index],marker=markers[model_index],markevery=dmark+model_index)
 
 # Plot horizontal line at initial depth
 ax[0].hlines(0,-100,500,color='black',linestyle='dashed',label='surface t = 0 yr',linewidth=1)
@@ -145,7 +159,7 @@ ax[1].grid(axis='y',color='0.95')
 ax[0].set_xlim(-5,205) # yr
 ax[0].set_ylim(-0.85,0.05) # m
 ax[1].set_xlim(-5,205) # yr
-ax[1].set_ylim(-0.3,3) # %
+ax[1].set_ylim(-0.3,5) # %
 
 # Add labels a) and b)
 ax[0].text(-20,0.05,"a)")
