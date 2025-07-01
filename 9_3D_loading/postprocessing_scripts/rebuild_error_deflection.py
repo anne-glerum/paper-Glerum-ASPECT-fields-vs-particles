@@ -67,8 +67,8 @@ taboo_loc = taboo_colat/360.*2.*np.pi*R # observer locations distance from pole 
 
 # load analytical data TABOO
 print ("Loading TABOO data")
-taboo_dir = base + "ABAQUS_TABOO/taboo/disp.his"
-taboo_displacement = np.genfromtxt(taboo_dir,comments='#', usecols=(0,1))
+taboo_dir = base + "ABAQUS_TABOO/taboo/"
+taboo_displacement = np.genfromtxt(taboo_dir+"disp.his",comments='#', usecols=(0,1))
 # Get the maximum deflection at each timestep,
 # i.e. the deflection at (0,0) over time. 
 # NB the max deflection of -0.7514 m at 200 yr is actually at
@@ -76,6 +76,28 @@ taboo_displacement = np.genfromtxt(taboo_dir,comments='#', usecols=(0,1))
 taboo_max_deflection =  taboo_displacement[0:n_taboo_time]
 
 ############# END TABOO #############
+
+############# START ABAQUS #############
+
+# load numerical data ABAQUS
+# There is a datafile for every 5 yr. The file consists of x y ? topo
+# data columns. The domain is 4 times the ASPECT domain, as it is not
+# axisymmetric, and therefore cannot be limited to a quarter of the domain.
+# The horizontal dimensions run from 0 to 3000 km, so the center
+# of the load is at (1500 km, 1500 km).
+abaqus_t_end = 200 # yr
+abaqus_dt = 5 # yr
+abaqus_time = np.arange(0,abaqus_t_end+abaqus_dt,abaqus_dt)
+abaqus_max_deflection = np.zeros(int(abaqus_t_end/abaqus_dt+1))
+abaqus_dir = base + "ABAQUS_TABOO/abaqus/"
+print ("Loading Abaqus data")
+for i, time in enumerate(abaqus_time):
+  abaqus_displacement = np.genfromtxt(abaqus_dir+"incomp_flat_FE_U3_E_"+str(time)+"yr.dat",usecols=(0,1,3))
+  abaqus_max_deflection[i] = np.min(abaqus_displacement[:,2])
+  # check that the maximum deflection is always in the center:
+  #print("Index Abaqus min: ", i, np.argmin(abaqus_displacement[:,2]))
+
+############# END ABAQUS #############
 
 # Set up a row of two plots, one with the maximum beam depth
 # and one with the min and max ve_stress_xx
@@ -138,6 +160,9 @@ ax[0].vlines(100,-10,10,color='black',linestyle='dotted',label='end increase loa
 
 # Plot TABOO max deflection over time.
 ax[0].plot(1000*taboo_max_deflection[:,0],taboo_max_deflection[:,1],label="TABOO",color="blue",linestyle="dashed",marker='^',markevery=10,markersize=6,linewidth=1)
+
+# Plot Abaqus max deflection over time.
+ax[0].plot(abaqus_time,abaqus_max_deflection,label="Abaqus",color="green",linestyle="dashed",marker='+',markevery=10,markersize=6,linewidth=1)
 
 # Labelling of plot
 ax[0].set_xlabel("Time [yr]")
