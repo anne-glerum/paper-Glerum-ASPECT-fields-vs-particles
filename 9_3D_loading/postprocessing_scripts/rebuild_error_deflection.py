@@ -21,7 +21,7 @@ tail = r"/topography"
 
 # The labels the graphs will get in the plot
 labels = [
-          'dtc = 500 yr, dte = 500 yr',
+          'AMG, geom, BLS, dtc = dte = 2.5 yr',
           'dtc = 250 yr, dte = 500 yr',
           'dtc = 125 yr, dte = 500 yr',
           'dtc = 250 yr, dte = 250 yr',
@@ -53,7 +53,7 @@ end_time = 200
 dt_output = 5
 
 # Create file path
-for name in names: 
+for model_index, name in enumerate(names): 
   path = base+name+tail
 
   print ("Model: ", base+name)
@@ -74,10 +74,7 @@ for name in names:
 
   # Loop over all topo files and get the max deflection at each output timestep
   # Topo file: x y z topo
-  #for i in np.arange(0,int(end_time + dtc), int(dtc)):
-  counter = 0
   for i, j in enumerate(np.arange(0,int(end_time/dtc+1), int(dt_output/dtc))):
-    print ("Index, value: ", i, j)
     if j < 10:
       file_path = path + ".0000" + str(j)
     else:
@@ -86,22 +83,15 @@ for name in names:
     topography = np.genfromtxt(file_path, comments='#', usecols=(3), unpack=True)
     max_deflection[i] = np.min(topography)
 
-    counter += 1
-
   # Plot the maximum deflection in m against time in yr in
   # categorical batlow colors.
-  ax[0].plot(time,max_deflection,label=labels[counter],color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark+counter)
-#   # Plot min and max stress (Pa) against time (ky).
-#   ax[1].plot(time/1e3,ve_xx_min,label=labels[counter],color=colors[counter],linestyle=linestyles[counter],marker=None)
-#   ax[1].plot(time/1e3,ve_xx_max,label=None,color=colors[counter],linestyle=linestyles[counter],marker=None)
-  
-#   counter += 1
+  ax[0].plot(time,max_deflection,label=labels[model_index],color=colors[model_index],linestyle=linestyles[model_index],marker=markers[model_index],markevery=dmark+model_index)
 
-# # Plot horizontal line at initial depth
-# ax[0].hlines(2812.5,0,50000,color='black',linestyle='dashed',label='original max depth',linewidth=1)
+# Plot horizontal line at initial depth
+ax[0].hlines(0,0,500,color='black',linestyle='dashed',label='surface t = 0 yr',linewidth=1)
 
-# # Plot vertical line at t=50 ky, when gravity is switched off.
-# ax[0].vlines(50,4000,2000,color='black',linestyle='dotted',label='gravity off',linewidth=1)
+# Plot vertical line at t=50 ky, when gravity is switched off.
+ax[0].vlines(100,-10,10,color='black',linestyle='dotted',label='end increase load',linewidth=1)
 
 # Labelling of plot
 ax[0].set_xlabel("Time [yr]")
@@ -109,7 +99,7 @@ ax[1].set_xlabel("Time [yr]")
 ax[0].set_ylabel(r"Maximum deflection [m]")
 ax[1].set_ylabel(r"Error maximum deflection")
 # Place legend
-ax[0].legend(loc='lower right',ncol=3,handlelength=4)
+ax[0].legend(loc='center right',ncol=2,handlelength=4)
 # Grid and tickes
 ax[0].grid(which='major')
 ax[0].grid(axis='x',color='0.95')
@@ -120,14 +110,14 @@ ax[1].grid(axis='y',color='0.95')
 #ax[1].set_yticks([0,2,4,6,8,10])
 
 # # Ranges of the axes
-# ax[0].set_xlim(0,350) # kyr
-# ax[0].set_ylim(3150,2750) # m
-# ax[1].set_xlim(0,350) # kyr
-# ax[1].set_ylim(-0.75e9,0.75e9) # %
+ax[0].set_xlim(-5,205) # yr
+ax[0].set_ylim(-0.85,0.05) # m
+ax[1].set_xlim(-5,205) # yr
+ax[1].set_ylim(-0.3,3) # %
 
-# # Add labels a) and b)
-# ax[0].text(-25,2750,"a)")
-# ax[1].text(-25,0.75e9,"b)")
+# Add labels a) and b)
+ax[0].text(-20,0.05,"a)")
+ax[1].text(-20,3,"b)")
 
 plt.tight_layout()
 
