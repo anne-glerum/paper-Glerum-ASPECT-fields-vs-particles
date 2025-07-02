@@ -13,6 +13,7 @@ rc("legend", fontsize=8)
 
 # Change path as needed
 base = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/Papers/Glerum_LD_ASPECT/repo/9_3D_loading/postprocessing_scripts/"
+output_file_base = "9_3D_loading_particles_max_deflection_matavQ1_PI"
 
 names = [
          ##"RL9_viscoelastic_3D_loading_particles_AMG_avegeometric_intcell_average_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
@@ -21,12 +22,18 @@ names = [
          ##"RL9_viscoelastic_3D_loading_particles_AMG_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
          ##"RL9_viscoelastic_3D_loading_particles_AMG_avegeometric_intquadratic_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
          #
-         "RL9_viscoelastic_3D_loading_particles_AMG_matavgeomvisc_avegeometric_intcell_average_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
-         "RL9_viscoelastic_3D_loading_particles_AMG_matavgeomvisc_avegeometric_intnearest_neighbor_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
-         "RL9_viscoelastic_3D_loading_particles_AMG_matavgeomvisc_avegeometric_intdistance_weighted_average_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
-         "RL9_viscoelastic_3D_loading_particles_AMG_matavgeomvisc_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
-         "RL9_viscoelastic_3D_loading_particles_AMG_matavgeomvisc_avegeometric_intquadratic_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
+         ##"RL9_viscoelastic_3D_loading_particles_AMG_matavgeomvisc_avegeometric_intcell_average_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
+         ##"RL9_viscoelastic_3D_loading_particles_AMG_matavgeomvisc_avegeometric_intnearest_neighbor_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
+         ##"RL9_viscoelastic_3D_loading_particles_AMG_matavgeomvisc_avegeometric_intdistance_weighted_average_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
+         ##"RL9_viscoelastic_3D_loading_particles_AMG_matavgeomvisc_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
+         ##"RL9_viscoelastic_3D_loading_particles_AMG_matavgeomvisc_avegeometric_intquadratic_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
          ##"RL9_viscoelastic_3D_loading_particles_AMG_partpropRR_23052025_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
+         #
+         "RL9_viscoelastic_3D_loading_particles_GMG_Q1visc_avegeometric_intcell_average_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
+         "RL9_viscoelastic_3D_loading_particles_GMG_Q1visc_avegeometric_intnearest_neighbor_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
+         "RL9_viscoelastic_3D_loading_particles_GMG_Q1visc_avegeometric_intdistance_weighted_average_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
+         "RL9_viscoelastic_3D_loading_particles_GMG_Q1visc_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
+         "RL9_viscoelastic_3D_loading_particles_GMG_Q1visc_avegeometric_intquadratic_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
         ]
 tail = r"/topography"
 
@@ -37,12 +44,17 @@ labels = [
           ##'AMG, geom, DWA, dtc = dte = 2.5 yr',
           ##'AMG, geom, BLS, dtc = dte = 2.5 yr',
           ##'AMG, geom, QLS, dtc = dte = 2.5 yr',
-          'AMG, geom mat av, geom, CA, dtc = dte = 2.5 yr',
-          'AMG, geom mat av, geom, NN, dtc = dte = 2.5 yr',
-          'AMG, geom mat av, geom, DWA, dtc = dte = 2.5 yr',
-          'AMG, geom mat av, geom, BLS, dtc = dte = 2.5 yr',
-          'AMG, geom mat av, geom, QLS, dtc = dte = 2.5 yr',
-          'AMG, geom mat av, geom, BLS, dtc = dte = 2.5 yr, partpropRR',
+          ##'AMG, geom mat av, geom, CA, dtc = dte = 2.5 yr',
+          ##'AMG, geom mat av, geom, NN, dtc = dte = 2.5 yr',
+          ##'AMG, geom mat av, geom, DWA, dtc = dte = 2.5 yr',
+          ##'AMG, geom mat av, geom, BLS, dtc = dte = 2.5 yr',
+          ##'AMG, geom mat av, geom, QLS, dtc = dte = 2.5 yr',
+          ##'AMG, geom mat av, geom, BLS, dtc = dte = 2.5 yr, partpropRR',
+          'AMG, Q1 mat av, geom, CA, dtc = dte = 2.5 yr',
+          'AMG, Q1 mat av, geom, NN, dtc = dte = 2.5 yr',
+          'AMG, Q1 mat av, geom, DWA, dtc = dte = 2.5 yr',
+          'AMG, Q1 mat av, geom, BLS, dtc = dte = 2.5 yr',
+          'AMG, Q1 mat av, geom, QLS, dtc = dte = 2.5 yr',
          ]
 # Set the colors available for plotting
 color1=[0.0051932, 0.098238, 0.34984]
@@ -125,20 +137,30 @@ dtc = 2.5
 end_time = 200
 dt_output = 5
 
+output_text_file = open(output_file_base + ".txt", "w")
+output_text_file.write("#3D loading benchmarking after Weerdesteijn et al. 2023. ")
+output_text_file.write("Average absolute difference and average absolute percentage difference between ASPECT and Abaqus and ASPECT and TABOO. ")
+output_text_file.write("Columns represent\n#model_name diff_abaqus perc_diff_abaqus diff_taboo perc_diff_taboo")
+output_text_file.write("\n#[-] [m] [%] [m] [%]")
+
 # Create file path
 for model_index, name in enumerate(names): 
   path = base+name+tail
 
   print ("Model: ", base+name)
 
-  if 'dtc5.0' in name:
+  if 'dtc5' in name:
     dtc = 5.0
-  elif 'dtc10.0' in name:
+    dt_output = 5.0
+  elif 'dtc10' in name:
     dtc = 10.0
-  elif 'dtc15.0' in name:
+    dt_output = 10.0
+  elif 'dtc15' in name:
     dtc = 15.0
-  elif 'dtc20.0' in name:
+    dt_output = 15.0
+  elif 'dtc20' in name:
     dtc = 20.0
+    dt_output = 20.0
 
   n_output = int(end_time / dt_output) + 1
   max_deflection = np.zeros(n_output)
@@ -163,15 +185,37 @@ for model_index, name in enumerate(names):
 
   # Plot the difference in maximum deflection between ASPECT and TABOO in % 
   # against time in yr in categorical batlow colors.
-  # First get the TABOO deflection at the same timesteps (dt_output).
-  sampled_taboo_max_deflection = taboo_max_deflection[0::int(dt_output/dtc)].copy()
+  # First get the TABOO deflection at the same timesteps (dt_output),
+  # instead of at every 2.5 yr.
+  sampled_taboo_max_deflection = taboo_max_deflection[0::int(dt_output/2.5)].copy()
   print ("Max TABOO deflection: ", np.min(sampled_taboo_max_deflection[:,1]))
   ax[1].plot(time,(max_deflection - sampled_taboo_max_deflection[:,1])/sampled_taboo_max_deflection[:,1]*100,label="vs TABOO",color=colors[model_index],linestyle="solid",marker=markers[model_index],markevery=dmark+model_index)
 
   # Plot the difference in maximum deflection between ASPECT and Abaqus in % 
   # against time in yr in categorical batlow colors.
-  # Abaqus output is already at every 5 yr.
-  ax[1].plot(time,(max_deflection - abaqus_max_deflection)/abaqus_max_deflection*100,label="vs Abaqus",color=colors[model_index],linestyle="dashed",marker=markers[model_index],markevery=dmark+model_index)
+  # Abaqus output is at every 5 yr.
+  sampled_abaqus_max_deflection = abaqus_max_deflection[0::int(dt_output/5)].copy()
+  ax[1].plot(time,(max_deflection - sampled_abaqus_max_deflection)/sampled_abaqus_max_deflection*100,label="vs Abaqus",color=colors[model_index],linestyle="dashed",marker=markers[model_index],markevery=dmark+model_index)
+
+  # Compute the average absolute difference in maximum deflection between
+  # ASPECT and Abaqus as SUM(abs(ASPECT-Abaqus))/n_output.
+  average_absolute_difference_abaqus = np.sum(np.abs(max_deflection - sampled_abaqus_max_deflection))/n_output
+  print ("Average absolute difference with Abaqus: ", average_absolute_difference_abaqus)
+  # Also compute the percentage difference. We ignore timestep 0 to avoid division by 0.
+  average_absolute_percentage_difference_abaqus = np.sum(np.abs((max_deflection[1:] - sampled_abaqus_max_deflection[1:])/sampled_abaqus_max_deflection[1:]*100.))/(n_output-1)
+  print ("Average absolute percentage difference with Abaqus: ", average_absolute_percentage_difference_abaqus)
+
+  # Compute the average absolute difference in maximum deflection between
+  # ASPECT and TABOO as SUM(abs(ASPECT-TABOO))/n_output.
+  average_absolute_difference_taboo = np.sum(np.abs(max_deflection - sampled_taboo_max_deflection[:,1]))/n_output
+  print ("Average absolute difference with TABOO: ", average_absolute_difference_taboo)
+  # Also compute the percentage difference. We ignore timestep 0 to avoid division by 0.
+  average_absolute_percentage_difference_taboo = np.sum(np.abs((max_deflection[1:] - sampled_taboo_max_deflection[1:,1])/sampled_taboo_max_deflection[1:,1]*100.))/(n_output-1)
+  print ("Average absolute percentage difference with TABOO: ", average_absolute_percentage_difference_taboo)
+
+  output_text_file.write("\n" + name + " " + str(average_absolute_difference_abaqus)  + " " + str(average_absolute_percentage_difference_abaqus) + " " + str(average_absolute_difference_taboo) + " " + str(average_absolute_percentage_difference_taboo))
+
+output_text_file.close()
 
 # Plot horizontal line at initial depth
 ax[0].hlines(0,-100,500,color='black',linestyle='dashed',label=None,linewidth=1)
@@ -217,6 +261,6 @@ ax[1].text(-20,7,"b)")
 plt.tight_layout()
 
 # Save as png
-filename = base + '9_3D_loading_particles_max_deflection_matavgeom_PI.png'
+filename = base + output_file_base + '.png'
 plt.savefig(filename, dpi=300)
 print ('Plot in: ' + filename)
