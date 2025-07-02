@@ -13,17 +13,18 @@ rc("legend", fontsize=8)
 
 # Change path as needed
 base = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/Papers/Glerum_LD_ASPECT/repo/9_3D_loading/postprocessing_scripts/"
+output_file_base = "9_3D_loading_fields_max_deflection_viscav"
 
 names = [
          "RL9_viscoelastic_3D_loading_AMG_dtc2.5_dte2.5_averaginggeometric_IGR1_IAR2",
-         ##"RL9_viscoelastic_3D_loading_AMG_dtc2.5_dte2.5_averagingharmonic_IGR1_IAR2",
-         ##"RL9_viscoelastic_3D_loading_AMG_dtc2.5_dte2.5_averagingarithmetic_IGR1_IAR2",
-         ##"RL9_viscoelastic_3D_loading_AMG_dtc2.5_dte2.5_averagingmaximum_composition_IGR1_IAR2",
-         "RL9_viscoelastic_3D_loading_AMG_dtc5_dte5_averaginggeometric_IGR1_IAR2",
-         "RL9_viscoelastic_3D_loading_AMG_dtc10_dte10_averaginggeometric_IGR1_IAR2",
-         "RL9_viscoelastic_3D_loading_AMG_dtc20_dte20_averaginggeometric_IGR1_IAR2",
-         ##"RL9_viscoelastic_3D_loading_AMG_dtc5_dte10_averaginggeometric_IGR1_IAR2",
-         ##"RL9_viscoelastic_3D_loading_AMG_dtc5_dte20_averaginggeometric_IGR1_IAR2",
+         "RL9_viscoelastic_3D_loading_AMG_dtc2.5_dte2.5_averagingharmonic_IGR1_IAR2",
+         "RL9_viscoelastic_3D_loading_AMG_dtc2.5_dte2.5_averagingarithmetic_IGR1_IAR2",
+         "RL9_viscoelastic_3D_loading_AMG_dtc2.5_dte2.5_averagingmaximum_composition_IGR1_IAR2",
+         ##"RL9_viscoelastic_3D_loading_AMG_dtc5_dte5_averaginggeometric_IGR1_IAR2",
+         ##"RL9_viscoelastic_3D_loading_AMG_dtc10_dte10_averaginggeometric_IGR1_IAR2",
+         ##"RL9_viscoelastic_3D_loading_AMG_dtc20_dte20_averaginggeometric_IGR1_IAR2",
+##         "RL9_viscoelastic_3D_loading_AMG_dtc5_dte10_averaginggeometric_IGR1_IAR2",
+##         "RL9_viscoelastic_3D_loading_AMG_dtc5_dte20_averaginggeometric_IGR1_IAR2",
          ##"RL9_viscoelastic_3D_loading_AMG_dtc10_dte20_averaginggeometric_IGR1_IAR2",
 
         ]
@@ -31,14 +32,17 @@ tail = r"/topography"
 
 # The labels the graphs will get in the plot
 labels = [
-          ##'AMG, geom, dtc = dte = 2.5 yr',
-          ##'AMG, harm, dtc = dte = 2.5 yr',
-          ##'AMG, arith, dtc = dte = 2.5 yr',
-          ##'AMG, max, dtc = dte = 2.5 yr',
+          'AMG, geom, dtc = dte = 2.5 yr',
+          'AMG, harm, dtc = dte = 2.5 yr',
+          'AMG, arith, dtc = dte = 2.5 yr',
+          'AMG, max, dtc = dte = 2.5 yr',
           'AMG, geom, dtc = dte = 2.5 yr',
           'AMG, geom, dtc = dte = 5 yr',
           'AMG, geom, dtc = dte = 10 yr',
           'AMG, geom, dtc = dte = 20 yr',
+          ##'AMG, geom, dtc = dte = 5 yr',
+          ##'AMG, geom, dtc = 5 yr, dte = 10 yr',
+          ##'AMG, geom, dtc = 5 yr, dte = 20 yr',
          ]
 # Set the colors available for plotting
 color1=[0.0051932, 0.098238, 0.34984]
@@ -121,6 +125,12 @@ dtc = 2.5
 end_time = 200
 dt_output = 5
 
+output_text_file = open(output_file_base + ".txt", "w")
+output_text_file.write("#3D loading benchmarking after Weerdesteijn et al. 2023. ")
+output_text_file.write("Average absolute difference and average absolute percentage difference between ASPECT and Abaqus and ASPECT and TABOO. ")
+output_text_file.write("Columns represent\n#model_name diff_abaqus perc_diff_abaqus diff_taboo perc_diff_taboo")
+output_text_file.write("\n#[-] [m] [%] [m] [%]")
+
 # Create file path
 for model_index, name in enumerate(names): 
   path = base+name+tail
@@ -177,6 +187,26 @@ for model_index, name in enumerate(names):
   sampled_abaqus_max_deflection = abaqus_max_deflection[0::int(dt_output/5)].copy()
   ax[1].plot(time,(max_deflection - sampled_abaqus_max_deflection)/sampled_abaqus_max_deflection*100,label="vs Abaqus",color=colors[model_index],linestyle="dashed",marker=markers[model_index],markevery=dmark+model_index)
 
+  # Compute the average absolute difference in maximum deflection between
+  # ASPECT and Abaqus as SUM(abs(ASPECT-Abaqus))/n_output.
+  average_absolute_difference_abaqus = np.sum(np.abs(max_deflection - sampled_abaqus_max_deflection))/n_output
+  print ("Average absolute difference with Abaqus: ", average_absolute_difference_abaqus)
+  # Also compute the percentage difference. We ignore timestep 0 to avoid division by 0.
+  average_absolute_percentage_difference_abaqus = np.sum(np.abs((max_deflection[1:] - sampled_abaqus_max_deflection[1:])/sampled_abaqus_max_deflection[1:]*100.))/(n_output-1)
+  print ("Average absolute percentage difference with Abaqus: ", average_absolute_percentage_difference_abaqus)
+
+  # Compute the average absolute difference in maximum deflection between
+  # ASPECT and TABOO as SUM(abs(ASPECT-TABOO))/n_output.
+  average_absolute_difference_taboo = np.sum(np.abs(max_deflection - sampled_taboo_max_deflection[:,1]))/n_output
+  print ("Average absolute difference with TABOO: ", average_absolute_difference_taboo)
+  # Also compute the percentage difference. We ignore timestep 0 to avoid division by 0.
+  average_absolute_percentage_difference_taboo = np.sum(np.abs((max_deflection[1:] - sampled_taboo_max_deflection[1:,1])/sampled_taboo_max_deflection[1:,1]*100.))/(n_output-1)
+  print ("Average absolute percentage difference with TABOO: ", average_absolute_percentage_difference_taboo)
+
+  output_text_file.write("\n" + name + " " + str(average_absolute_difference_abaqus)  + " " + str(average_absolute_percentage_difference_abaqus) + " " + str(average_absolute_difference_taboo) + " " + str(average_absolute_percentage_difference_taboo))
+
+output_text_file.close()
+
 # Plot horizontal line at initial depth
 ax[0].hlines(0,-100,500,color='black',linestyle='dashed',label=None,linewidth=1)
 
@@ -196,7 +226,7 @@ ax[0].set_ylabel(r"Maximum deflection [m]")
 ax[1].set_ylabel(r"Error maximum deflection [%]")
 # Place legend
 ax[0].legend(loc='upper right',ncol=1,handlelength=4)
-ax[1].legend(loc='upper center',ncol=2,handlelength=4)
+ax[1].legend(loc='lower center',ncol=2,handlelength=4)
 # Grid and tickes
 ax[0].grid(which='major')
 ax[0].grid(axis='x',color='0.95')
@@ -210,15 +240,15 @@ ax[1].grid(axis='y',color='0.95')
 ax[0].set_xlim(-5,205) # yr
 ax[0].set_ylim(-0.8,0.05) # m
 ax[1].set_xlim(-5,205) # yr
-ax[1].set_ylim(-0.5,2.5) # %
+ax[1].set_ylim(-50.5,5.5) # %
 
 # Add labels a) and b)
 ax[0].text(-20,0.05,"a)")
-ax[1].text(-20,3,"b)")
+ax[1].text(-20,5.5,"b)")
 
 plt.tight_layout()
 
 # Save as png
-filename = base + '9_3D_loading_fields_max_deflection_dtcisdte.png'
+filename = base + output_file_base + '.png'
 plt.savefig(filename, dpi=300)
 print ('Plot in: ' + filename)
