@@ -13,53 +13,51 @@ rc("legend", fontsize=8)
 
 # Change path as needed
 base = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/Papers/Glerum_LD_ASPECT/repo/9_3D_loading/postprocessing_scripts/"
-output_file_base = "9_3D_loading_particles_max_deflection_main_MG_"
+output_file_base = "9_3D_loading_particles_max_deflection_main_PIC_"
 drop_t0 = True
 
 names = [
-         "RL9_viscoelastic_3D_loading_particles_main_AMG_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4_pw1",
+         #"RL9_viscoelastic_3D_loading_particles_main_AMG_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4_pw1",
          "RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4_pw1",
-         ##"RL9_viscoelastic_3D_loading_particles_AMG_avegeometric_intcell_average_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
-         #"RL9_viscoelastic_3D_loading_particles_AMG_avegeometric_intnearest_neighbor_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
-         ##"RL9_viscoelastic_3D_loading_particles_AMG_avegeometric_intdistance_weighted_average_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
-         ##"RL9_viscoelastic_3D_loading_particles_AMG_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
-         ##"RL9_viscoelastic_3D_loading_particles_AMG_avegeometric_intquadratic_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
-         #
-         ##"RL9_viscoelastic_3D_loading_particles_AMG_matavgeomvisc_avegeometric_intcell_average_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
-         ##"RL9_viscoelastic_3D_loading_particles_AMG_matavgeomvisc_avegeometric_intnearest_neighbor_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
-         ##"RL9_viscoelastic_3D_loading_particles_AMG_matavgeomvisc_avegeometric_intdistance_weighted_average_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
-         ##"RL9_viscoelastic_3D_loading_particles_AMG_matavgeomvisc_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
-         ##"RL9_viscoelastic_3D_loading_particles_AMG_matavgeomvisc_avegeometric_intquadratic_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
-         ##"RL9_viscoelastic_3D_loading_particles_AMG_partpropRR_23052025_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
-         #
-         #"RL9_viscoelastic_3D_loading_particles_GMG_Q1visc_avegeometric_intcell_average_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
-         #"RL9_viscoelastic_3D_loading_particles_GMG_Q1visc_avegeometric_intnearest_neighbor_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
-         #"RL9_viscoelastic_3D_loading_particles_GMG_Q1visc_avegeometric_intdistance_weighted_average_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
-         #"RL9_viscoelastic_3D_loading_particles_GMG_Q1visc_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
-         #"RL9_viscoelastic_3D_loading_particles_GMG_Q1visc_avegeometric_intquadratic_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
+         #"RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intbilinear_least_squares_limTrue_dtc5_dte5_IGR1_IAR2_np4_pw1",
+         #"RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intbilinear_least_squares_limTrue_dtc10_dte10_IGR1_IAR2_np4_pw1",
+         #"RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intbilinear_least_squares_limTrue_dtc20_dte20_IGR1_IAR2_np4_pw1",
+         #"RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intbilinear_least_squares_limTrue_dtc10_dte20_IGR1_IAR2_np4_pw1",
+         #"RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intbilinear_least_squares_limTrue_dtc5_dte20_IGR1_IAR2_np4_pw1",
+         #"RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np16_pw1",
+         #"RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4_pw0",
+         #"RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4_pw1",
+         "RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np6_pw1",
+         "RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np8_pw1",
+         #"RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte5_IGR1_IAR2_np4_pw1",
+         #"RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intbilinear_least_squares_limTrue_dtc5_dte10_IGR1_IAR2_np4_pw1",
+         #"RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intcell_average_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4_pw1",
+         #"RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intnearest_neighbor_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4_pw1",
+         #"RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intdistance_weighted_average_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4_pw1",
+         #"RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4_pw1",
+         #"RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intquadratic_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4_pw1",
         ]
 tail = r"/topography"
 
 # The labels the graphs will get in the plot
 labels = [
-          'AMG, geom, dtc = dte = 2.5 yr, pw = 1',
-          'GMG, geom, dtc = dte = 2.5 yr, pw = 1',
-          ##'AMG, geom, CA, dtc = dte = 2.5 yr',
-          #'AMG, geom, NN, dtc = dte = 2.5 yr',
-          ##'AMG, geom, DWA, dtc = dte = 2.5 yr',
-          ##'AMG, geom, BLS, dtc = dte = 2.5 yr',
-          ##'AMG, geom, QLS, dtc = dte = 2.5 yr',
-          ##'AMG, geom mat av, geom, CA, dtc = dte = 2.5 yr',
-          ##'AMG, geom mat av, geom, NN, dtc = dte = 2.5 yr',
-          ##'AMG, geom mat av, geom, DWA, dtc = dte = 2.5 yr',
-          ##'AMG, geom mat av, geom, BLS, dtc = dte = 2.5 yr',
-          ##'AMG, geom mat av, geom, QLS, dtc = dte = 2.5 yr',
-          ##'AMG, geom mat av, geom, BLS, dtc = dte = 2.5 yr, partpropRR',
-          'AMG, Q1 mat av, geom, CA, dtc = dte = 2.5 yr',
-          'AMG, Q1 mat av, geom, NN, dtc = dte = 2.5 yr',
-          'AMG, Q1 mat av, geom, DWA, dtc = dte = 2.5 yr',
-          'AMG, Q1 mat av, geom, BLS, dtc = dte = 2.5 yr',
-          'AMG, Q1 mat av, geom, QLS, dtc = dte = 2.5 yr',
+         # 'AMG, geom, dtc = dte = 2.5 yr, pw = 1',
+         # 'GMG, geom, dtc = dte = 2.5 yr, pw = 1',
+          #'GMG, geom, dtc = dte = 2.5 yr, pw = 0',
+          #'GMG, geom, dtc = dte = 5 yr, pw = 1',
+          #'GMG, geom, dtc = dte = 10 yr, pw = 1',
+          #'GMG, geom, dtc = dte = 20 yr, pw = 1',
+          #'GMG, geom, dtc = 20 yr, dte = 20 yr, pw = 1',
+          #'GMG, geom, dtc = 10 yr, dte = 20 yr, pw = 1',
+          #'GMG, geom, dtc = 5 yr, dte = 20 yr, pw = 1',
+          #'GMG, geom, dtc = dte = 2.5 yr, pw = 1, PI = CA',
+          #'GMG, geom, dtc = dte = 2.5 yr, pw = 1, PI = NN',
+          #'GMG, geom, dtc = dte = 2.5 yr, pw = 1, PI = DWA',
+          #'GMG, geom, dtc = dte = 2.5 yr, pw = 1, PI = BLS',
+          #'GMG, geom, dtc = dte = 2.5 yr, pw = 1, PI = QLS',
+          'GMG, geom, dtc = dte = 2.5 yr, pw = 1, PIC = 4x4x4',
+          'GMG, geom, dtc = dte = 2.5 yr, pw = 1, PIC = 6x6x6',
+          'GMG, geom, dtc = dte = 2.5 yr, pw = 1, PIC = 8x8x8',
          ]
 # Set the colors available for plotting
 color1=[0.0051932, 0.098238, 0.34984]
@@ -68,7 +66,7 @@ color3=[0.32701, 0.4579, 0.28638]
 color4=[0.67824, 0.55071, 0.1778]
 color5=[0.97584, 0.63801, 0.50183]
 color6=[0.98447, 0.78462, 0.93553]
-colors = [color1, color4, color3, color4, color5, color6, 'black', 'blue', color3, color4, color5]
+colors = [color1, color3, color4, color5, color6, color6, 'black', 'blue', color3, color4, color5]
 # Set the line styles
 linestyles = ['solid', 'solid', 'solid', 'solid', 'dashed', 'dashed', 'dashed','dashdot', 'dashdot', 'dotted',  'dotted','dotted'] 
 # Set the marker styles (no markers in this case)
@@ -139,11 +137,8 @@ fig = plt.figure(figsize=(10, 6))
 ax = [fig.add_subplot(2, 1, i) for i in range(1, 3)]
 
 dtc = 2.5
-if drop_t0 == True and dtc > 2.5:
-  end_time = 200 + dtc
-else:
-  end_time = 200
 dt_output = 5
+end_time = 200
 
 output_text_file = open(output_file_base + 'dropt0' + str(drop_t0) + ".txt", "w")
 output_text_file.write("#3D loading benchmarking after Weerdesteijn et al. 2023. ")
@@ -170,6 +165,8 @@ for model_index, name in enumerate(names):
     dtc = 20.0
     dt_output = 20.0
 
+  if drop_t0 == True and dtc > 2.5:
+    end_time = 200 + dtc
   n_output = int(end_time / dt_output) + 1
   max_deflection = np.zeros(n_output)
   print ("N output steps: ", n_output)
@@ -198,14 +195,15 @@ for model_index, name in enumerate(names):
 
   # Plot the difference in maximum deflection between ASPECT and TABOO in % 
   # against time in yr in categorical batlow colors.
-  # Because ASPECT is one step behind, drop the first ASPECT timestep
-  # and the last TABOO and Abaqus timestep if drop_t0 == true.
+  # Because ASPECT is one step behind, drop the first ASPECT timestep.
+  # ASPECT ran one additional timestep after 200 yr, so we can shift the whole
+  # sequence by one timestep.
   # First get the TABOO deflection at the same timesteps (dt_output),
   # instead of at every 2.5 yr.
   sampled_taboo_max_deflection = taboo_max_deflection[0::int(dt_output/2.5)].copy()
   if drop_t0 == True and dtc > 2.5:
     # Also drop the first TABOO timestep to avoid devision by zero
-    ax[1].plot(time[1:-1],(max_deflection[2:] - sampled_taboo_max_deflection[1:-1,1])/sampled_taboo_max_deflection[1:-1,1]*100,label=labels[model_index]+" vs TABOO",color=colors[model_index],linestyle="solid",marker=markers[model_index],markevery=dmark+model_index)
+    ax[1].plot(time[1:-1],(max_deflection[2:] - sampled_taboo_max_deflection[1:,1])/sampled_taboo_max_deflection[1:,1]*100,label=labels[model_index]+" vs TABOO",color=colors[model_index],linestyle="solid",marker=markers[model_index],markevery=dmark+model_index)
   else:
     # Also drop the first TABOO timestep to avoid devision by zero
     ax[1].plot(time[1:],(max_deflection[1:] - sampled_taboo_max_deflection[1:,1])/sampled_taboo_max_deflection[1:,1]*100,label=labels[model_index]+" vs TABOO",color=colors[model_index],linestyle="solid",marker=markers[model_index],markevery=dmark+model_index)
@@ -217,7 +215,7 @@ for model_index, name in enumerate(names):
   sampled_abaqus_max_deflection = abaqus_max_deflection[0::int(dt_output/5)].copy()
   if drop_t0 == True and dtc > 2.5:
     # Also drop the first timestep to avoid devision by zero
-    ax[1].plot(time[1:-1],(max_deflection[2:] - sampled_abaqus_max_deflection[1:-1])/sampled_abaqus_max_deflection[1:-1]*100,label=labels[model_index]+" vs Abaqus",color=colors[model_index],linestyle="dashed",marker=markers[model_index],markevery=dmark+model_index)
+    ax[1].plot(time[1:-1],(max_deflection[2:] - sampled_abaqus_max_deflection[1:])/sampled_abaqus_max_deflection[1:]*100,label=labels[model_index]+" vs Abaqus",color=colors[model_index],linestyle="dashed",marker=markers[model_index],markevery=dmark+model_index)
   else:
     # Also drop the first timestep to avoid devision by zero
     ax[1].plot(time[1:],(max_deflection[1:] - sampled_abaqus_max_deflection[1:])/sampled_abaqus_max_deflection[1:]*100,label=labels[model_index]+" vs Abaqus",color=colors[model_index],linestyle="dashed",marker=markers[model_index],markevery=dmark+model_index)
@@ -225,13 +223,13 @@ for model_index, name in enumerate(names):
   # Compute the average absolute difference in maximum deflection between
   # ASPECT and Abaqus as SUM(abs(ASPECT-Abaqus))/n_output.
   if drop_t0 == True and dtc > 2.5:
-    average_absolute_difference_abaqus = np.sum(np.abs(max_deflection[1:] - sampled_abaqus_max_deflection[:-1]))/(n_output-1)
+    average_absolute_difference_abaqus = np.sum(np.abs(max_deflection[1:] - sampled_abaqus_max_deflection))/(n_output-1)
   else:
     average_absolute_difference_abaqus = np.sum(np.abs(max_deflection - sampled_abaqus_max_deflection))/n_output
   print ("Average absolute difference with Abaqus: ", average_absolute_difference_abaqus)
   # Also compute the percentage difference. We ignore timestep 0 to avoid division by 0.
   if drop_t0 == True and dtc > 2.5:
-    average_absolute_percentage_difference_abaqus = np.sum(np.abs((max_deflection[2:] - sampled_abaqus_max_deflection[1:-1])/sampled_abaqus_max_deflection[1:-1]*100.))/(n_output-2)
+    average_absolute_percentage_difference_abaqus = np.sum(np.abs((max_deflection[2:] - sampled_abaqus_max_deflection[1:])/sampled_abaqus_max_deflection[1:]*100.))/(n_output-2)
   else:
     average_absolute_percentage_difference_abaqus = np.sum(np.abs((max_deflection[1:] - sampled_abaqus_max_deflection[1:])/sampled_abaqus_max_deflection[1:]*100.))/(n_output-1)
   print ("Average absolute percentage difference with Abaqus: ", average_absolute_percentage_difference_abaqus)
@@ -239,13 +237,13 @@ for model_index, name in enumerate(names):
   # Compute the average absolute difference in maximum deflection between
   # ASPECT and TABOO as SUM(abs(ASPECT-TABOO))/n_output.
   if drop_t0 == True and dtc > 2.5:
-    average_absolute_difference_taboo = np.sum(np.abs(max_deflection[1:] - sampled_taboo_max_deflection[:-1,1]))/(n_output-1)
+    average_absolute_difference_taboo = np.sum(np.abs(max_deflection[1:] - sampled_taboo_max_deflection[:,1]))/(n_output-1)
   else:
     average_absolute_difference_taboo = np.sum(np.abs(max_deflection - sampled_taboo_max_deflection[:,1]))/n_output
   print ("Average absolute difference with TABOO: ", average_absolute_difference_taboo)
   # Also compute the percentage difference. We ignore timestep 0 to avoid division by 0.
   if drop_t0 == True and dtc > 2.5:
-    average_absolute_percentage_difference_taboo = np.sum(np.abs((max_deflection[2:] - sampled_taboo_max_deflection[1:-1,1])/sampled_taboo_max_deflection[1:-1,1]*100.))/(n_output-2)
+    average_absolute_percentage_difference_taboo = np.sum(np.abs((max_deflection[2:] - sampled_taboo_max_deflection[1:,1])/sampled_taboo_max_deflection[1:,1]*100.))/(n_output-2)
   else:
     average_absolute_percentage_difference_taboo = np.sum(np.abs((max_deflection[1:] - sampled_taboo_max_deflection[1:,1])/sampled_taboo_max_deflection[1:,1]*100.))/(n_output-1)
   print ("Average absolute percentage difference with TABOO: ", average_absolute_percentage_difference_taboo)
