@@ -17,6 +17,7 @@ output_file_base = "9_3D_loading_particles_max_deflection_main_MG_"
 drop_t0 = True
 
 names = [
+         "RL9_viscoelastic_3D_loading_particles_main_AMG_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4_pw1",
          "RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4_pw1",
          ##"RL9_viscoelastic_3D_loading_particles_AMG_avegeometric_intcell_average_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
          #"RL9_viscoelastic_3D_loading_particles_AMG_avegeometric_intnearest_neighbor_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4",
@@ -41,6 +42,7 @@ tail = r"/topography"
 
 # The labels the graphs will get in the plot
 labels = [
+          'AMG, geom, dtc = dte = 2.5 yr, pw = 1',
           'GMG, geom, dtc = dte = 2.5 yr, pw = 1',
           ##'AMG, geom, CA, dtc = dte = 2.5 yr',
           #'AMG, geom, NN, dtc = dte = 2.5 yr',
@@ -66,7 +68,7 @@ color3=[0.32701, 0.4579, 0.28638]
 color4=[0.67824, 0.55071, 0.1778]
 color5=[0.97584, 0.63801, 0.50183]
 color6=[0.98447, 0.78462, 0.93553]
-colors = [color1, color2, color3, color4, color5, color6, 'black', 'blue', color3, color4, color5]
+colors = [color1, color4, color3, color4, color5, color6, 'black', 'blue', color3, color4, color5]
 # Set the line styles
 linestyles = ['solid', 'solid', 'solid', 'solid', 'dashed', 'dashed', 'dashed','dashdot', 'dashdot', 'dotted',  'dotted','dotted'] 
 # Set the marker styles (no markers in this case)
@@ -137,13 +139,13 @@ fig = plt.figure(figsize=(10, 6))
 ax = [fig.add_subplot(2, 1, i) for i in range(1, 3)]
 
 dtc = 2.5
-if drop_t0 = True and dtc > 2.5:
+if drop_t0 == True and dtc > 2.5:
   end_time = 200 + dtc
 else:
   end_time = 200
 dt_output = 5
 
-output_text_file = open(output_file_base + ".txt", "w")
+output_text_file = open(output_file_base + 'dropt0' + str(drop_t0) + ".txt", "w")
 output_text_file.write("#3D loading benchmarking after Weerdesteijn et al. 2023. ")
 output_text_file.write("Average absolute difference and average absolute percentage difference between ASPECT and Abaqus and ASPECT and TABOO. ")
 output_text_file.write("Columns represent\n#model_name diff_abaqus perc_diff_abaqus diff_taboo perc_diff_taboo")
@@ -203,10 +205,10 @@ for model_index, name in enumerate(names):
   sampled_taboo_max_deflection = taboo_max_deflection[0::int(dt_output/2.5)].copy()
   if drop_t0 == True and dtc > 2.5:
     # Also drop the first TABOO timestep to avoid devision by zero
-    ax[1].plot(time[1:-1],(max_deflection[2:] - sampled_taboo_max_deflection[1:-1,1])/sampled_taboo_max_deflection[1:-1,1]*100,label="vs TABOO",color=colors[model_index],linestyle="solid",marker=markers[model_index],markevery=dmark+model_index)
+    ax[1].plot(time[1:-1],(max_deflection[2:] - sampled_taboo_max_deflection[1:-1,1])/sampled_taboo_max_deflection[1:-1,1]*100,label=labels[model_index]+" vs TABOO",color=colors[model_index],linestyle="solid",marker=markers[model_index],markevery=dmark+model_index)
   else:
     # Also drop the first TABOO timestep to avoid devision by zero
-    ax[1].plot(time[1:],(max_deflection[1:] - sampled_taboo_max_deflection[1:,1])/sampled_taboo_max_deflection[1:,1]*100,label="vs TABOO",color=colors[model_index],linestyle="solid",marker=markers[model_index],markevery=dmark+model_index)
+    ax[1].plot(time[1:],(max_deflection[1:] - sampled_taboo_max_deflection[1:,1])/sampled_taboo_max_deflection[1:,1]*100,label=labels[model_index]+" vs TABOO",color=colors[model_index],linestyle="solid",marker=markers[model_index],markevery=dmark+model_index)
   print ("Max TABOO deflection: ", np.min(sampled_taboo_max_deflection[:,1]))
 
   # Plot the difference in maximum deflection between ASPECT and Abaqus in % 
@@ -215,10 +217,10 @@ for model_index, name in enumerate(names):
   sampled_abaqus_max_deflection = abaqus_max_deflection[0::int(dt_output/5)].copy()
   if drop_t0 == True and dtc > 2.5:
     # Also drop the first timestep to avoid devision by zero
-    ax[1].plot(time[1:-1],(max_deflection[2:] - sampled_abaqus_max_deflection[1:-1])/sampled_abaqus_max_deflection[1:-1]*100,label="vs Abaqus",color=colors[model_index],linestyle="dashed",marker=markers[model_index],markevery=dmark+model_index)
+    ax[1].plot(time[1:-1],(max_deflection[2:] - sampled_abaqus_max_deflection[1:-1])/sampled_abaqus_max_deflection[1:-1]*100,label=labels[model_index]+" vs Abaqus",color=colors[model_index],linestyle="dashed",marker=markers[model_index],markevery=dmark+model_index)
   else:
     # Also drop the first timestep to avoid devision by zero
-    ax[1].plot(time[1:],(max_deflection[1:] - sampled_abaqus_max_deflection[1:])/sampled_abaqus_max_deflection[1:]*100,label="vs Abaqus",color=colors[model_index],linestyle="dashed",marker=markers[model_index],markevery=dmark+model_index)
+    ax[1].plot(time[1:],(max_deflection[1:] - sampled_abaqus_max_deflection[1:])/sampled_abaqus_max_deflection[1:]*100,label=labels[model_index]+" vs Abaqus",color=colors[model_index],linestyle="dashed",marker=markers[model_index],markevery=dmark+model_index)
 
   # Compute the average absolute difference in maximum deflection between
   # ASPECT and Abaqus as SUM(abs(ASPECT-Abaqus))/n_output.
@@ -286,12 +288,12 @@ ax[0].set_xlim(-5,205) # yr
 #ax[0].set_ylim(-1.2,0.05) # m
 ax[1].set_xlim(-5,205) # yr
 #ax[1].set_ylim(-0.3,47) # %
-ax[0].set_ylim(-2.2,0.05) # m
-ax[1].set_ylim(-5.5,5.5) # %
+ax[0].set_ylim(-1.0,0.05) # m
+ax[1].set_ylim(-0.5,2.5) # %
 
 # Add labels a) and b)
 ax[0].text(-20,0.05,"a)")
-ax[1].text(-20,5.5,"b)")
+ax[1].text(-20,2.5,"b)")
 
 plt.tight_layout()
 
