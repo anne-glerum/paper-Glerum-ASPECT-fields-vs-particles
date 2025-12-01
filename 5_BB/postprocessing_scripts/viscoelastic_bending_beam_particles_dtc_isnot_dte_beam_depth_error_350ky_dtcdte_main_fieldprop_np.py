@@ -17,10 +17,12 @@ base = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/HLRN/HLRN/fix_stresses_el
 names = [
           'RL9_viscoelastic_bending_beam_htansmooth10m_particles_Newton_diffminmaxPPC_fieldpropRR_main_avegeometric_intbilinear_least_squares_limTrue_dtc500_dte500_IGR2_IAR1_np4',
           'RL9_viscoelastic_bending_beam_htansmooth10m_particles_Newton_diffminmaxPPC_fieldpropRR_main_avegeometric_intbilinear_least_squares_limTrue_dtc500_dte500_IGR2_IAR1_np8',
-          'RL9_viscoelastic_bending_beam_htansmooth10m_particles_Newton_diffminmaxPPC_fieldpropRR_main_avegeometric_intbilinear_least_squares_limTrue_dtc500_dte500_IGR2_IAR1_np16',
+          #'RL9_viscoelastic_bending_beam_htansmooth10m_particles_Newton_diffminmaxPPC_fieldpropRR_main_avegeometric_intbilinear_least_squares_limTrue_dtc500_dte500_IGR2_IAR1_np16',
+          'RL9_VE_BB_htansmooth10m_particles_Newton_diffminmaxPPC_pw0_main_avegeometric_intbilinear_least_squares_limTrue_dtc500_dte500_IGR2_IAR1_np16',
           'RL9_viscoelastic_bending_beam_htansmooth10m_particles_Newton_diffminmaxPPC_fieldpropRR_main_avegeometric_intquadratic_least_squares_limTrue_dtc500_dte500_IGR2_IAR1_np4',
           'RL9_viscoelastic_bending_beam_htansmooth10m_particles_Newton_diffminmaxPPC_fieldpropRR_main_avegeometric_intquadratic_least_squares_limTrue_dtc500_dte500_IGR2_IAR1_np8',
-          'RL9_viscoelastic_bending_beam_htansmooth10m_particles_Newton_diffminmaxPPC_fieldpropRR_main_avegeometric_intquadratic_least_squares_limTrue_dtc500_dte500_IGR2_IAR1_np16',
+          #'RL9_viscoelastic_bending_beam_htansmooth10m_particles_Newton_diffminmaxPPC_fieldpropRR_main_avegeometric_intquadratic_least_squares_limTrue_dtc500_dte500_IGR2_IAR1_np16',
+          'RL9_VE_BB_htansmooth10m_particles_Newton_diffminmaxPPC_pw0_main_avegeometric_intquadratic_least_squares_limTrue_dtc500_dte500_IGR2_IAR1_np16',
         ]
 tail = r"/statistics"
 
@@ -73,23 +75,23 @@ for name in names:
   # Plot the beam depth in m against counter
   # categorical batlow colors.
   if "bilinear" in name:
-    ax[0].scatter(counter,beam_depth[-1],label=labels[counter],color=color1,linestyle=linestyles[counter],marker=markers[counter])
+    ax[0].scatter(counter,beam_depth[-1],label=labels[counter],color=color4,linestyle=linestyles[counter],marker=markers[counter])
   else:
-    ax[0].scatter(counter-3,beam_depth[-1],label=labels[counter],color=color4,linestyle=linestyles[counter],marker=markers[counter])
+    ax[0].scatter(counter-3,beam_depth[-1],label=labels[counter],color=color5,linestyle=linestyles[counter],marker=markers[counter])
 
   # Plot the absolute error
   if "bilinear" in name:
-    ax[1].scatter(counter,beam_depth[-1] - 2812.5,label=labels[counter],color=color1,linestyle=linestyles[counter],marker=markers[counter])
+    ax[1].scatter(counter,beam_depth[-1] - 2800.,label=labels[counter],color=color4,linestyle=linestyles[counter],marker=markers[counter])
   else:
-    ax[1].scatter(counter-3,beam_depth[-1] - 2812.5,label=labels[counter],color=color4,linestyle=linestyles[counter],marker=markers[counter])
+    ax[1].scatter(counter-3,beam_depth[-1] - 2800.,label=labels[counter],color=color5,linestyle=linestyles[counter],marker=markers[counter])
   
   counter += 1
 
 # Plot horizontal line at initial depth
-ax[0].hlines(2812.5,-50000,50000,color='black',linestyle='dashed',label=r"$\mathrm{z_{max}(t_{0})}$",linewidth=1)
+ax[0].hlines(2800.,-50000,50000,color='black',linestyle='dashed',label=r"$\mathrm{z_{max}(t_{0})}$",linewidth=1)
 
 # Plot horizontal line at initial depth + one cell height (100/2^3)
-ax[0].hlines(2825,-50000,50000,color='black',linestyle='dotted',label=r"$\mathrm{z_{max}(t_{0})+dh}$",linewidth=1)
+ax[0].hlines(2812.5,-50000,50000,color='black',linestyle='dotted',label=r"$\mathrm{z_{max}(t_{0})+dh}$",linewidth=1)
 
 # Plot horizontal line at maximum analytical depth
 # Equation 3.85 of Turcotte and Schubert 2002
@@ -116,18 +118,19 @@ ax[1].grid(axis='y',color='0.95')
 ax[0].set_xticks([])
 ax[0].set_yticks([2800,2820,2840,2860,2880])
 ax[1].set_xticks([])
-ax[1].set_yticks([-50,-25,0,25,50])
+#ax[1].set_yticks([0,20,40,60])
+ax[1].set_yticks([0,10,20,30,40,50,60,70])
 ax[0].set_title("Particles, htan10m, Newton, pw0, geometric, BLS/QLS, dt500, IGR2, IAR1", fontsize=6)
 
 # Ranges of the axes
-ax[0].set_xlim(-0.5,4.5) # -
-ax[0].set_ylim(2880,2800) # m
-ax[1].set_xlim(-0.5,4.5) # -
-ax[1].set_ylim(-50,50) # m
+ax[0].set_xlim(-0.5,2.5) # -
+ax[0].set_ylim(2870,2790) # m
+ax[1].set_xlim(-0.5,2.5) # -
+ax[1].set_ylim(0,70) # m
 
 # Add labels a) and b)
-ax[0].text(-1.8,2800,"a)")
-ax[1].text(-1.8,50,"b)")
+ax[0].text(-1.3,2790,"a)")
+ax[1].text(-1.3,70,"b)")
 
 plt.tight_layout()
 

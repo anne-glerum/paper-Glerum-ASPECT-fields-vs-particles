@@ -66,27 +66,28 @@ for name in names:
   # The correct columns are selected with usecols.
   time,beam_depth,ve_xx_min,ve_xx_max,ve_xx_ave = np.genfromtxt(path, comments='#', usecols=(1,23,24,25,26), unpack=True)
   print ("Max t: ", time[-1])
+  print ("Max beam depth at t = 50 ky: ", beam_depth[np.where(time == 50000)])
   print ("Max beam depth at t = 350 ky: ", beam_depth[-1])
 
   # Plot the beam depth in m against counter
   # categorical batlow colors.
   if "bilinear" in name:
-    ax[0].scatter(counter,beam_depth[-1],label=labels[counter],color=color1,linestyle=linestyles[counter],marker=markers[counter])
+    ax[0].scatter(counter,beam_depth[-1],label=labels[counter],color=color4,linestyle=linestyles[counter],marker=markers[counter])
   else:
-    ax[0].scatter(counter-4,beam_depth[-1],label=labels[counter],color=color4,linestyle=linestyles[counter],marker=markers[counter])
+    ax[0].scatter(counter-4,beam_depth[-1],label=labels[counter],color=color5,linestyle=linestyles[counter],marker=markers[counter])
   # Plot the absolute error
   if "bilinear" in name:
-    ax[1].scatter(counter,beam_depth[-1] - 2812.5,label=labels[counter],color=color1,linestyle=linestyles[counter],marker=markers[counter])
+    ax[1].scatter(counter,beam_depth[-1] - 2800.,label=labels[counter],color=color4,linestyle=linestyles[counter],marker=markers[counter])
   else:
-    ax[1].scatter(counter-4,beam_depth[-1] - 2812.5,label=labels[counter],color=color4,linestyle=linestyles[counter],marker=markers[counter])
+    ax[1].scatter(counter-4,beam_depth[-1] - 2800.,label=labels[counter],color=color5,linestyle=linestyles[counter],marker=markers[counter])
   
   counter += 1
 
 # Plot horizontal line at initial depth
-ax[0].hlines(2812.5,-50000,50000,color='black',linestyle='dashed',label=r"$\mathrm{z_{max}(t_{0})}$",linewidth=1)
+ax[0].hlines(2800.,-50000,50000,color='black',linestyle='dashed',label=r"$\mathrm{z_{max}(t_{0})}$",linewidth=1)
 
 # Plot horizontal line at initial depth + one cell height (100/2^3)
-ax[0].hlines(2825,-50000,50000,color='black',linestyle='dotted',label=r"$\mathrm{z_{max}(t_{0})+dh}$",linewidth=1)
+ax[0].hlines(2812.5,-50000,50000,color='black',linestyle='dotted',label=r"$\mathrm{z_{max}(t_{0})+dh}$",linewidth=1)
 
 # Plot horizontal line at maximum analytical depth
 # Equation 3.85 of Turcotte and Schubert 2002
@@ -113,18 +114,19 @@ ax[1].grid(axis='y',color='0.95')
 ax[0].set_xticks([])
 ax[0].set_yticks([2800,2820,2840,2860,2880])
 ax[1].set_xticks([])
-ax[1].set_yticks([-50,-25,0,25,50])
+#ax[1].set_yticks([0,12.5,0,25,37.5,50])
+ax[1].set_yticks([0,10,20,30,40,50,60,70])
 ax[0].set_title("Particles, htan10m, Newton, pw0, geometric, BLS/QLS, IGR2, IAR1, np4", fontsize=6)
 
 # Ranges of the axes
 ax[0].set_xlim(-0.5,3.5) # -
-ax[0].set_ylim(2880,2800) # m
+ax[0].set_ylim(2870,2790) # m
 ax[1].set_xlim(-0.5,3.5) # -
-ax[1].set_ylim(-50,50) # m
+ax[1].set_ylim(0,70) # m
 
 # Add labels a) and b)
-ax[0].text(-1.8,2800,"a)")
-ax[1].text(-1.8,50,"b)")
+ax[0].text(-1.8,2790,"a)")
+ax[1].text(-1.8,70,"b)")
 
 plt.tight_layout()
 
