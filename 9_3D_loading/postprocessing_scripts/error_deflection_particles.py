@@ -13,12 +13,12 @@ rc("legend", fontsize=8)
 
 # Change path as needed
 base = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/Papers/Glerum_LD_ASPECT/repo/9_3D_loading/postprocessing_scripts/"
-output_file_base = "9_3D_loading_particles_max_deflection_main_PIC_"
+output_file_base = "9_3D_loading_particles_max_deflection_main_PI_"
 drop_t0 = True
 
 names = [
          #"RL9_viscoelastic_3D_loading_particles_main_AMG_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4_pw1",
-         "RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4_pw1",
+         #"RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4_pw1",
          #"RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intbilinear_least_squares_limTrue_dtc5_dte5_IGR1_IAR2_np4_pw1",
          #"RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intbilinear_least_squares_limTrue_dtc10_dte10_IGR1_IAR2_np4_pw1",
          #"RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intbilinear_least_squares_limTrue_dtc20_dte20_IGR1_IAR2_np4_pw1",
@@ -27,15 +27,15 @@ names = [
          #"RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np16_pw1",
          #"RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4_pw0",
          #"RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4_pw1",
-         "RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np6_pw1",
-         "RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np8_pw1",
+         #"RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np6_pw1",
+         #"RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np8_pw1",
          #"RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte5_IGR1_IAR2_np4_pw1",
          #"RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intbilinear_least_squares_limTrue_dtc5_dte10_IGR1_IAR2_np4_pw1",
-         #"RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intcell_average_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4_pw1",
-         #"RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intnearest_neighbor_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4_pw1",
-         #"RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intdistance_weighted_average_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4_pw1",
-         #"RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4_pw1",
-         #"RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intquadratic_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4_pw1",
+         "RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intcell_average_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4_pw1",
+         "RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intnearest_neighbor_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4_pw1",
+         "RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intdistance_weighted_average_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4_pw1",
+         "RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4_pw1",
+         "RL9_viscoelastic_3D_loading_particles_main_GMG_avegeometric_intquadratic_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4_pw1",
         ]
 tail = r"/topography"
 
@@ -50,14 +50,14 @@ labels = [
           #'GMG, geom, dtc = 20 yr, dte = 20 yr, pw = 1',
           #'GMG, geom, dtc = 10 yr, dte = 20 yr, pw = 1',
           #'GMG, geom, dtc = 5 yr, dte = 20 yr, pw = 1',
-          #'GMG, geom, dtc = dte = 2.5 yr, pw = 1, PI = CA',
-          #'GMG, geom, dtc = dte = 2.5 yr, pw = 1, PI = NN',
-          #'GMG, geom, dtc = dte = 2.5 yr, pw = 1, PI = DWA',
-          #'GMG, geom, dtc = dte = 2.5 yr, pw = 1, PI = BLS',
-          #'GMG, geom, dtc = dte = 2.5 yr, pw = 1, PI = QLS',
-          'GMG, geom, dtc = dte = 2.5 yr, pw = 1, PIC = 4x4x4',
-          'GMG, geom, dtc = dte = 2.5 yr, pw = 1, PIC = 6x6x6',
-          'GMG, geom, dtc = dte = 2.5 yr, pw = 1, PIC = 8x8x8',
+          'GMG, geom, dtc = dte = 2.5 yr, pw = 1, PI = CA',
+          'GMG, geom, dtc = dte = 2.5 yr, pw = 1, PI = NN',
+          'GMG, geom, dtc = dte = 2.5 yr, pw = 1, PI = DWA',
+          'GMG, geom, dtc = dte = 2.5 yr, pw = 1, PI = BLS',
+          'GMG, geom, dtc = dte = 2.5 yr, pw = 1, PI = QLS',
+          #'GMG, geom, dtc = dte = 2.5 yr, pw = 1, PIC = 4x4x4',
+          #'GMG, geom, dtc = dte = 2.5 yr, pw = 1, PIC = 6x6x6',
+          #'GMG, geom, dtc = dte = 2.5 yr, pw = 1, PIC = 8x8x8',
          ]
 # Set the colors available for plotting
 color1=[0.0051932, 0.098238, 0.34984]
@@ -223,7 +223,7 @@ for model_index, name in enumerate(names):
   # Compute the average absolute difference in maximum deflection between
   # ASPECT and Abaqus as SUM(abs(ASPECT-Abaqus))/n_output.
   if drop_t0 == True and dtc > 2.5:
-    average_absolute_difference_abaqus = np.sum(np.abs(max_deflection[1:] - sampled_abaqus_max_deflection))/(n_output-1)
+    average_absolute_difference_abaqus = np.sum(np.abs(max_deflection[1:] - sampled_abaqus_max_deflection[1:]))/(n_output-1)
   else:
     average_absolute_difference_abaqus = np.sum(np.abs(max_deflection - sampled_abaqus_max_deflection))/n_output
   print ("Average absolute difference with Abaqus: ", average_absolute_difference_abaqus)
