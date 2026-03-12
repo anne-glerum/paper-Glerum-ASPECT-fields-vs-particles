@@ -15,17 +15,21 @@ base = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/HLRN/HLRN/fix_stresses_el
 
 # Change file name modifiers as needed depending on your file structure
 names = [
-         "RL9_viscoelastic_bending_beam_smooth25m_DGlimiter_Newton_dtc500_dte500_averaginggeometric_IGR1_IAR0",
-         "RL9_viscoelastic_bending_beam_smooth25m_DGlimiter_Newton_dtc500_dte500_averaginggeometric_IGR2_IAR0",
-         "RL9_viscoelastic_bending_beam_smooth25m_DGlimiter_Newton_dtc500_dte500_averaginggeometric_IGR2_IAR1",
+         #"RL9_viscoelastic_bending_beam_smooth25m_DGlimiter_Newton_dtc500_dte500_averaginggeometric_IGR1_IAR0",
+         #"RL9_viscoelastic_bending_beam_smooth25m_DGlimiter_Newton_dtc500_dte500_averaginggeometric_IGR2_IAR0",
+         #"RL9_viscoelastic_bending_beam_smooth25m_DGlimiter_Newton_dtc500_dte500_averaginggeometric_IGR2_IAR1",
+          'RL9_viscoelastic_bending_beam_htansmooth10m_Newton_AMG_main_dtc500_dte500_averaginggeometric_IGR2_IAR0',
+          'RL9_viscoelastic_bending_beam_htansmooth10m_Newton_AMG_main_dtc500_dte500_averaginggeometric_IGR2_IAR1',
+          'RL9_viscoelastic_bending_beam_htansmooth10m_Newton_AMG_main_dtc500_dte500_averaginggeometric_IGR2_IAR2',
         ]
 tail = r"/statistics"
 
 # The labels the graphs will get in the plot
 labels = [
-          'dh = 50 m',
+          #'dh = 50 m',
           'dh = 25 m',
           'dh = 12.5 m',
+          'dh = 6.25 m',
          ]
 # Set the colors available for plotting
 color1=[0.0051932, 0.098238, 0.34984]
@@ -111,6 +115,6 @@ ax[1].text(-25,0.75e9,"b)")
 plt.tight_layout()
 
 # Save as pdf
-filename = '5_viscoelastic_bending_beam_smooth25_dte_isnot_dtc_depth_dh.png'
+filename = '5_viscoelastic_bending_beam_htansmooth10_dte_isnot_dtc_depth_dh.png'
 plt.savefig(filename, dpi=300)
 print ('Plot in: ' + filename)

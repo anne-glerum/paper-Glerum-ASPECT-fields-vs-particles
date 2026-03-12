@@ -15,10 +15,14 @@ base = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/HLRN/HLRN/fix_stresses_el
 
 # Change file name modifiers as needed depending on your file structure
 names = [
-         "RL9_viscoelastic_bending_beam_smooth25m_DGlimiter_Newton_dtc500_dte500_averaginggeometric_IGR2_IAR0",
-         "RL9_viscoelastic_bending_beam_smooth25m_DGlimiter_Newton_dtc250_dte250_averaginggeometric_IGR2_IAR0",
-         "RL9_viscoelastic_bending_beam_smooth25m_DGlimiter_Newton_dtc125_dte125_averaginggeometric_IGR2_IAR0",
-         "RL9_viscoelastic_bending_beam_smooth25m_DGlimiter_Newton_dtc62.5_dte62.5_averaginggeometric_IGR2_IAR0",
+         #"RL9_viscoelastic_bending_beam_smooth25m_DGlimiter_Newton_dtc500_dte500_averaginggeometric_IGR2_IAR0",
+         #"RL9_viscoelastic_bending_beam_smooth25m_DGlimiter_Newton_dtc250_dte250_averaginggeometric_IGR2_IAR0",
+         #"RL9_viscoelastic_bending_beam_smooth25m_DGlimiter_Newton_dtc125_dte125_averaginggeometric_IGR2_IAR0",
+         #"RL9_viscoelastic_bending_beam_smooth25m_DGlimiter_Newton_dtc62.5_dte62.5_averaginggeometric_IGR2_IAR0",
+          'RL9_viscoelastic_bending_beam_htansmooth10m_Newton_AMG_main_dtc500_dte500_averaginggeometric_IGR2_IAR1',
+          'RL9_viscoelastic_bending_beam_htansmooth10m_Newton_AMG_main_dtc250_dte250_averaginggeometric_IGR2_IAR1',
+          'RL9_viscoelastic_bending_beam_htansmooth10m_Newton_AMG_main_dtc125_dte125_averaginggeometric_IGR2_IAR1',
+          'RL9_viscoelastic_bending_beam_htansmooth10m_Newton_AMG_main_dtc62.5_dte62.5_averaginggeometric_IGR2_IAR1',
         ]
 tail = r"/statistics"
 
@@ -69,7 +73,7 @@ for name in names:
   counter += 1
 
 # Plot horizontal line at initial depth
-ax[0].hlines(2812.5,0,50000,color='black',linestyle='dashed',label='original max depth',linewidth=1)
+ax[0].hlines(2800,0,50000,color='black',linestyle='dashed',label='original max depth',linewidth=1)
 
 # Plot horizontal line at maximum analytical depth
 # Equation 3.85 of Turcotte and Schubert 2002
@@ -113,6 +117,6 @@ ax[1].text(-25,0.75e9,"b)")
 plt.tight_layout()
 
 # Save as pdf
-filename = '5_viscoelastic_bending_beam_smooth25_dte_isnot_dtc_depth_dtcisdte.png'
+filename = '5_viscoelastic_bending_beam_htansmooth10_dte_isnot_dtc_depth_dtcisdte.png'
 plt.savefig(filename, dpi=300)
 print ('Plot in: ' + filename)
