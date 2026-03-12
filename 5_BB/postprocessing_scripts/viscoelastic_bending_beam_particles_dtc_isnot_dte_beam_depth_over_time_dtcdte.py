@@ -14,19 +14,79 @@ rc("lines", linewidth=3, markersize=8)
 base = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/HLRN/HLRN/fix_stresses_elasticity/paper_14072023/BM5/"
 
 # Change file name modifiers as needed depending on your file structure
+
+#RL9_viscoelastic_bending_beam_htansmooth_particles_Newton_avegeometric_intquadratic_least_squares_limTrue_dtc250_dte250_IGR2_IAR0_np4.prm
+#RL9_viscoelastic_bending_beam_htansmooth10m_particles_Newton_avegeometric_intquadratic_least_squares_limTrue_dtc250_dte250_IGR2_IAR0_np4.prm
+#RL9_viscoelastic_bending_beam_htansmooth5m_particles_Newton_avegeometric_intquadratic_least_squares_limTrue_dtc250_dte250_IGR2_IAR0_np4.prm
+#
+#RL9_viscoelastic_bending_beam_htansmooth10m_particles_Newton_avegeometric_intdistance_weighted_average_limTrue_dtc125_dte125_IGR2_IAR0_np4.prm
+#
+#RL9_viscoelastic_bending_beam_htansmooth10m_particles_Newton_avegeometric_intdistance_weighted_average_limTrue_dtc62.5_dte62.5_IGR2_IAR0_np4.prm
+#RL9_viscoelastic_bending_beam_htansmooth20m_particles_Newton_diffminmaxPPC_avegeometric_intcell_average_limTrue_dtc62.5_dte62.5_IGR2_IAR0_np4.prm
+#RL9_viscoelastic_bending_beam_htansmooth20m_particles_Newton_diffminmaxPPC_avegeometric_intdistance_weighted_average_limTrue_dtc62.5_dte62.5_IGR2_IAR0_np4.prm
+
 names = [
-         'RL9_viscoelastic_bending_beam_particles_Newton_avegeometric_intquadratic_least_squares_limTrue_dtc500_dte500_IGR2_IAR0_np4',
-         'RL9_viscoelastic_bending_beam_particles_Newton_avegeometric_intquadratic_least_squares_limTrue_dtc250_dte250_IGR2_IAR0_np4',
-         'RL9_viscoelastic_bending_beam_particles_Newton_avegeometric_intquadratic_least_squares_limTrue_dtc125_dte125_IGR2_IAR0_np4',
+#         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intquadratic_least_squares_limTrue_dtc500_dte500_IGR2_IAR0_np4',
+         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intquadratic_least_squares_limTrue_dtc250_dte250_IGR2_IAR0_np4',
+#         'RL9_viscoelastic_bending_beam_htansmooth_particles_Newton_avegeometric_intquadratic_least_squares_limTrue_dtc250_dte250_IGR2_IAR0_np4',
+#         'RL9_viscoelastic_bending_beam_htansmooth10m_particles_Newton_avegeometric_intquadratic_least_squares_limTrue_dtc250_dte250_IGR2_IAR0_np4',
+#         'RL9_viscoelastic_bending_beam_htansmooth5m_particles_Newton_avegeometric_intquadratic_least_squares_limTrue_dtc250_dte250_IGR2_IAR0_np4',
+#         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intdistance_weighted_average_limTrue_dtc125_dte125_IGR2_IAR0_np4',
+#         'RL9_viscoelastic_bending_beam_htansmooth10m_particles_Newton_avegeometric_intdistance_weighted_average_limTrue_dtc125_dte125_IGR2_IAR0_np4',
+#         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intquadratic_least_squares_limTrue_dtc62.5_dte62.5_IGR2_IAR0_np4',
+#         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intdistance_weighted_average_limTrue_dtc62.5_dte62.5_IGR2_IAR0_np4',
+#         'RL9_viscoelastic_bending_beam_htansmooth10m_particles_Newton_avegeometric_intdistance_weighted_average_limTrue_dtc62.5_dte62.5_IGR2_IAR0_np4',
+#         'RL9_viscoelastic_bending_beam_htansmooth20m_particles_Newton_diffminmaxPPC_avegeometric_intdistance_weighted_average_limTrue_dtc62.5_dte62.5_IGR2_IAR0_np4',
+#         'RL9_viscoelastic_bending_beam_htansmooth20m_particles_Newton_avegeometric_intcell_average_limTrue_dtc62.5_dte62.5_IGR2_IAR0_np4',
+#         'RL9_viscoelastic_bending_beam_htansmooth20m_particles_Newton_diffminmaxPPC_avegeometric_intcell_average_limTrue_dtc62.5_dte62.5_IGR2_IAR0_np4',
+#         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intquadratic_least_squares_limTrue_dtc125_dte125_IGR2_IAR0_np4',
+#         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_alwaysgravity_avegeometric_intquadratic_least_squares_limTrue_dtc500_dte500_IGR2_IAR0_np4',
+#         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intdistance_weighted_average_limTrue_dtc125_dte125_IGR2_IAR0_np4',
+ #        'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intdistance_weighted_average_limTrue_dtc62.5_dte62.5_IGR2_IAR0_np8',
+#         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intdistance_weighted_average_limTrue_dtc62.5_dte62.5_IGR2_IAR1_np8',
+#         'RL9_viscoelastic_bending_beam_htansmooth20m_particles_Newton_diffminmaxPPC_rand_avegeometric_intdistance_weighted_average_limTrue_dtc62.5_dte62.5_IGR2_IAR0_np4',
+#         'RL9_viscoelastic_bending_beam_htansmooth20m_particles_Newton_diffminmaxPPC_rk4_avegeometric_intdistance_weighted_average_limTrue_dtc62.5_dte62.5_IGR2_IAR0_np4',
+#         'RL9_viscoelastic_bending_beam_htansmooth20m_particles_Newton_diffminmaxPPC_quad_avegeometric_intdistance_weighted_average_limTrue_dtc62.5_dte62.5_IGR2_IAR0_np4',
+#         'RL9_viscoelastic_bending_beam_htansmooth20m_particles_Newton_diffminmaxPPC_geommatav_avegeometric_intcell_average_limTrue_dtc62.5_dte62.5_IGR2_IAR0_np4',
+          #'RL9_viscoelastic_bending_beam_htansmooth20m_particles_Newton_diffminmaxPPC_geommatav_avegeometric_intnearest_neighbor_limTrue_dtc62.5_dte62.5_IGR2_IAR0_np4',
+          #'RL9_viscoelastic_bending_beam_htansmooth20m_particles_Newton_diffminmaxPPC_geommatav_randgen_rk4_avegeometric_intdistance_weighted_average_limTrue_dtc62.5_dte62.5_IGR2_IAR0_np4',
+          #'RL9_viscoelastic_bending_beam_htansmooth20m_particles_Newton_diffminmaxPPC_geommatav_randgen_rk4_avemaximum_composition_intdistance_weighted_average_limTrue_dtc62.5_dte62.5_IGR2_IAR0_np4',
+          #'RL9_viscoelastic_bending_beam_htansmooth20m_particles_Newton_diffminmaxPPC_geommatav_randgen_avemaximum_composition_intdistance_weighted_average_limTrue_dtc62.5_dte62.5_IGR2_IAR0_np4',
+          #'RL9_viscoelastic_bending_beam_htansmooth20m_particles_Newton_diffminmaxPPC_geommatav_avegeometric_intdistance_weighted_average_limTrue_dtc62.5_dte62.5_IGR2_IAR0_np4',
+          'RL9_viscoelastic_bending_beam_htansmooth10m_particles_Newton_diffminmaxPPC_fieldpropRR_23052025_avegeometric_intbilinear_least_squares_limTrue_dtc250_dte250_IGR2_IAR1_np4',
         ]
 tail = r"/statistics"
 
 # The labels the graphs will get in the plot
 labels = [
-          'dtc = dte = 500 yr',
-          'dtc = dte = 250 yr',
-          'dtc = dte = 125 yr',
-          'dtc = dte = 62.5 yr',
+#          'dtc = dte = 500 yr',
+          'dtc = dte = 250 yr, lin25m beam, QLS',
+#          'dtc = dte = 250 yr, htan25m beam',
+#          'dtc = dte = 250 yr, htan10m beam',
+#          'dtc = dte = 250 yr, htan5m beam',
+#          'dtc = dte = 125 yr',
+#          'dtc = dte = 125 yr, htan10m, DWA',
+#          'dtc = dte = 62.5 yr, DWA, htan20m, randgen, min!=max PPC',
+#          'dtc = dte = 62.5 yr, DWA, htan20m, min!=max PPC, rk4',
+#          'dtc = dte = 62.5 yr, DWA, htan20m, quad, min!=max PPC',
+#          'dtc = 62.5 yr, dte = 250 yr, CA, htan20m, geom mat av, min!=max PPC',
+#          'dtc = dte = 62.5 yr, NN, htan20m, geom mat av, min!=max PPC, randgen, rk4',
+#          'dtc = dte = 62.5 yr, DWA, htan20m, geom mat av, min!=max PPC, randgen, rk4',
+#          'dtc = dte = 62.5 yr, DWA, htan20m, geom mat av, min!=max PPC, randgen, rk4, maxcomp',
+#          'dtc = dte = 62.5 yr, DWA, htan20m, geom mat av, min!=max PPC, randgen, maxcomp',
+#          'dtc = dte = 62.5 yr, DWA, htan20m, geom mat av, min!=max PPC',
+#          'dtc = dte = 62.5 yr, lin25m, QLS',
+#          'dtc = dte = 62.5 yr, lin25m, DWA',
+#          'dtc = dte = 62.5 yr, htan10m, DWA',
+#          'dtc = dte = 62.5 yr, htan20m, DWA, min!=max PPC',
+#          'dtc = dte = 62.5 yr, htan20m, CA, min!=max PPC',
+#          'dtc = dte = 62.5 yr, htan20m, CA',
+#          'dtc = dte = 500 yr, gravity on',
+#          'dtc = dte = 125 yr, DWA',
+#          'dtc = dte = 62.5 yr, DWA',
+#          'dtc = dte = 62.5 yr, DWA, PPC = 8x8',
+#          'dtc = dte = 62.5 yr, DWA, PPC = 8x8, dh = 12.5 m',
+          'dtc = dte = 250 yr, htan10m, BLS',
          ]
 # Set the colors available for plotting
 color1=[0.0051932, 0.098238, 0.34984]
@@ -35,9 +95,9 @@ color3=[0.32701, 0.4579, 0.28638]
 color4=[0.67824, 0.55071, 0.1778]
 color5=[0.97584, 0.63801, 0.50183]
 color6=[0.98447, 0.78462, 0.93553]
-colors = [color1, color3, color4, color6, color5, color6, 'black', 'blue', color3, color4, color5]
+colors = [color1, color2, color3, color4, color5, color6, color5, color4, color5, 'black', 'blue', color3, color4, color5]
 # Set the line styles
-linestyles = ['solid', 'solid', 'solid', 'solid', 'solid', 'solid', 'solid','dashdot', 'dashdot', 'dotted',  'dotted','dotted'] 
+linestyles = ['dashed', 'solid', 'solid', 'solid', 'solid', 'solid', 'solid', 'dashed', 'dashed', 'dashdot', 'dashed','dashed', 'dashdot', 'dotted',  'dotted','dotted'] 
 # Set the marker styles (no markers in this case)
 markers = ['', '', '', '', '', '', '', '', '', '', '', '', '', ''] 
 dmark = 100
@@ -68,7 +128,7 @@ for name in names:
   counter += 1
 
 # Plot horizontal line at initial depth
-ax[0].hlines(2800,0,50000,color='black',linestyle='dashed',label='original max depth',linewidth=2)
+ax[0].hlines(2812.5,0,50000,color='black',linestyle='dashed',label='original max depth',linewidth=1)
 
 # Plot horizontal line at maximum analytical depth
 # Equation 3.85 of Turcotte and Schubert 2002
@@ -79,10 +139,10 @@ ax[0].hlines(2800,0,50000,color='black',linestyle='dashed',label='original max d
 # D = 72e6 G
 # q = 3e6 kg/(ms^2)
 # The maximum deflection at x = 4800 is therefore 276.48 m.
-#ax[0].hlines(3076.48,0,50,color='black',linestyle='dashed')
+#ax[0].hlines(3076.48,0,500000,color='black',label='analytical max depth',linestyle='dashdot',linewidth=1)
 
 # Plot vertical line at t=50 ky, when gravity is switched off.
-ax[0].vlines(50,4000,2000,color='black',linestyle='dotted',linewidth=2)
+ax[0].vlines(50,4000,2000,color='black',linestyle='dotted',linewidth=1)
 
 # Labelling of plot
 ax[1].set_xlabel("Time [ky]")
@@ -99,18 +159,18 @@ ax[1].grid(axis='y',color='0.95')
 #ax[1].set_yticks([0,2,4,6,8,10])
 
 # Ranges of the axes
-ax[0].set_xlim(0,500) # kyr
-ax[0].set_ylim(3300,2700) # m
-ax[1].set_xlim(0,500) # kyr
-ax[1].set_ylim(-1e9,1e9) # %
+ax[0].set_xlim(0,350) # kyr
+ax[0].set_ylim(3250,2750) # m
+ax[1].set_xlim(0,350) # kyr
+ax[1].set_ylim(-0.75e9,0.75e9) # %
 
 # Add labels a) and b)
-ax[0].text(-34,2700,"a)")
-ax[1].text(-34,1e9,"b)")
+ax[0].text(-25,2750,"a)")
+ax[1].text(-25,0.75e9,"b)")
 
 plt.tight_layout()
 
 # Save as pdf
-filename = '5_viscoelastic_bending_beam_dte_particles_isnot_dtc_depth_dtcisdte.png'
+filename = '5_viscoelastic_bending_beam_dte_particles_isnot_dtc_depth_dtcisdte_smoothing_250_250_fieldprop_23052025.png'
 plt.savefig(filename, dpi=300)
 print ('Plot in: ' + filename)

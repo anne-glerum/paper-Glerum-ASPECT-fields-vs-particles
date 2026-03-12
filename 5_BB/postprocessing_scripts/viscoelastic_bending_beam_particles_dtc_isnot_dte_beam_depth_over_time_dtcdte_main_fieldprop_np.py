@@ -15,17 +15,23 @@ base = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/HLRN/HLRN/fix_stresses_el
 
 # Change file name modifiers as needed depending on your file structure
 names = [
-         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intquadratic_least_squares_limTrue_dtc500_dte500_IGR1_IAR0_np4',
-         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intquadratic_least_squares_limTrue_dtc500_dte500_IGR2_IAR0_np4',
-         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intquadratic_least_squares_limTrue_dtc500_dte500_IGR2_IAR1_np4',
+#          'RL9_viscoelastic_bending_beam_htansmooth10m_particles_Newton_diffminmaxPPC_fieldpropRR_main_avegeometric_intbilinear_least_squares_limTrue_dtc500_dte500_IGR2_IAR1_np4',
+#          'RL9_viscoelastic_bending_beam_htansmooth10m_particles_Newton_diffminmaxPPC_fieldpropRR_main_avegeometric_intbilinear_least_squares_limTrue_dtc500_dte500_IGR2_IAR1_np8',
+#          'RL9_viscoelastic_bending_beam_htansmooth10m_particles_Newton_diffminmaxPPC_fieldpropRR_main_avegeometric_intbilinear_least_squares_limTrue_dtc500_dte500_IGR2_IAR1_np16',
+          'RL9_viscoelastic_bending_beam_htansmooth10m_particles_Newton_diffminmaxPPC_fieldpropRR_main_avegeometric_intquadratic_least_squares_limTrue_dtc500_dte500_IGR2_IAR1_np4',
+          'RL9_viscoelastic_bending_beam_htansmooth10m_particles_Newton_diffminmaxPPC_fieldpropRR_main_avegeometric_intquadratic_least_squares_limTrue_dtc500_dte500_IGR2_IAR1_np8',
+          'RL9_viscoelastic_bending_beam_htansmooth10m_particles_Newton_diffminmaxPPC_fieldpropRR_main_avegeometric_intquadratic_least_squares_limTrue_dtc500_dte500_IGR2_IAR1_np16',
         ]
 tail = r"/statistics"
 
 # The labels the graphs will get in the plot
 labels = [
-          'dh = 50 m',
-          'dh = 25 m',
-          'dh = 12.5 m',
+#          '4x4, BLS',
+#          '8x8, BLS',
+#          '16x16, BLS',
+          '4x4, QLS',
+          '8x8, QLS',
+          '16x16, QLS',
          ]
 # Set the colors available for plotting
 color1=[0.0051932, 0.098238, 0.34984]
@@ -34,9 +40,9 @@ color3=[0.32701, 0.4579, 0.28638]
 color4=[0.67824, 0.55071, 0.1778]
 color5=[0.97584, 0.63801, 0.50183]
 color6=[0.98447, 0.78462, 0.93553]
-colors = [color1, color3, color4, color6, color5, color6, 'black', 'blue', color3, color4, color5]
+colors = [color1, color2, color3, color4, color5, color6, 'black', 'blue', color3, color4, color5]
 # Set the line styles
-linestyles = ['solid', 'solid', 'solid', 'solid', 'solid', 'solid', 'solid','dashdot', 'dashdot', 'dotted',  'dotted','dotted'] 
+linestyles = ['solid', 'solid', 'solid', 'dashed', 'dashed', 'dashed', 'solid', 'solid','dashdot', 'dashdot', 'dotted',  'dotted','dotted'] 
 # Set the marker styles (no markers in this case)
 markers = ['', '', '', '', '', '', '', '', '', '', '', '', '', ''] 
 dmark = 100
@@ -81,7 +87,7 @@ ax[0].hlines(2812.5,0,50000,color='black',linestyle='dashed',label='original max
 #ax[0].hlines(3076.48,0,50,color='black',linestyle='dashed')
 
 # Plot vertical line at t=50 ky, when gravity is switched off.
-ax[0].vlines(50,4000,2000,color='black',linestyle='dotted',linewidth=1, label='gravity off')
+ax[0].vlines(50,4000,2000,color='black',linestyle='dotted',linewidth=1,label='gravity off')
 
 # Labelling of plot
 ax[1].set_xlabel("Time [ky]")
@@ -110,6 +116,6 @@ ax[1].text(-25,0.75e9,"b)")
 plt.tight_layout()
 
 # Save as pdf
-filename = '5_viscoelastic_bending_beam_dte_particles_isnot_dtc_depth_dtcisdte_dh.png'
+filename = '5_viscoelastic_bending_beam_dte_particles_isnot_dtc_depth_dtcisdte_main_fieldprop_np.png'
 plt.savefig(filename, dpi=300)
 print ('Plot in: ' + filename)

@@ -17,8 +17,10 @@ base = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/HLRN/HLRN/fix_stresses_el
 names = [
          "ve_build-up_simple_shear_dtc0.01_dte0.01_GR2_1",
          "ve_build-up_simple_shear_dtc0.01_dte0.01_GR4_1",
+         "ve_build-up_simple_shear_RL9_dtc0.01_dte0.01_GR2",
          "ve_build-up_simple_shear_particles_periodic_interpolatorcell_average_dtc0.01_dte0.01_GR2_np4_1",
          "ve_build-up_simple_shear_particles_periodic_interpolatorcell_average_dtc0.01_dte0.01_GR4_np4_1",
+         "ve_build-up_simple_shear_particles_RL9_periodic_bvel1e-10_1e-10_interpolatorbilinear_least_squares_dtc0.01_dte0.01_GR2_np4",
         ]
 tail = r"/statistics"
 
@@ -26,8 +28,10 @@ tail = r"/statistics"
 labels = [
           'fields, dtc = dte = 0.01 s, dh = 0.25 m',
           'fields, dtc = dte = 0.01 s, dh = 0.0625 m',
+          'fields, dtc = dte = 0.01 s, dh = 0.25 m, RL9, fixed step OS',
           'particles, dtc = dte = 0.01 s, dh = 0.25 m',
           'particles, dtc = dte = 0.01 s, dh = 0.0625 m',
+          'particles, dtc = dte = 0.01 s, dh = 0.25 m, BLS, RL9',
          ]
 # Set the colors available for plotting
 color1=[0.0051932, 0.098238, 0.34984]
@@ -36,9 +40,9 @@ color3=[0.32701, 0.4579, 0.28638]
 color4=[0.67824, 0.55071, 0.1778]
 color5=[0.97584, 0.63801, 0.50183]
 color6=[0.98447, 0.78462, 0.93553]
-colors = [color1, color2, color3, color4, color5, color6, color5, color1, color3, color5]
+colors = [color1, color2, color3, color4, color5, color6, color1, color1, color3, color5]
 # Set the line styles
-linestyles = ['solid', 'dashed', 'dashdot', 'dotted', 'solid', 'solid', 'dotted', 'dotted', 'dotted'] 
+linestyles = ['solid', 'dashed', 'dashdot', 'solid', 'dashed', 'dashdot', 'dotted', 'dotted', 'dotted'] 
 # Set the marker styles (no markers in this case)
 markers = ['', '', '', '', '', '', '', '', ''] 
 # Only plot every nth marker
@@ -98,8 +102,8 @@ ax[1].set_xlabel("Time [s]")
 ax[0].set_ylabel(r"Viscoelastic stress $\tau0_{cxy}$ [Pa]")
 ax[1].set_ylabel(r"Error E [%]")
 # Manually place legend in lower right corner. 
-#ax[0].legend(loc='upper left',handlelength=4)
-ax[1].legend(loc='upper left',ncol=1,handlelength=4)
+ax[0].legend(loc='upper left',handlelength=4)
+#ax[1].legend(loc='upper left',ncol=1,handlelength=4)
 # Grid and tickes
 ax[0].grid(axis='x',color='0.95')
 ax[0].set_yticks([0,5,10,15])
@@ -111,9 +115,9 @@ ax[1].set_xticks([0,0.2,0.4,0.5,0.6,0.8,1.0])
 
 # Ranges of the axes
 ax[0].set_xlim(0,1.) # s
-ax[0].set_ylim(0,15.5) # MPa
+#ax[0].set_ylim(0,15.5) # MPa
 ax[1].set_xlim(0,1.) # s
-ax[1].set_ylim(-0.55,-0.05) # %
+#ax[1].set_ylim(-0.55,-0.05) # %
 
 # Add labels a) and b)
 ax[0].text(-0.055,15.5,"c)")
