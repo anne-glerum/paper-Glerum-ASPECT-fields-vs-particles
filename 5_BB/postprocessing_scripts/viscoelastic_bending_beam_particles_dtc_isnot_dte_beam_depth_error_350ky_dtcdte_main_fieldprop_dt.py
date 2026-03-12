@@ -19,23 +19,27 @@ names = [
           'RL9_viscoelastic_bending_beam_htansmooth10m_particles_Newton_diffminmaxPPC_fieldpropRR_main_avegeometric_intbilinear_least_squares_limTrue_dtc250_dte250_IGR2_IAR1_np4',
           'RL9_viscoelastic_bending_beam_htansmooth10m_particles_Newton_diffminmaxPPC_fieldpropRR_main_avegeometric_intbilinear_least_squares_limTrue_dtc125_dte125_IGR2_IAR1_np4',
           'RL9_viscoelastic_bending_beam_htansmooth10m_particles_Newton_diffminmaxPPC_fieldpropRR_main_avegeometric_intbilinear_least_squares_limTrue_dtc62.5_dte62.5_IGR2_IAR1_np4',
+          'RL9_VE_BB_htansmooth10m_particles_Newton_diffminmaxPPC_pw0_main_avegeometric_intbilinear_least_squares_limFalse_dtc62.5_dte62.5_IGR2_IAR2_np4',
           'RL9_viscoelastic_bending_beam_htansmooth10m_particles_Newton_diffminmaxPPC_fieldpropRR_main_avegeometric_intquadratic_least_squares_limTrue_dtc500_dte500_IGR2_IAR1_np4',
           'RL9_viscoelastic_bending_beam_htansmooth10m_particles_Newton_diffminmaxPPC_fieldpropRR_main_avegeometric_intquadratic_least_squares_limTrue_dtc250_dte250_IGR2_IAR1_np4',
           'RL9_viscoelastic_bending_beam_htansmooth10m_particles_Newton_diffminmaxPPC_fieldpropRR_main_avegeometric_intquadratic_least_squares_limTrue_dtc125_dte125_IGR2_IAR1_np4',
           'RL9_viscoelastic_bending_beam_htansmooth10m_particles_Newton_diffminmaxPPC_fieldpropRR_main_avegeometric_intquadratic_least_squares_limTrue_dtc62.5_dte62.5_IGR2_IAR1_np4',
+          'RL9_VE_BB_htansmooth10m_particles_Newton_diffminmaxPPC_pw0_main_avegeometric_intquadratic_least_squares_limFalse_dtc62.5_dte62.5_IGR2_IAR2_np4',
         ]
 tail = r"/statistics"
 
 # The labels the graphs will get in the plot
 labels = [
-          '500 yr, BLS',
-          '250 yr, BLS',
-          '125 yr, BLS',
-          '62.5 yr, BLS',
+          '500 yr, LLS',
+          '250 yr, LLS',
+          '125 yr, LLS',
+          '62.5 yr, LLS',
+          '62.5 yr, LLS, 6.25 m',
           '500 yr, QLS',
           '250 yr, QLS',
           '125 yr, QLS',
           '62.5 yr, QLS',
+          '62.5 yr, QLS, 6.25 m',
          ]
 # Set the colors available for plotting
 color1=[0.0051932, 0.098238, 0.34984]
@@ -48,7 +52,7 @@ colors = [color1, color1, color3, color4, color5, color6, 'black', color4, color
 # Set the line styles
 linestyles = ['solid', 'solid', 'solid', 'solid', 'solid', 'solid', 'solid', 'solid', 'solid', 'solid', 'solid', 'solid', 'solid', 'solid']
 # Set the marker styles (no markers in this case)
-markers = ['s', 'x', 'v', 'd', '3', '*', '.', '_', '', '', '', '', '', ''] 
+markers = ['s', 'x', 'v', 'd', '3', '*', '.', '_', '1', '2', '', '', '', ''] 
 
 # Set up a row of two plots, one with the maximum beam depth
 # at t = 350 ky and one with the error of that depth wrt the original max depth.
@@ -57,6 +61,7 @@ ax = [fig.add_subplot(2, 1, i) for i in range(1, 3)]
 
 yr_in_secs = 3600. * 24. * 365.2425
 counter = 0 
+QLS_offset = 5
 
 # Create file path
 for name in names: 
@@ -74,12 +79,12 @@ for name in names:
   if "bilinear" in name:
     ax[0].scatter(counter,beam_depth[-1],label=labels[counter],color=color4,linestyle=linestyles[counter],marker=markers[counter])
   else:
-    ax[0].scatter(counter-4,beam_depth[-1],label=labels[counter],color=color5,linestyle=linestyles[counter],marker=markers[counter])
+    ax[0].scatter(counter-QLS_offset,beam_depth[-1],label=labels[counter],color=color5,linestyle=linestyles[counter],marker=markers[counter])
   # Plot the absolute error
   if "bilinear" in name:
     ax[1].scatter(counter,beam_depth[-1] - 2800.,label=labels[counter],color=color4,linestyle=linestyles[counter],marker=markers[counter])
   else:
-    ax[1].scatter(counter-4,beam_depth[-1] - 2800.,label=labels[counter],color=color5,linestyle=linestyles[counter],marker=markers[counter])
+    ax[1].scatter(counter-QLS_offset,beam_depth[-1] - 2800.,label=labels[counter],color=color5,linestyle=linestyles[counter],marker=markers[counter])
   
   counter += 1
 
@@ -116,12 +121,12 @@ ax[0].set_yticks([2800,2820,2840,2860,2880])
 ax[1].set_xticks([])
 #ax[1].set_yticks([0,12.5,0,25,37.5,50])
 ax[1].set_yticks([0,10,20,30,40,50,60,70])
-ax[0].set_title("Particles, htan10m, Newton, pw0, geometric, BLS/QLS, IGR2, IAR1, np4", fontsize=6)
+ax[0].set_title("Particles, htan10m, Newton, pw0, geometric, LLS/QLS, IGR2, IAR1, np4", fontsize=6)
 
 # Ranges of the axes
-ax[0].set_xlim(-0.5,3.5) # -
+ax[0].set_xlim(-0.5,4.5) # -
 ax[0].set_ylim(2870,2790) # m
-ax[1].set_xlim(-0.5,3.5) # -
+ax[1].set_xlim(-0.5,4.5) # -
 ax[1].set_ylim(0,70) # m
 
 # Add labels a) and b)

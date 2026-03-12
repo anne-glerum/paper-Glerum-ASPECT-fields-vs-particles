@@ -27,13 +27,13 @@ tail = r"/statistics"
 labels = [
 #          'dt = 500 yr, dh = 12.5 m, CA, htan10m, pw = 0',
 #          'dt = 500 yr, dh = 12.5 m, NN, htan10m, pw = 0',
-#          'dt = 500 yr, dh = 12.5 m, BLS, htan10m, pw = 0',
+#          'dt = 500 yr, dh = 12.5 m, LLS, htan10m, pw = 0',
 #          'dt = 500 yr, dh = 12.5 m, QLS, htan10m, pw = 0',
 #          'dt = 500 yr, dh = 12.5 m, DWA, htan10m, pw = 0',
           'CA',
           'NN',
           'DWA',
-          'BLS',
+          'LLS',
           'QLS',
          ]
 # Set the colors available for plotting
