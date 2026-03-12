@@ -16,6 +16,7 @@ base = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/HLRN/HLRN/fix_stresses_el
 # Change file name modifiers as needed depending on your file structure
 names = [
          'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intquadratic_least_squares_limTrue_dtc500_dte500_IGR2_IAR0_np4',
+         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_diffminmaxPPC_avegeometric_intquadratic_least_squares_limTrue_dtc500_dte500_IGR2_IAR0_np4',
          'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intquadratic_least_squares_limTrue_dtc500_dte500_IGR2_IAR0_np8',
          'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intquadratic_least_squares_limTrue_dtc500_dte500_IGR2_IAR0_np16',
         ]
@@ -24,6 +25,7 @@ tail = r"/statistics"
 # The labels the graphs will get in the plot
 labels = [
           'PPC = 4x4',
+          'PPC = 4x4, min!=max PPC',
           'PPC = 8x8',
           'PPC = 16x16',
          ]

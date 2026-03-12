@@ -15,23 +15,39 @@ base = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/HLRN/HLRN/fix_stresses_el
 
 # Change file name modifiers as needed depending on your file structure
 names = [
-         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intquadratic_least_squares_limTrue_dtc500_dte500_IGR2_IAR0_np4',
-         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intquadratic_least_squares_limTrue_dtc250_dte500_IGR2_IAR0_np4',
-         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intquadratic_least_squares_limTrue_dtc125_dte500_IGR2_IAR0_np4',
+#         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intquadratic_least_squares_limTrue_dtc500_dte500_IGR2_IAR0_np4',
+#         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intquadratic_least_squares_limTrue_dtc250_dte500_IGR2_IAR0_np4',
+#         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intquadratic_least_squares_limTrue_dtc125_dte500_IGR2_IAR0_np4',
+#         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intdistance_weighted_average_limTrue_dtc125_dte500_IGR2_IAR0_np4',
          'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intquadratic_least_squares_limTrue_dtc250_dte250_IGR2_IAR0_np4',
-         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intquadratic_least_squares_limTrue_dtc125_dte250_IGR2_IAR0_np4',
-         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intquadratic_least_squares_limTrue_dtc62.5_dte250_IGR2_IAR0_np4',
+#         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intquadratic_least_squares_limTrue_dtc125_dte250_IGR2_IAR0_np4',
+#         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intquadratic_least_squares_limTrue_dtc62.5_dte250_IGR2_IAR0_np4',
+#         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intdistance_weighted_average_limTrue_dtc125_dte250_IGR2_IAR0_np4',
+#         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intdistance_weighted_average_limTrue_dtc125_dte250_IGR2_IAR0_np8',
+#         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intdistance_weighted_average_limTrue_dtc62.5_dte250_IGR2_IAR0_np8',
+         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intdistance_weighted_average_limTrue_dtc62.5_dte250_IGR2_IAR0_np4',
+#         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_diffminmaxPPC_avegeometric_intdistance_weighted_average_limTrue_dtc62.5_dte250_IGR2_IAR0_np4',
+#         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_avegeometric_intcell_average_limTrue_dtc62.5_dte250_IGR2_IAR0_np4',
+#         'RL9_viscoelastic_bending_beam_smooth_particles_Newton_diffminmaxPPC_avegeometric_intcell_average_limTrue_dtc62.5_dte250_IGR2_IAR0_np4',
         ]
 tail = r"/statistics"
 
 # The labels the graphs will get in the plot
 labels = [
-          'dtc = 500 yr, dte = 500 yr',
-          'dtc = 250 yr, dte = 500 yr',
-          'dtc = 125 yr, dte = 500 yr',
+#          'dtc = 500 yr, dte = 500 yr',
+#          'dtc = 250 yr, dte = 500 yr',
+#          'dtc = 125 yr, dte = 500 yr',
+#          'dtc = 125 yr, dte = 500 yr, DWA',
           'dtc = 250 yr, dte = 250 yr',
-          'dtc = 125 yr, dte = 250 yr',
-          'dtc = 62.5 yr, dte = 250 yr',
+#          'dtc = 125 yr, dte = 250 yr',
+#          'dtc = 62.5 yr, dte = 250 yr',
+#          'dtc = 125 yr, dte = 250 yr, DWA',
+          #'dtc = 125 yr, dte = 250 yr, DWA, PPC = 8x8',
+          #'dtc = 62.5 yr, dte = 250 yr, DWA, PPC = 8x8',
+          'dtc = 62.5 yr, dte = 250 yr, DWA',
+          'dtc = 62.5 yr, dte = 250 yr, DWA, min!=max PPC',
+          'dtc = 62.5 yr, dte = 250 yr, CA',
+          'dtc = 62.5 yr, dte = 250 yr, CA, min!=max PPC',
          ]
 # Set the colors available for plotting
 color1=[0.0051932, 0.098238, 0.34984]
@@ -40,9 +56,9 @@ color3=[0.32701, 0.4579, 0.28638]
 color4=[0.67824, 0.55071, 0.1778]
 color5=[0.97584, 0.63801, 0.50183]
 color6=[0.98447, 0.78462, 0.93553]
-colors = [color1, color2, color3, color4, color5, color6, 'black', 'blue', color3, color4, color5]
+colors = [color1, color3, color4, color5, color6, color4, color5, color6]
 # Set the line styles
-linestyles = ['solid', 'solid', 'solid', 'dashed', 'dashed', 'dashed', 'solid','dashdot', 'dashdot', 'dotted',  'dotted','dotted'] 
+linestyles = ['solid', 'solid', 'dashed', 'solid', 'dashed', 'dashed', 'dashdot', 'dashdot', 'dotted',  'dotted','dotted'] 
 # Set the marker styles (no markers in this case)
 markers = ['', '', '', '', '', '', '', '', '', '', '', '', '', ''] 
 dmark = 100
@@ -107,15 +123,15 @@ ax[1].grid(axis='y',color='0.95')
 ax[0].set_xlim(0,350) # kyr
 ax[0].set_ylim(3150,2750) # m
 ax[1].set_xlim(0,350) # kyr
-ax[1].set_ylim(-0.75e9,0.75e9) # %
+ax[1].set_ylim(-1.5e9,1.5e9) # %
 
 # Add labels a) and b)
 ax[0].text(-25,2750,"a)")
-ax[1].text(-25,0.75e9,"b)")
+ax[1].text(-25,1.5e9,"b)")
 
 plt.tight_layout()
 
 # Save as pdf
-filename = '5_viscoelastic_bending_beam_dte_particles_isnot_dtc_depth_dtcisnotdte.png'
+filename = '5_viscoelastic_bending_beam_dte_particles_isnot_dtc_depth_dtcisnotdte_QLS_DWA_gen_adv_250_62.5.png'
 plt.savefig(filename, dpi=300)
 print ('Plot in: ' + filename)
