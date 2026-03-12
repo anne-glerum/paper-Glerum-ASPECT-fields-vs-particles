@@ -18,7 +18,10 @@ cm_data2 = np.loadtxt("roma.txt")
 roma_map = LinearSegmentedColormap.from_list(cm_data2, cm_data2)
 
 # time array
-Time = np.arange(0,200.1,5.) # [yr]
+dtc = 10.
+dtc = 2.5
+#Time = np.arange(0,200.1,dtc) # [yr]
+Time = np.arange(0,200.1,dtc*2) # [yr]
 
 Time_list = []
 for i in range(len(Time)):
@@ -27,25 +30,71 @@ for i in range(len(Time)):
  
 Time_list2 = []
 for i in range(len(Time)):
-    Time_list2.append(int(Time[i]/2.5))
+    Time_list2.append(int(Time[i]/dtc))
     Time_list2[i] = "%05d" % Time_list2[i]
 
 Time_list3 = []
 for i in range(len(Time)):
-    Time_list3.append(int(Time[i]/2.5))
+    Time_list3.append(int(Time[i]/dtc))
     Time_list3[i] = "%01d" % Time_list3[i]
 
 # load numerical data ASPECT
 label_as = ['old_cf_ref','old_p_ref','new_cf_ref','new_p_ref']
-label_as = ['new_cf_ref','new_p_ref']
-model_name = ['RL9_viscoelastic_3D_loading_AMG_dtc2.5_dte2.5_averaginggeometric_IGR1_IAR2','RL9_viscoelastic_3D_loading_particles_AMG_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR0_np4']
-label_as = ['new_cf_ref']
-model_name = ['RL9_viscoelastic_3D_loading_AMG_dtc2.5_dte2.5_averaginggeometric_IGR1_IAR2']
-label_as = ['new_p_ref']
-model_name = ['RL9_viscoelastic_3D_loading_particles_AMG_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR0_np4']
-
+# new labeling
 label_as = ['AMG_geometric_BLSlim_dtc2_5_dte2_5_IGR1_IAR2_np4']
 model_name = ['RL9_viscoelastic_3D_loading_particles_AMG_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4']
+label_as = [
+##'AMG_avegeometric_BLSlim_limTrue_dtc2_5_dte2_5_IGR1_IAR2_np4',
+##'AMG_avegeometric_CA_limTrue_dtc2_5_dte2_5_IGR1_IAR2_np4',
+##'AMG_avegeometric_DWA_limTrue_dtc2_5_dte2_5_IGR1_IAR2_np4',
+#'AMG_avegeometric_NN_limTrue_dtc2_5_dte2_5_IGR1_IAR2_np4',
+##'AMG_avegeometric_QLS_limTrue_dtc2_5_dte2_5_IGR1_IAR2_np4',
+##'GMG_matavgeomvisc_avegeometric_BLSlim_limTrue_dtc2_5_dte2_5_IGR1_IAR2_np4',
+##'GMG_matavgeomvisc_avegeometric_CA_limTrue_dtc2_5_dte2_5_IGR1_IAR2_np4',
+##'GMG_matavgeomvisc_avegeometric_DWA_limTrue_dtc2_5_dte2_5_IGR1_IAR2_np4',
+##'GMG_matavgeomvisc_avegeometric_NN_limTrue_dtc2_5_dte2_5_IGR1_IAR2_np4',
+##'GMG_matavgeomvisc_avegeometric_QLS_limTrue_dtc2_5_dte2_5_IGR1_IAR2_np4',
+##'AMG_dtc10_dte10_avegeometric_IGR1_IAR2',
+#'AMG_dtc10_dte20_avegeometric_IGR1_IAR2',
+##'AMG_dtc20_dte20_avegeometric_IGR1_IAR2',
+##'AMG_dtc2_5_dte2_5_avearithmetic_IGR1_IAR2',
+##'AMG_dtc2_5_dte2_5_avegeometric_IGR1_IAR2',
+##'AMG_dtc2_5_dte2_5_aveharmonic_IGR1_IAR2',
+##'AMG_dtc2_5_dte2_5_avemaximum_composition_IGR1_IAR2',
+##'AMG_dtc5_dte10_avegeometric_IGR1_IAR2',
+##'AMG_dtc5_dte20_avegeometric_IGR1_IAR2',
+##'AMG_dtc5_dte5_avegeometric_IGR1_IAR2',
+##'AMG_partpropRR_avegeometric_BLS_limTrue_dtc2_5_dte2_5_IGR1_IAR2_np4',
+#'GMG_partpropRR_23052025_avegeometric_BLM_limTrue_dtc2_5_dte2_5_IGR1_IAR2_np4',
+'AMG_partpropRR_23052025_avegeometric_BLS_limTrue_dtc2_5_dte2_5_IGR1_IAR2_np4',
+] 
+
+model_name = [
+##'RL9_viscoelastic_3D_loading_particles_AMG_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4',
+##'RL9_viscoelastic_3D_loading_particles_AMG_avegeometric_intcell_average_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4',
+##'RL9_viscoelastic_3D_loading_particles_AMG_avegeometric_intdistance_weighted_average_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4',
+# NN didn't finish
+#'RL9_viscoelastic_3D_loading_particles_AMG_avegeometric_intnearest_neighbor_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4',
+##'RL9_viscoelastic_3D_loading_particles_AMG_avegeometric_intquadratic_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4',
+##'RL9_viscoelastic_3D_loading_particles_GMG_matavgeomvisc_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4',
+##'RL9_viscoelastic_3D_loading_particles_GMG_matavgeomvisc_avegeometric_intcell_average_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4',
+##'RL9_viscoelastic_3D_loading_particles_GMG_matavgeomvisc_avegeometric_intdistance_weighted_average_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4',
+##'RL9_viscoelastic_3D_loading_particles_GMG_matavgeomvisc_avegeometric_intnearest_neighbor_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4',
+##'RL9_viscoelastic_3D_loading_particles_GMG_matavgeomvisc_avegeometric_intquadratic_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4',
+##'RL9_viscoelastic_3D_loading_AMG_dtc10_dte10_averaginggeometric_IGR1_IAR2',
+#'RL9_viscoelastic_3D_loading_AMG_dtc10_dte20_averaginggeometric_IGR1_IAR2',
+##'RL9_viscoelastic_3D_loading_AMG_dtc20_dte20_averaginggeometric_IGR1_IAR2',
+##'RL9_viscoelastic_3D_loading_AMG_dtc2.5_dte2.5_averagingarithmetic_IGR1_IAR2',
+##'RL9_viscoelastic_3D_loading_AMG_dtc2.5_dte2.5_averaginggeometric_IGR1_IAR2',
+##'RL9_viscoelastic_3D_loading_AMG_dtc2.5_dte2.5_averagingharmonic_IGR1_IAR2',
+##'RL9_viscoelastic_3D_loading_AMG_dtc2.5_dte2.5_averagingmaximum_composition_IGR1_IAR2',
+##'RL9_viscoelastic_3D_loading_AMG_dtc5_dte10_averaginggeometric_IGR1_IAR2',
+##'RL9_viscoelastic_3D_loading_AMG_dtc5_dte20_averaginggeometric_IGR1_IAR2',
+##'RL9_viscoelastic_3D_loading_AMG_dtc5_dte5_averaginggeometric_IGR1_IAR2',
+#'RL9_viscoelastic_3D_loading_particles_AMG_partpropRR_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4',
+#'RL9_viscoelastic_3D_loading_particles_GMG_partpropRR_23052025_test_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4',
+'RL9_viscoelastic_3D_loading_particles_AMG_partpropRR_23052025_avegeometric_intbilinear_least_squares_limTrue_dtc2.5_dte2.5_IGR1_IAR2_np4',
+] 
 for k in range(len(model_name)):
     print ("Reading in: ", model_name[k])
     Dir = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/Papers/Glerum_LD_ASPECT/repo/9_3D_loading/postprocessing_scripts/"+model_name[k]+"/"
@@ -64,7 +113,7 @@ R = 6371.0 # Earth radius analytical model [km]
 
 t_start = 0.0 # start time [ka]
 t_end   = 0.2 # end time [ka]
-t_step  = 0.0025 # time step size [ka]
+t_step  = dtc/1000 #0.0025 # time step size [ka]
 
 colat_start = 0.0  # start observer locations co-latitude [degree]
 colat_end   = 5.0  # end observer locations co-latitude [degree]
@@ -111,8 +160,8 @@ vminm_ab = vmin.min(); vmaxm_ab = vmax.max()
 del vmin, vmax
 
 # plot surface topography ASPECT
+fig = plt.figure(figsize=(20,15))
 for k in range(len(label_as)):
-    fig = plt.figure(figsize=(20,15))
     plt.rc('axes', axisbelow=True)
     for i in range(1,int((len(Time)-1)/2+1)):
         ax = fig.add_subplot(4,5,i)
@@ -136,6 +185,8 @@ for k in range(len(label_as)):
     filename = output_dir_base + model_name[k] + '/' + label_as[k] + '_surface_topo.png'
     # plot looks good
     plt.savefig(filename, dpi=300)
+    plt.cla()
+plt.close(fig)
 
 ### create radial deformation profile plots: ASPECT and TABOO and ABAQUS #######
 print ("Creating radial deformation plots")
@@ -171,11 +222,11 @@ for i in range(int(len(Time))):
     exec("topo_"+Time_list[i]+"_ab_R = np.sqrt((topo_"+Time_list[i]+"_ab_radial[:,0]/1000)**2+(topo_"+Time_list[i]+"_ab_radial[:,1]/1000)**2)") 
 
 # create plot: deformation profiles through time, ASPECT
+fig = plt.figure(figsize=(8,6))
 for k in range(len(label_as)):
-    fig = plt.figure(figsize=(8,6))
     for i in range(int((len(Time)-1)/2+1)):
-        j = 12*i
-        exec("plt.plot(topo_"+Time_list[2*i]+"_as_"+label_as[k]+"_R,topo_"+Time_list[2*i]+"_as_"+label_as[k]+"_radial[:,3],color=cm_data[j,:])")
+        j = int(12*(dtc/5))*i
+        exec("plt.plot(topo_"+Time_list[2*i]+"_as_"+label_as[k]+"_R,topo_"+Time_list[2*i]+"_as_"+label_as[k]+"_radial[:,3],color=cm_data[j,:],label="+str(Time_list[2*i])+")")
     plt.xlim([0,500])
     #plt.ylim([-0.8,0.1])
     ax = plt.gca()
@@ -183,12 +234,15 @@ for k in range(len(label_as)):
     plt.title('ASPECT',fontsize=15)
     plt.xlabel('Horizontal distance from load center, y=x [km]',fontsize=15, ha='center')
     plt.ylabel('Vertical surface deformation [m]',fontsize=15)
-    plt.legend(['t=0 yr','t=10 yr','t=20 yr','t=30 yr','t=40 yr','t=50 yr','t=60 yr','t=70 yr','t=80 yr','t=90 yr','t=100 yr','t=110 yr','t=120 yr','t=130 yr','t=140 yr','t=150 yr','t=160 yr','t=170 yr','t=180 yr','t=190 yr','t=200 yr'],ncol=2,loc=4,fontsize=15)
+#    plt.legend(['t=0 yr','t=10 yr','t=20 yr','t=30 yr','t=40 yr','t=50 yr','t=60 yr','t=70 yr','t=80 yr','t=90 yr','t=100 yr','t=110 yr','t=120 yr','t=130 yr','t=140 yr','t=150 yr','t=160 yr','t=170 yr','t=180 yr','t=190 yr','t=200 yr'],ncol=2,loc=4,fontsize=15)
+    plt.legend(ncol=2,loc=4,fontsize=15)
     plt.grid(which='major')
     #plt.show()
     # plot looks good
     filename = output_dir_base + model_name[k] + "/"  + label_as[k] + '_profile_ASPECT.png'
     plt.savefig(filename, dpi=300)
+    plt.cla()
+plt.close(fig)
 
 # create plot: deformation profiles through time, ABAQUS
 fig = plt.figure(figsize=(8,6))
@@ -208,11 +262,12 @@ plt.grid(which='major')
 # plot looks good
 filename = output_dir_base + '_profile_ABAQUS.png'
 plt.savefig(filename, dpi=300)
+plt.close(fig)
 
 # create plot: deformation profiles through time ASPECT and TABOO, time step = 10 yr
+fig = plt.figure(figsize=(24,10))
 for k in range(len(label_as)):
     title_plot = ['ASPECT','TABOO','Abaqus']
-    fig = plt.figure(figsize=(24,10))
     for l in range(3):
         ax = fig.add_subplot(1,3,l+1)
         for i in range(1,int((len(Time)-1)/2+1)):
@@ -242,9 +297,11 @@ for k in range(len(label_as)):
             plt.xlabel('Horizontal distance from load center [km]',fontsize=15)
         #plt.show()
         # plot looks bad
-        plt.tight_layout()
-        filename = output_dir_base + model_name[k] + "/"  + label_as[k] + '_profile_ASPECT_TABOO_ABAQUS.png'
-        plt.savefig(filename, dpi=300)
+    plt.tight_layout()
+    filename = output_dir_base + model_name[k] + "/"  + label_as[k] + '_profile_ASPECT_TABOO_ABAQUS.png'
+    plt.savefig(filename, dpi=300)
+    plt.cla()
+plt.close(fig)
 
 ### create maximum deformation plots ###########################################
 print ("Creating maximum deformation plots")
@@ -261,8 +318,8 @@ topo_max_ab = np.zeros((int(len(Time)),2)); topo_max_ab[:,0] = Time[::1]
 for i in range(len(Time)):
     exec("topo_max_ab[i,1] = topo_"+Time_list[i]+"_ab_radial[:,3].min()")
 
+fig = plt.figure(figsize=(8,6))
 for k in range(len(label_as)): 
-    fig = plt.figure()
     exec("plt.plot(topo_max_as_"+label_as[k]+"[:,0],topo_max_as_"+label_as[k]+"[:,1],c='k',zorder=0,label='_nolegend_')")
     for i in range(len(Time)):
         j = 6*i
@@ -289,7 +346,7 @@ for k in range(len(label_as)):
     plt.tick_params(labelsize=20)
     ax.tick_params(axis='both',labelsize=20)
     plt.xlabel('Time [yr]',fontsize=25)
-    plt.ylabel('Maximum vertical surface deformation [m]',fontsize=15)
+    plt.ylabel('Maximum vertical surface deformation [m]',fontsize=10)
     plt.legend(['ASPECT','TABOO','Abaqus'],loc='upper right',fontsize=20)
     plt.grid(which='major')
     #plt.show()
@@ -297,6 +354,8 @@ for k in range(len(label_as)):
     plt.tight_layout()
     filename = output_dir_base + model_name[k] + "/"  + label_as[k] + '_max_def_ASPECT_TABOO_ABAQUS.png'
     plt.savefig(filename, dpi=300)
+    plt.cla()
+plt.close(fig)
 
 ### create combined uplift and uplift rate plots ###############################
 print ("Creating uplift and uplift rate plots")
@@ -360,8 +419,8 @@ for p in range(len(distances)):
 
 # create uplift and uplift rate plots at specified distances
 dist_color = ['r','gold','b','k']
+fig = plt.figure(figsize=(8,6))
 for k in range(len(label_as)):
-    fig = plt.figure(figsize=(8,6))
     ax = fig.add_subplot(1,2,1)
     for p in range(len(distances)-1):
         exec("plt.plot(Time[::2],topo_1loc_as_"+label_as[k]+"_"+str(distances[p])+",color=dist_color[p],linestyle='-')")
@@ -395,6 +454,9 @@ for k in range(len(label_as)):
     plt.tight_layout()
     filename = output_dir_base + model_name[k] + "/"  + label_as[k] + '_uplift.png'
     plt.savefig(filename, dpi=300)
+    ax.clear()
+    plt.cla()
+plt.close(fig)
        
 
 if False:
