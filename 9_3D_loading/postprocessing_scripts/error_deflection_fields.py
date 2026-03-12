@@ -13,20 +13,20 @@ rc("legend", fontsize=8)
 
 # Change path as needed
 base = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/Papers/Glerum_LD_ASPECT/repo/9_3D_loading/postprocessing_scripts/"
-output_file_base = "9_3D_loading_fields_max_deflection_dtcisdte_"
+output_file_base = "9_3D_loading_fields_max_deflection_dtcisnotdte_"
 drop_t0 = True
 
 names = [
-         "RL9_viscoelastic_3D_loading_AMG_dtc2.5_dte2.5_averaginggeometric_IGR1_IAR2",
+#         "RL9_viscoelastic_3D_loading_AMG_dtc2.5_dte2.5_averaginggeometric_IGR1_IAR2",
 #         "RL9_viscoelastic_3D_loading_AMG_dtc2.5_dte2.5_averagingharmonic_IGR1_IAR2",
 #         "RL9_viscoelastic_3D_loading_AMG_dtc2.5_dte2.5_averagingarithmetic_IGR1_IAR2",
 #         "RL9_viscoelastic_3D_loading_AMG_dtc2.5_dte2.5_averagingmaximum_composition_IGR1_IAR2",
-         "RL9_viscoelastic_3D_loading_AMG_dtc5_dte5_averaginggeometric_IGR1_IAR2",
-         "RL9_viscoelastic_3D_loading_AMG_dtc10_dte10_averaginggeometric_IGR1_IAR2",
-         "RL9_viscoelastic_3D_loading_AMG_dtc20_dte20_averaginggeometric_IGR1_IAR2",
-##         "RL9_viscoelastic_3D_loading_AMG_dtc5_dte10_averaginggeometric_IGR1_IAR2",
-##         "RL9_viscoelastic_3D_loading_AMG_dtc5_dte20_averaginggeometric_IGR1_IAR2",
-         ##"RL9_viscoelastic_3D_loading_AMG_dtc10_dte20_averaginggeometric_IGR1_IAR2",
+#         "RL9_viscoelastic_3D_loading_AMG_dtc5_dte5_averaginggeometric_IGR1_IAR2",
+#         "RL9_viscoelastic_3D_loading_AMG_dtc10_dte10_averaginggeometric_IGR1_IAR2",
+#         "RL9_viscoelastic_3D_loading_AMG_dtc20_dte20_averaginggeometric_IGR1_IAR2",
+         "RL9_viscoelastic_3D_loading_AMG_dtc5_dte10_averaginggeometric_IGR1_IAR2",
+         "RL9_viscoelastic_3D_loading_AMG_dtc5_dte20_averaginggeometric_IGR1_IAR2",
+         "RL9_viscoelastic_3D_loading_AMG_dtc10_dte20_averaginggeometric_IGR1_IAR2",
 
         ]
 tail = r"/topography"
