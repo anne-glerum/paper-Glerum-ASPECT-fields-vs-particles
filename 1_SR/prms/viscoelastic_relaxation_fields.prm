@@ -1,4 +1,10 @@
-#  Global parameters
+# This setup models the relaxation of elastic stresses in the absence
+# of driving forces.
+# The analytical solution is:
+#     \tau_{xx} = \tau_{xx_{t0}} \exp(-t \frac{\mu}{\eta_{viscous}}),
+# where \tau_{xx} is the first component of the stored stress tensor,
+# \mu is the shear modulus and \eta_{viscous} the viscous viscosity.
+# Global parameters
 set Dimension                              = 2
 set Start time                             = 0
 set End time                               = 250e3
@@ -10,33 +16,32 @@ set CFL number                             = 0.5
 set Maximum time step                      = 500
 set Pressure normalization                 = surface
 set Surface pressure                       = 0.
-set Output directory                       = /scratch/usr/bbpanneg/runs/fix_stresses_elasticity/paper_11072022/BM1/ve_relaxation_dt500yr_dh10km
+set Output directory                       = output
 
-# New elasticity settings
+# For the stress update
 set Use operator splitting                 = true
 
 # Solver settings
 subsection Solver parameters
   set Temperature solver tolerance = 1e-5
   subsection Stokes solver parameters
-    set Use direct solver for Stokes system = false
-    set Linear solver tolerance = 1e-7
+    set Stokes solver type                  = block AMG
+    set Linear solver tolerance             = 1e-7
     set Number of cheap Stokes solver steps = 200
   end
   # Make sure to do only 1 splitting step
   subsection Operator splitting parameters
-    set Reaction time step                 = 5000 # larger than maximum Stokes time step
+    set Reaction solver type                   = fixed step
+    set Reaction time step                     = 5000 # larger than maximum Stokes time step
     set Reaction time steps per advection step = 1
   end
 end
 
-# Model geometry (100x100 km, 2 km spacing)
+# Model geometry (100x100 km)
 subsection Geometry model
   set Model name = box
 
   subsection Box
-    set X repetitions = 1
-    set Y repetitions = 1
     set X extent      = 100e3
     set Y extent      = 100e3
   end
@@ -49,45 +54,45 @@ subsection Mesh refinement
   set Time steps between mesh refinement = 0
 end
 
-# Element types
+# Use discontinuous Galerkin for the stress tensor
+# components.
 subsection Discretization
-  set Composition polynomial degree     = 2
-  set Stokes velocity polynomial degree = 2
-  set Temperature polynomial degree     = 2
   set Use discontinuous composition discretization = true
 end
 
-# Formulation classification
+# Turn on elasticity
 subsection Formulation
   set Enable elasticity = true
 end
 
-# Velocity boundary conditions
+# Prescribe a negligable amount of horizontal velocity
+# to make sure the solver converges.
 subsection Boundary velocity model
   set Tangential velocity boundary indicators = top, bottom
   set Prescribed velocity boundary indicators = left x: function, right x: function
   subsection Function
-    set Function expression = 1e-13; 0
+    set Function expression = 1e-10; 0
   end
 end
 
-# Number and name of compositional fields
+# Six fields that represent the independent components
+# of the deviatoric stress of the current timestep
+# and the previous timestep.
 subsection Compositional fields
   set Number of fields = 6
   set Names of fields  = ve_stress_xx, ve_stress_yy, ve_stress_xy, ve_stress_xx_old, ve_stress_yy_old, ve_stress_xy_old
 end
 
-# Spatial domain of different compositional fields
+# Initial values of the stresses
 subsection Initial composition model
   set Model name = function
   subsection Function
     set Variable names      = x,y
     set Function constants  =
-    set Function expression = 20e6; -20e6; 0; 20079050; -20079050; 0
+    set Function expression = 20e6; -20e6; 0; 20e6; -20e6; 0
   end
 end
 
-# Composition boundary conditions
 # We specify that no boundaries have a fixed composition
 # in order to prevent boundary effects from developing
 # in the compositional fields tracking viscoelastic stresses.
@@ -95,7 +100,8 @@ subsection Boundary composition model
   set Fixed composition boundary indicators =
 end
 
-# Temperature boundary conditions
+# Temperature does not play a role in this benchmark
+# we set it to 293 K everywhere
 subsection Boundary temperature model
   set Fixed temperature boundary indicators = bottom, top, left, right
   set List of model names = box
@@ -107,7 +113,6 @@ subsection Boundary temperature model
   end
 end
 
-# Temperature initial conditions
 subsection Initial temperature model
   set Model name = function
   subsection Function
@@ -115,18 +120,17 @@ subsection Initial temperature model
   end
 end
 
-
-# Gravity model
+# Gravity is set to zero.
 subsection Gravity model
   set Model name = vertical
   subsection Vertical
-    set Magnitude = 0 #10.
+    set Magnitude = 0.
   end
 end
 
 # Post processing
 subsection Postprocess
-  set List of postprocessors = composition statistics, velocity statistics, visualization
+  set List of postprocessors = composition statistics, velocity statistics, heating statistics, visualization
 
   subsection Visualization
     set List of output variables = material properties, strain rate, named additional outputs, stress
@@ -135,18 +139,12 @@ subsection Postprocess
       set List of material properties = viscosity
     end
 
-    set Time between graphical output = 100000
+    set Time between graphical output = 50000
     set Interpolate output = true
     set Write higher order output = true
   end
 
 end
-
-# Termination criteria
-subsection Termination criteria
- set Termination criteria = end time
-end
-
 
 # Material model
 subsection Material model
@@ -164,7 +162,7 @@ subsection Material model
     set Activation volumes for dislocation creep  = 0.
 
     set Elastic shear moduli        = 1.e10
-    set Use fixed elastic time step = true
+    set Use fixed elastic time step = false
     # Elastic time step for t0 should match the computational timestep
     set Fixed elastic time step     = 500
 
@@ -181,4 +179,8 @@ subsection Material model
 
   end
 
+end
+  
+subsection Heating model
+  set List of model names = shear heating
 end
