@@ -51,10 +51,22 @@ plt.setp(ax.get_xticklabels(),fontsize=12, visible=True)
 plt.setp(ax.get_yticklabels(),fontsize=12, visible=True)
 
 # Annotations - Boundary Conditions
-ax.text(-5,50,'Free slip',fontsize=9, rotation = 90, va = 'center', ha = 'center')
-ax.text(105,50,'Free slip',fontsize=9, rotation = -90, va = 'center', ha = 'center')
+#ax.text(-5,50,'Free slip',fontsize=9, rotation = 90, va = 'center', ha = 'center')
+#ax.text(105,50,'Free slip',fontsize=9, rotation = -90, va = 'center', ha = 'center')
 ax.text(50,-5,'Free slip',fontsize=9, va = 'center', ha = 'center')
 ax.text(50,105,'Free slip',fontsize=9, va = 'center', ha = 'center')
+# Right boundary
+ax.arrow(100,20,2,0,width=0.8, clip_on=False, fill=True, facecolor='black')
+ax.arrow(100,40,2,0,width=0.8, clip_on=False, fill=True, facecolor='black')
+ax.arrow(100,60,2,0,width=0.8, clip_on=False, fill=True, facecolor='black')
+ax.arrow(100,80,2,0,width=0.8, clip_on=False, fill=True, facecolor='black')
+ax.text(101,10,'$\mathrm{v_x}=10^{-10}$\n  [m/yr]', fontsize=8)
+# Left boundary
+ax.arrow(0,20,2,0,width=0.8, clip_on=False, fill=True, facecolor='black')
+ax.arrow(0,40,2,0,width=0.8, clip_on=False, fill=True, facecolor='black')
+ax.arrow(0,60,2,0,width=0.8, clip_on=False, fill=True, facecolor='black')
+ax.arrow(0,80,2,0,width=0.8, clip_on=False, fill=True, facecolor='black')
+ax.text(-19.5,10,'$\mathrm{v_x}=10^{-10}$\n  [m/yr]', fontsize=8)
 # Annotations material properties
 ax.text(35,75,r'$\rho=2800$ $\mathrm{kg/m^3}$', fontsize=9, ha='left')
 ax.text(35,70,r'$g=0$ $\mathrm{m/s^2}$', fontsize=9, ha='left')
