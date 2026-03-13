@@ -10,26 +10,26 @@ from mpl_toolkits.axes_grid1.inset_locator import mark_inset
 #from scipy.integrate import simpson
 from numpy import trapz
 rc("pdf", fonttype=42)
-rc("lines", linewidth=3, markersize=3)
+rc("lines", linewidth=3, markersize=10)
 
 # Change path as needed
 base = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/HLRN/HLRN/fix_stresses_elasticity/paper_14072023/BM1/"
 
 # Change file name modifiers as needed depending on your file structure
 names = [
-         "ve_relaxation_bgvel1e-12_IColdisnew_shearheating_dtc250_dte250_GR2_g0",
-         "ve_relaxation_bgvel1e-12_IColdisnew_shearheating_dtc125_dte125_GR2_g0",
-         "ve_relaxation_bgvel1e-12_IColdisnew_shearheating_dtc62.5_dte62.5_GR2_g0",
-         "ve_relaxation_bgvel1e-12_IColdisnew_shearheating_dtc15.625_dte15.625_GR2_g0",
+         "ve_relaxation_main_dtc250_dte250_GR2_1",
+         "ve_relaxation_main_dtc125_dte125_GR2_1",
+         "ve_relaxation_main_dtc62.5_dte62.5_GR2_1",
+         "ve_relaxation_main_dtc15.625_dte15.625_GR2_1",
         ]
 tail = r"/statistics"
 
 # The labels the graphs will get in the plot
 labels = [
-          r'dtc = dte = 250 yr',
-          r'dtc = dte = 125 yr',
-          r'dtc = dte = 62.5 yr',
-          r'dtc = dte = 15.625 yr',
+          r'dt = 250 yr',
+          r'dt = 125 yr',
+          r'dt = 62.5 yr',
+          r'dt = 15.625 yr',
          ]
 # Set the colors available for plotting
 color1=[0.0051932, 0.098238, 0.34984]
@@ -41,8 +41,9 @@ color6=[0.98447, 0.78462, 0.93553]
 colors = [color2, color3, color4, color5, color6, color4, color5, color3, color4, color5]
 # Set the line styles
 linestyles = ['solid', 'solid', 'solid', 'solid', 'solid', 'dashdot', 'dashdot', 'dotted',  'dotted','dotted'] 
-# Set the marker styles (no markers in this case)
-markers = ['', '', '', '', '', '', '', '', '', '', '', '', '', ''] 
+# Set the marker styles
+markers = ['|', 'x', 'o', '', '', '', '', '', '', '', '', '', '', ''] 
+dmark = 200
 
 # Set up a row of two plots, one with heating rates
 # and one with the percentage difference of tau^0_c to the analytical solution
@@ -70,7 +71,7 @@ for name in names:
   # categorical batlow colors. We have to divide
   # by the model domain area, as the heating term is
   # integrated over the domain (J/s=W).
-  ax[0].plot(time/1e3,shear_heating/1e10,label=labels[counter],color=colors[counter],linestyle=linestyles[counter],marker=markers[counter])
+  ax[0].plot(time/1e3,shear_heating/1e10,label=labels[counter],color=colors[counter],linestyle=linestyles[counter],marker=markers[counter], markevery=dmark, fillstyle='none')
   print ("Heating t=0: ", shear_heating[0]/1e10, " $\mathrm{Jm^{-3}s^1$")
   # Compute and plot the total integrated energy density (the area under the shear heating, i.e., integrated energy density, curve)
   area = trapz(shear_heating/1e10,time*yr_in_secs)
