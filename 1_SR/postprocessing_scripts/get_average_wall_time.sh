@@ -30,12 +30,14 @@ do
     t_advection=$(bc <<<"scale=4;$t_advection+${arr[0]}")
     readarray -t arr < <(grep 'Build composition preconditioner' tmp.txt | awk '{print substr($8, 1, length($8)-1)}')
     t_advection=$(bc <<<"scale=4;$t_advection+${arr[0]}")
+    readarray -t arr < <(grep 'Solve composition reactions' tmp.txt | awk '{print substr($8, 1, length($8)-1)}')
+    t_advection=$(bc <<<"scale=4;$t_advection+${arr[0]}")
     readarray -t arr < <(grep ' Solve composition system' tmp.txt | awk '{print substr($8, 1, length($8)-1)}')
     t_advection=$(bc <<<"scale=4;$t_advection+${arr[0]}")
 
   done
-  t_stokes=$(bc <<<"scale=4;$t_stokes/3.0")
   t_advection=$(bc <<<"scale=4;$t_advection/3.0")
+  t_stokes=$(bc <<<"scale=4;$t_stokes/3.0")
   echo "Average total advection time:" $t_advection
   echo "Average total Stokes time:" $t_stokes
   echo "--------"
