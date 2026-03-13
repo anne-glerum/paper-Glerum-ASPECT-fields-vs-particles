@@ -100,7 +100,7 @@ ax[1].set_yticks([0,2,4,6,8,10])
 
 # Ranges of the axes
 ax[0].set_xlim(0,250) # kyr
-ax[0].set_ylim(0,21) # MPa
+ax[0].set_ylim(-1,21) # MPa
 ax[1].set_xlim(0,250) # kyr
 ax[1].set_ylim(0,4) # %
 
