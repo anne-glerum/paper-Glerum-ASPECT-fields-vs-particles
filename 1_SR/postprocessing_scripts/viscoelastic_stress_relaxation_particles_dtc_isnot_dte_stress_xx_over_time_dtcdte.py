@@ -8,26 +8,26 @@ from matplotlib import rc
 from mpl_toolkits.axes_grid1.inset_locator import zoomed_inset_axes 
 from mpl_toolkits.axes_grid1.inset_locator import mark_inset
 rc("pdf", fonttype=42)
-rc("lines", linewidth=3, markersize=3)
+rc("lines", linewidth=3, markersize=10)
 
 # Change path as needed
 base = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/HLRN/HLRN/fix_stresses_elasticity/paper_14072023/BM1/"
 
 # Change file name modifiers as needed depending on your file structure
 names = [
-         "ve_relaxation_particles_bgvel_interpolatorcell_average_dtc500_dte500_GR2_np4_g0",
-         "ve_relaxation_particles_bgvel_interpolatorcell_average_dtc250_dte250_GR2_np4_g0",
-         "ve_relaxation_particles_bgvel_interpolatorcell_average_dtc125_dte125_GR2_np4_g0",
-         "ve_relaxation_particles_bgvel_interpolatorcell_average_dtc62.5_dte62.5_GR2_np4_g0",
+         "ve_relaxation_particles_main_interpolatorcell_average_dtc500_dte500_GR2_np4_1",
+         "ve_relaxation_particles_main_interpolatorcell_average_dtc250_dte250_GR2_np4_1",
+         "ve_relaxation_particles_main_interpolatorcell_average_dtc125_dte125_GR2_np4_1",
+         "ve_relaxation_particles_main_interpolatorcell_average_dtc62.5_dte62.5_GR2_np4_1",
         ]
 tail = r"/statistics"
 
 # The labels the graphs will get in the plot
 labels = [
-          'dtc = dte = 500 yr, dh = 25 km',
-          'dtc = dte = 250 yr, dh = 25 km',
-          'dtc = dte = 125 yr, dh = 25 km',
-          'dtc = dte = 62.5 yr, dh = 25 km',
+          'dt = 500 yr, dh = 25 km',
+          'dt = 250 yr, dh = 25 km',
+          'dt = 125 yr, dh = 25 km',
+          'dt = 62.5 yr, dh = 25 km',
          ]
 # Set the colors available for plotting
 color1=[0.0051932, 0.098238, 0.34984]
@@ -39,8 +39,9 @@ color6=[0.98447, 0.78462, 0.93553]
 colors = [color2, color3, color4, color5, color6, color4, color5, color3, color4, color5, color3, color4, color5]
 # Set the line styles
 linestyles = ['solid', 'solid', 'solid', 'solid', 'solid', 'dashed', 'dashed', 'dashdot', 'dashdot', 'dashdot', 'dotted',  'dotted','dotted'] 
-# Set the marker styles (no markers in this case)
-markers = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''] 
+# Set the marker styles
+markers = ['|', 'x', 'o', '', '', '', '', '', '', '', '', '', '', '', ''] 
+dmark=100
 
 # Set up a row of two plots, one with absolute stress values
 # and one with the percentage difference to the analytical solution
@@ -67,13 +68,13 @@ for name in names:
   # Read in the time and the minimum xx and yy components of the viscoelastic stress,
   # which are stored on the fields ve_stress_xx and ve_stress_yy.
   # The correct columns are selected with usecols.
-  time,stress_xx_min = np.genfromtxt(path, comments='#', usecols=(1,13), unpack=True)
+  time,stress_xx_min = np.genfromtxt(path, comments='#', usecols=(1,12), unpack=True)
 
   # Plot the stress elements in MPa against time in ky in
   # categorical batlow colors.
-  ax[0].plot(time/1e3,stress_xx_min/1e6,label=labels[counter],color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=20)
+  ax[0].plot(time/1e3,stress_xx_min/1e6,label=labels[counter],color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark, fillstyle='none')
 #  axins.plot(time/1e3,stress_xx_min/1e6,label=None,color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=20)
-  ax[1].plot(time/1e3,(stress_xx_min-(20e6*np.exp(-1e10*time*yr_in_secs/1e22)))/(20e6*np.exp(-1e10*time*yr_in_secs/1e22))*100.,label=labels[counter],color=colors[counter],linestyle=linestyles[counter],marker=markers[counter])
+  ax[1].plot(time/1e3,(stress_xx_min-(20e6*np.exp(-1e10*time*yr_in_secs/1e22)))/(20e6*np.exp(-1e10*time*yr_in_secs/1e22))*100.,label=labels[counter],color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark, fillstyle='none')
   
   counter += 1
 
@@ -84,7 +85,7 @@ ax[0].plot(time/1e3,20*np.exp(-1e10*time*yr_in_secs/1e22),label='analytical',col
 
 # Labelling of plot
 ax[1].set_xlabel("Time [ky]")
-ax[0].set_ylabel(r"Viscoelastic stress $\tau_{xx}$ [MPa]")
+ax[0].set_ylabel(r"Stress $\tau_{xx}$ [MPa]")
 ax[1].set_ylabel(r"Error [%]")
 # Manually place legend in lower right corner. 
 ax[0].legend(loc='upper right',ncol=1,handlelength=4)
@@ -99,7 +100,7 @@ ax[1].set_yticks([0,2,4,6,8,10])
 
 # Ranges of the axes
 ax[0].set_xlim(0,250) # kyr
-ax[0].set_ylim(0,21) # MPa
+ax[0].set_ylim(-1,21) # MPa
 ax[1].set_xlim(0,250) # kyr
 ax[1].set_ylim(0,10.) # %
 
