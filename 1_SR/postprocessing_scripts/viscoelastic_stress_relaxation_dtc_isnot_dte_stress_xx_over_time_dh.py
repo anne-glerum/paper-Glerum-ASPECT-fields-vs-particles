@@ -15,19 +15,19 @@ base = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/HLRN/HLRN/fix_stresses_el
 
 # Change file name modifiers as needed depending on your file structure
 names = [
-         "ve_relaxation_bgvel_dtc250_dte250_GR1_g0",
-         "ve_relaxation_bgvel_dtc250_dte250_GR2_g0",
-         "ve_relaxation_bgvel_dtc250_dte250_GR3_g0",
-         "ve_relaxation_bgvel_dtc250_dte250_GR4_g0",
+         "ve_relaxation_main_dtc250_dte250_GR1_1",
+         "ve_relaxation_main_dtc250_dte250_GR2_1",
+         "ve_relaxation_main_dtc250_dte250_GR3_1",
+         "ve_relaxation_main_dtc250_dte250_GR4_1",
         ]
 tail = r"/statistics"
 
 # The labels the graphs will get in the plot
 labels = [
-          'dtc = dte = 250 yr, dh = 50 km',
-          'dtc = dte = 250 yr, dh = 25 km',
-          'dtc = dte = 250 yr, dh = 12.5 km',
-          'dtc = dte = 250 yr, dh = 6.25 km',
+          'dt = 250 yr, dh = 50 km',
+          'dt = 250 yr, dh = 25 km',
+          'dt = 250 yr, dh = 12.5 km',
+          'dt = 250 yr, dh = 6.25 km',
          ]
 # Set the colors available for plotting
 color1=[0.0051932, 0.098238, 0.34984]
@@ -39,7 +39,7 @@ color6=[0.98447, 0.78462, 0.93553]
 colors = [color2, color3, color4, color5, color6, color4, color5, color3, color4, color5]
 # Set the line styles
 linestyles = ['solid', 'solid', 'solid', 'solid', 'solid', 'dashdot', 'dashdot', 'dotted',  'dotted','dotted'] 
-# Set the marker styles (no markers in this case)
+# Set the marker styles
 markers = ['|', 'x', 'o', '', '', '', '', '', '', '', '', '', '', ''] 
 dmark = 100
 
@@ -68,9 +68,6 @@ for name in names:
   # Read in the time and the minimum xx and yy components of the viscoelastic stress,
   # which are stored on the fields ve_stress_xx and ve_stress_yy.
   # The correct columns are selected with usecols.
-#  if counter == 0:
-#    time,stress_xx_min = np.genfromtxt(path, comments='#', usecols=(1,15), unpack=True)
-#  else:
   time,stress_xx_min = np.genfromtxt(path, comments='#', usecols=(1,18), unpack=True)
 
   # Plot the stress elements in MPa against time in ky in
@@ -88,7 +85,7 @@ ax[0].plot(time/1e3,20*np.exp(-1e10*time*yr_in_secs/1e22),label='analytical',col
 
 # Labelling of plot
 ax[1].set_xlabel("Time [ky]")
-ax[0].set_ylabel(r"Viscoelastic stress $\tau_{xx}$ [MPa]")
+ax[0].set_ylabel(r"Stress $\tau_{xx}$ [MPa]")
 ax[1].set_ylabel(r"Error [%]")
 # Manually place legend in lower right corner. 
 ax[0].legend(loc='upper right',ncol=1,handlelength=4)
