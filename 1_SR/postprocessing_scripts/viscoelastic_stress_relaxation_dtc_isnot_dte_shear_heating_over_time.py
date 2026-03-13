@@ -127,7 +127,7 @@ ax[0].set_xlim(0,250) # kyr
 #ax[1].set_ylim(0,10) # %
 
 # Add labels a) and b)
-ax[0].text(-15,4.2e-8,"d)")
+ax[0].text(-15,4.2e-8,"c)")
 #ax[1].text(-15,10,"b)")
 
 # Save as png
