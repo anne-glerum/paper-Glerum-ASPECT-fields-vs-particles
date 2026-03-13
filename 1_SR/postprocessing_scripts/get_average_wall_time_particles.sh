@@ -15,6 +15,9 @@ do
     # The nr of degrees of freedom
     echo 'Nr. of DOFs:' $(grep free $name'_'$i'/log.txt' | awk '{print $6}')
 
+    # The nr of particles
+    echo 'Nr. of particles:' $(grep -m 1 'Number of advected particles' $name'_'$i'/log.txt' | awk '{print $5}')
+
     # Get the last occurrence of the wall time statistics
     tail -26 $name'_'$i'/log.txt' > tmp.txt
 
