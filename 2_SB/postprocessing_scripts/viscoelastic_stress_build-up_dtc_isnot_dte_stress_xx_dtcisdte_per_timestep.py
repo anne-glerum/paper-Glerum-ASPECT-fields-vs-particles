@@ -8,7 +8,7 @@ from matplotlib import rc
 from mpl_toolkits.axes_grid1.inset_locator import zoomed_inset_axes 
 from mpl_toolkits.axes_grid1.inset_locator import mark_inset
 rc("pdf", fonttype=42)
-rc("lines", linewidth=3, markersize=8)
+rc("lines", linewidth=3, markersize=10)
 
 # Change path as needed
 base = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/HLRN/HLRN/fix_stresses_elasticity/paper_14072023/BM2/"
@@ -16,12 +16,11 @@ base = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/HLRN/HLRN/fix_stresses_el
 # Change file name modifiers as needed depending on your file structure
 # Always start with largest dte, largest dtc
 names = [
-         "ve_build-up_dtc500_dte500_GR2_1",
-         "ve_build-up_dtc250_dte250_GR2_1",
-         "ve_build-up_dtc125_dte125_GR2",
-         "ve_build-up_dtc62.5_dte62.5_GR2",
-         "ve_build-up_dtc31.25_dte31.25_GR2",
-         "ve_build-up_dtc15.625_dte15.625_GR2",
+         "ve_build-up_main_dtc500_dte500_GR2_1",
+         "ve_build-up_main_dtc250_dte250_GR2_1",
+         "ve_build-up_main_dtc125_dte125_GR2_1",
+         "ve_build-up_main_dtc62.5_dte62.5_GR2_1",
+         "ve_build-up_main_dtc31.25_dte31.25_GR2_1",
         ]
 tail = r"/statistics"
 
@@ -30,9 +29,9 @@ labels = [
           't = 10 ky',
           't = 50 ky',
           't = 100 ky',
-          't = 10 ky, dte = 250 yr',
-          't = 50 ky, dte = 250 yr',
-          't = 150 ky, dte = 250 yr',
+          't = 10 ky, dt = 250 yr',
+          't = 50 ky, dt = 250 yr',
+          't = 150 ky, dt = 250 yr',
          ]
 
 # Set the colors available for plotting
@@ -45,12 +44,11 @@ color6=[0.98447, 0.78462, 0.93553]
 colors = [color2, color4, color5, color6, color6, color6, color5, color3, color4, color5]
 # Set the line styles
 linestyles = ['solid', 'solid', 'solid', 'solid', 'solid', 'solid', 'dashdot', 'dotted',  'dotted','dotted'] 
-# Set the marker styles (no markers in this case)
+# Set the marker styles
 markers = ['o', 'v', 's', 'o', 'v', 's', '', '', '', '', '', '', '', ''] 
 
-# Set up a row of two plots, one with absolute stress values
-# and one with the percentage difference to the analytical solution
-fig = plt.figure(figsize=(10, 6))
+# Set up a row of one plot
+fig = plt.figure(figsize=(10, 3.9))
 ax = [fig.add_subplot(1, 1, i) for i in range(1, 2)]
 
 yr_in_secs = 3600. * 24. * 365.2425
@@ -131,12 +129,12 @@ for i in np.arange(n_dte500,n_dte500+n_dte250):
   dte250_error100000.append(errors_100000[i])
   dte250_error200000.append(errors_200000[i])
    
-x = np.array([500,250,125,62.5,31.25,15.625])
+x = np.array([500,250,125,62.5,31.25])
 def y(a,b):
   return a+b*x
 
 # Labelling of plot
-ax[0].set_xlabel("Computational = elastic timestep size [yr]")
+ax[0].set_xlabel("Time step size [yr]")
 ax[0].set_ylabel(r"Error E [%]")
 #ax[0].set_title(r"BM2: Error per computational timestep size for different elastic timestep sizes and at different timesteps")
 # Place legend
@@ -145,11 +143,11 @@ ax[0].legend(loc='upper right',ncol=1,handlelength=4)
 ax[0].grid(axis='x',color='0.95')
 ax[0].grid(axis='y',color='0.95')
 #ax[0].set_xticks([500,400,300,250,200,125,100,62.5,0])
-ax[0].set_yticks([0,0.5,1])
+##ax[0].set_yticks([0,0.5,1])
 
 # Ranges of the axes
-ax[0].set_xlim(550,0) # yr
-ax[0].set_ylim(-0.1,0.8) # %
+##ax[0].set_xlim(550,0) # yr
+##ax[0].set_ylim(-0.1,0.8) # %
 
 # Add labels
 #ax[0].text(-15,21,"a)")
@@ -162,9 +160,9 @@ ax[0].plot(x,errors_100000,label=labels[1],color=colors[1],linestyle=linestyles[
 ax[0].plot(x,errors_200000,label=labels[2],color=colors[2],linestyle=linestyles[2],marker=markers[2])
 
 # Place legend
-ax[0].legend(loc='upper right',ncol=1,handlelength=4)
+##ax[0].legend(loc='upper right',ncol=1,handlelength=4)
 # Save as png
-plt.savefig('2_viscoelastic_build-up_dte_isnot_dtc_fields_dtcisdte_error_per_timestep.png')    
+##plt.savefig('2_viscoelastic_build-up_dte_isnot_dtc_fields_dtcisdte_error_per_timestep.png', dpi=300)
 
 # Plot on loglog scale
 # B = order
@@ -182,9 +180,10 @@ plt.semilogy()
 ax[0].set_yticks([1e-3,1e-2,1e-1,1e0,1e1])
 ax[0].legend(loc='upper right',ncol=1,handlelength=4)
 # Ranges of the axes
-ax[0].set_xlim(1e3,1e1) # yr
-ax[0].set_ylim(8e-4,2e0) # %
+ax[0].set_xlim(2e3,9e0) # yr
+ax[0].set_ylim(9e-4,2e0) # %
 # Add labels
-ax[0].text(1350,2,"a)")
+ax[0].text(2950,2,"c)")
+
 # Save as png
 plt.savefig('2_viscoelastic_build-up_dte_isnot_dtc_fields_dtcisdte_error_per_timestep_loglog.png', dpi=300)
