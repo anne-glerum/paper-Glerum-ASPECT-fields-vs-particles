@@ -101,9 +101,9 @@ ax1.hlines(2812.5,-50000,50000,color='black',linestyle='dotted',label=None,linew
 # Labelling of plot
 ax2.set_xlabel("Simulation [-]")
 ax1.set_ylabel(r"Max. beam depth [m]")
-ax1.annotate("t = 50 ky", xytext=(4.35,2850), xy=(1.5, 2815),ha='right',va='center')
+ax1.annotate("t = 350 ky", xytext=(4.35,2850), xy=(1.5, 2815),ha='right',va='center')
 ax1.text(-0.1,2800,r"$\mathrm{z_{max}(t_{0})}$",va='center',ha='left',bbox=dict(boxstyle='square,pad=0',facecolor='white', edgecolor='none'))
-ax2.annotate("t = 350 ky", xytext=(4.35,3090), xy=(1, 3055),ha='right',va='center')
+ax2.annotate("t = 50 ky", xytext=(4.35,3090), xy=(1, 3055),ha='right',va='center')
 ax1.annotate(r"", xytext=(-0.4,2812.5), xy=(-0.4, 2800),
             arrowprops=dict(arrowstyle="<->",relpos=(0,1)))
 ax1.text(-0.35,2806.25,r"dh",va='center',ha='left',bbox=dict(facecolor='white', edgecolor='none',boxstyle='square,pad=0.'))

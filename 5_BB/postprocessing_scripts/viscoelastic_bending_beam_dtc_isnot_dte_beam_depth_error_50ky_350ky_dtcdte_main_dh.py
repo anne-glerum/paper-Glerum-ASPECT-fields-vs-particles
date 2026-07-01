@@ -18,6 +18,7 @@ names = [
           'RL9_viscoelastic_bending_beam_htansmooth10m_Newton_AMG_main_dtc500_dte500_averaginggeometric_IGR2_IAR0',
           'RL9_viscoelastic_bending_beam_htansmooth10m_Newton_AMG_main_dtc500_dte500_averaginggeometric_IGR2_IAR1',
 #          'RL9_viscoelastic_bending_beam_htansmooth10m_Newton_AMG_main_dtc500_dte500_averaginggeometric_IGR2_IAR2',
+#          'RL9_viscoelastic_bending_beam_htansmooth10m_Newton_AMG_main_dtc250_dte250_averaginggeometric_IGR2_IAR2',
         ]
 tail = r"/statistics"
 
@@ -25,7 +26,8 @@ tail = r"/statistics"
 labels = [
           'dh = 25 m',
           'dh = 12.5 m',
-          'dh = 6.25 m',
+#          'dh = 6.25 m',
+          'dh = 6.25 m, dt = 25',
          ]
 # Set the colors available for plotting
 color1=[0.0051932, 0.098238, 0.34984]
@@ -96,9 +98,9 @@ ax1.hlines(2806.25,-50000,50000,color='black',linestyle='dotted',label=None,line
 # Labelling of plot
 ax2.set_xlabel("Simulation [-]")
 ax1.set_ylabel(r"Max. beam depth [m]")
-ax1.annotate("t = 50 ky", xytext=(-0.35,2827.5), xy=(1.5, 2815),ha='left',va='center')
+ax1.annotate("t = 350 ky", xytext=(-0.35,2827.5), xy=(1.5, 2815),ha='left',va='center')
 ax1.text(-0.1,2800,r"$\mathrm{z_{max}(t_{0})}$",va='center',ha='left',bbox=dict(facecolor='white', edgecolor='none'))
-ax2.annotate("t = 350 ky", xytext=(2.35,3052), xy=(1, 3055),ha='right')
+ax2.annotate("t = 50 ky", xytext=(2.35,3052.5), xy=(1, 3055),ha='right',va='center')
 ax1.annotate(r"", xytext=(-0.4,2812.5), xy=(-0.4, 2800),
             arrowprops=dict(arrowstyle="<->",relpos=(0,1)))
 ax1.text(-0.35,2806.25,r"dh",va='center',ha='left',bbox=dict(facecolor='white', edgecolor='none',boxstyle='square,pad=0.'))
