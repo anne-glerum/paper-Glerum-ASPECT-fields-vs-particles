@@ -42,8 +42,8 @@ fig, (ax) = plt.subplots(1,1,figsize=(6,4),sharex=False, squeeze=True)
 cmap = colors.ListedColormap(['lightsteelblue', 'darkblue','pink']) # Create customized discrete colormap
 im=ax.imshow(M,extent=[x_left, x_right, z_surface, z_bottom], cmap=cmap)
 #ax.spines['top'].set_visible(False)
-ax.set_yticks([z_bottom,z_bottom/2, z_surface])
-ax.set_xticks([x_left,x_right/2, x_right])
+ax.set_yticks([z_bottom,z_bottom/2, z_surface, 2200, 2800])
+ax.set_xticks([x_left,x_right/2, x_right,4800])
 ax.set_xlabel('X [m]',fontsize=13)
 ax.set_ylabel('Y [m]',fontsize=13)
 ax.set_xlim(x_left,x_right)
@@ -76,6 +76,8 @@ ax.arrow(670,1900,100,500,width=5,head_width=0, clip_on=False, fill=True, faceco
 # Add Connection Patch
 #ax.add_patch(ConnectionPatch(xyA=(x_right,z_surface),coordsA='data',xyB=(2850,z_surface),coordsB='data',axesA=ax,axesB=ax1,clip_on=False))
 #ax.add_patch(ConnectionPatch(xyA=(x_right,z_bottom),coordsA='data',xyB=(2850,z_bottom),coordsB='data',axesA=ax,axesB=ax1,clip_on=False))
+
+#ax.text(-1000,5000,"a)")
 
 # Save Figure
 plt.savefig('5_viscoelastic_bending_beam_setup.png',bbox_inches="tight",dpi=300)
