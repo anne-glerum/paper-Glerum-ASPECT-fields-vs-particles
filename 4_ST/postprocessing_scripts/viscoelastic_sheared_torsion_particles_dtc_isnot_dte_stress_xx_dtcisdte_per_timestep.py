@@ -168,7 +168,7 @@ ax[0].legend(loc='lower right',ncol=1,handlelength=4)
 ax[0].set_xlim(9e-4,4e-2) # yr
 ax[0].set_ylim(1e-2,3) # %
 # Add labels
-ax[0].text(2950,2,"c)")
+ax[0].text(7e-4,3,"b)")
 
 # Save as png
 plt.savefig('4_viscoelastic_sheared_torsion_particles_dtc_isnot_dte_error_per_timestep_loglog.png', dpi=300)
