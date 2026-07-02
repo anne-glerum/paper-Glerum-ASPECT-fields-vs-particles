@@ -8,7 +8,7 @@ from matplotlib import rc
 from mpl_toolkits.axes_grid1.inset_locator import zoomed_inset_axes 
 from mpl_toolkits.axes_grid1.inset_locator import mark_inset
 rc("pdf", fonttype=42)
-rc("lines", linewidth=3, markersize=8)
+rc("lines", linewidth=2, markersize=8)
 
 # Change path as needed
 base = r"/Users/acglerum/Documents/Postdoc/SB_CRYSTALS/HLRN/HLRN/fix_stresses_elasticity/paper_14072023/BM5/"
@@ -49,8 +49,9 @@ dmark = 100
 
 # Set up a row of two plots, one with the maximum beam depth
 # and one with the min and max ve_stress_xx
-fig = plt.figure(figsize=(10, 6))
-ax = [fig.add_subplot(2, 1, i) for i in range(1, 3)]
+#fig = plt.figure(figsize=(10, 6))
+fig = plt.figure(figsize=(4, 4))
+ax = [fig.add_subplot(2, 1, i) for i in range(1, 2)]
 
 yr_in_secs = 3600. * 24. * 365.2425
 counter = 0 
@@ -66,15 +67,14 @@ for name in names:
   # Plot the beam depth in m against time in ky in
   # categorical batlow colors.
   ax[0].plot(time/1e3,beam_depth,label=labels[counter],color=colors[counter],linestyle=linestyles[counter],marker=markers[counter],markevery=dmark+counter)
-  # Plot min and max stress (Pa) against time (ky).
-  ax[1].plot(time/1e3,ve_xx_min,label=labels[counter],color=colors[counter],linestyle=linestyles[counter],marker=None)
-  ax[1].plot(time/1e3,ve_xx_max,label=None,color=colors[counter],linestyle=linestyles[counter],marker=None)
   
   counter += 1
 
 # Plot horizontal line at initial depth
 ax[0].hlines(2800,0,50000,color='black',linestyle='dashed',label=None,linewidth=1)
-ax[0].text(25,2800,r"$\mathrm{z_{max}(t_{0})}$",va='center',ha='center',bbox=dict(facecolor='white', edgecolor='none'))
+ax[0].text(100,2805,r"$\mathrm{z_{max}(t_{0})}$",va='bottom',ha='center',bbox=dict(facecolor='white', edgecolor='none',boxstyle='square,pad=0.'),fontsize=8)
+ax[0].hlines(2812.5,0,50000,color='black',linestyle='dotted',label=None,linewidth=1)
+#ax[0].text(100,2817.5,r"$\mathrm{z_{max}(t_{0})}+12.5$",va='top',ha='center',bbox=dict(facecolor='white', edgecolor='none',boxstyle='square,pad=0.'),fontsize=8)
 
 # Plot horizontal line at maximum analytical depth
 # Equation 3.85 of Turcotte and Schubert 2002
@@ -88,37 +88,29 @@ ax[0].text(25,2800,r"$\mathrm{z_{max}(t_{0})}$",va='center',ha='center',bbox=dic
 #ax[0].hlines(3076.48,0,500000,color='black',linestyle='dashdot',label='analytical max depth',linewidth=1)
 
 # Plot vertical line at t=50 ky, when gravity is switched off.
-ax[0].vlines(50,4000,2000,color='black',linestyle='dotted',label=None,linewidth=1)
-ax[0].text(50,2925,r"gravity off",va='center',ha='center',bbox=dict(facecolor='white', edgecolor='none'), rotation='vertical')
+ax[0].vlines(50,4000,2000,color='black',linestyle='solid',label=None,linewidth=1)
+ax[0].text(50,2925,r"gravity off",va='center',ha='center',bbox=dict(facecolor='white', edgecolor='none',boxstyle='square,pad=0.1'), rotation='vertical',fontsize=8)
 
 # Labelling of plot
 ax[0].set_xlabel("Time [ky]")
-ax[1].set_xlabel("Time [ky]")
-ax[0].set_ylabel(r"Maximum beam depth [m]")
-ax[1].set_ylabel(r"$\tau^0_{cxx}$ min/max [Pa s]")
+ax[0].set_ylabel(r"Max. beam depth [m]")
 # Place legend
-ax[0].legend(loc='lower right',ncol=3,handlelength=4)
+ax[0].legend(loc='lower right',ncol=1,handlelength=2,fontsize=8)
 # Grid and tickes
 ax[0].grid(axis='x',color='0.95')
 #ax[0].set_yticks([0,1000,2000,3000,4000])
 ax[0].grid(axis='y',color='0.95')
-ax[1].grid(axis='x',color='0.95')
-ax[1].grid(axis='y',color='0.95')
-#ax[1].set_yticks([0,2,4,6,8,10])
 
 # Ranges of the axes
 ax[0].set_xlim(0,350) # kyr
 ax[0].set_ylim(3100,2750) # m
-ax[1].set_xlim(0,350) # kyr
-ax[1].set_ylim(-0.75e9,0.75e9) # %
 
 # Add labels a) and b)
-ax[0].text(-25,2750,"a)")
-ax[1].text(-25,0.75e9,"b)")
+#ax[0].text(-25,2750,"a)")
 
 plt.tight_layout()
 
 # Save as pdf
-filename = '5_viscoelastic_bending_beam_htansmooth10_dte_isnot_dtc_depth_dh.png'
+filename = '5_viscoelastic_bending_beam_htansmooth10_dte_isnot_dtc_depth_dh_depthonly.png'
 plt.savefig(filename, dpi=300)
 print ('Plot in: ' + filename)
