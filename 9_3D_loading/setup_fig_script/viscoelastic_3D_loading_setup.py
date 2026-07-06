@@ -11,6 +11,12 @@ from matplotlib.patches import Rectangle
 import matplotlib as mpl
 mpl.rcParams['text.latex.preamble'] = r'\usepackage{{amsmath}}'
 
+#----------------------------Output formatting------------------------------
+# Function to output scientific notation nicely
+def to_scientific_notation(number):
+    a, b = '{:.0E}'.format(number).split('E+')
+    return str(a) + rf'$\cdot 10^{{{b:}}}$'
+
 #----------------------------General plotting parameters------------------------------
 
 z_surface=0 		# Depth of the surface [km]
@@ -72,7 +78,7 @@ gravity[3]=10.024
 #-----------------------------------------Plotting--------------------------------------------
 
 # Create subplots
-fig, (ax) = plt.subplots(1,2,figsize=(8,4),sharex=False, squeeze=True)
+fig, (ax) = plt.subplots(1,2,figsize=(7,4),sharex=False, squeeze=True)
 
 cmap = colors.ListedColormap(['darkblue', 'pink', 'palevioletred', 'lightsteelblue']) # Create customized discrete colormap
 cmaptop = colors.ListedColormap(['white','darkblue']) # Create customized discrete colormap
@@ -81,11 +87,11 @@ im2=ax[1].imshow(Mtop,extent=[x_left, x_right, y_front, y_back], cmap=cmaptop)
 # a)
 ax[0].set_yticks([z_bottom,670,420,z_surface])
 ax[0].set_xticks([x_left,x_right/2, x_right])
-ax[0].set_xlabel('X km]',fontsize=13)
-ax[0].set_ylabel('Depth km]',fontsize=13)
+ax[0].set_xlabel('X [km]',fontsize=13)
+ax[0].set_ylabel('Depth [km]',fontsize=13)
 ax[0].set_xlim(x_left,x_right)
 ax[0].set_ylim(z_bottom,z_surface)
-ax[0].text(0,-105,'(a) front view',fontsize=15)
+ax[0].text(750,-105,'front view',fontsize=13,ha='center')
 plt.setp(ax[0].get_xticklabels(),fontsize=12, visible=True)
 plt.setp(ax[0].get_yticklabels(),fontsize=12, visible=True)
 secy = ax[0].secondary_yaxis('right')
@@ -94,11 +100,13 @@ secy.set_yticklabels(["70"])
 # b)
 ax[1].set_yticks([y_front, y_back/2, y_back])
 ax[1].set_xticks([x_left,x_right/2, x_right])
-ax[1].set_xlabel('X km]',fontsize=13)
-ax[1].set_ylabel('Y km]',fontsize=13)
+ax[1].yaxis.tick_right()
+ax[1].yaxis.set_label_position("right")
+ax[1].set_xlabel('X [km]',fontsize=13)
+ax[1].set_ylabel('Y [km]',fontsize=13)
 ax[1].set_xlim(x_left,x_right)
 ax[1].set_ylim(y_front,y_back)
-ax[1].text(0,1555,'(b) top view',fontsize=15)
+ax[1].text(750,1555,'top view',fontsize=13,ha='center')
 plt.setp(ax[1].get_xticklabels(),fontsize=12, visible=True)
 plt.setp(ax[1].get_yticklabels(),fontsize=12, visible=True)
 
@@ -112,13 +120,13 @@ ax[1].text(60,750,'Free slip',fontsize=9, rotation = 90, va = 'center', ha = 'ce
 ax[1].text(1440,750,'Free slip',fontsize=9, rotation = -90, va = 'center', ha = 'center', color='white')
 ax[1].text(750,1440,'Free slip',fontsize=9, rotation = 0, va = 'center', ha = 'center', color='white')
 ax[1].text(750,60,'Free slip',fontsize=9, rotation = 0, va = 'center', ha = 'center', color='white')
-ax[1].text(200,100,'Ice load',fontsize=9, rotation = 0, va = 'center', ha = 'center', color='white')
+ax[1].text(210,110,'Ice load',fontsize=9, rotation = 0, va = 'center', ha = 'center', color='white')
 
 # Annotations material properties
-ax[1].text(750,1200,r'$\rho=$'+str(density[0])+' $\mathrm{kg/m^3}$', fontsize=8, ha='center', va='center', color='white')
-ax[1].text(750,1140,'$\eta_{\mathrm{v}}=$'+str(viscosity[0])+ '$\,\mathrm{Pa} \cdot \mathrm{s}$', fontsize=8, ha='center', va='center', color='white')
+ax[1].text(750,1220,r'$\rho=$'+str(density[0])+' $\mathrm{kg/m^3}$', fontsize=8, ha='center', va='center', color='white')
+ax[1].text(750,1140,'$\eta_{\mathrm{v}}=$'+to_scientific_notation(viscosity[0])+ '$\,\mathrm{Pa} \cdot \mathrm{s}$', fontsize=8, ha='center', va='center', color='white')
 ax[1].text(750,1060,'$G=$'+str(shear_modulus[0]/1e9)+'$\, \mathrm{GPa}$', fontsize=8, ha='center', va='center', color='white')
-ax[1].text(750,1000,'$g=$'+str(gravity[0])+'$\, \mathrm{m/s^2}$', fontsize=8, ha='center', va='center', color='white')
+ax[1].text(750,980,'$g=$'+str(gravity[0])+'$\, \mathrm{m/s^2}$', fontsize=8, ha='center', va='center', color='white')
 #ax[0].add_patch(Rectangle((530, 1220), 950, 490,fill=False,lw=1,edgecolor='darkblue'))
 #ax[0].arrow(1400,1220,-100,-1180,width=1,head_width=0, clip_on=False, fill=True, color='darkblue')
 #ax[0].text(550,670+640,r'$\rho=$'+str(density[0])+' $\mathrm{kg/m^3}$', fontsize=8, ha='left', va='center')
@@ -127,22 +135,22 @@ ax[1].text(750,1000,'$g=$'+str(gravity[0])+'$\, \mathrm{m/s^2}$', fontsize=8, ha
 #ax[0].text(550,670+970,'$g=$'+str(gravity[0])+'$\, \mathrm{m/s^2}$', fontsize=8, ha='left', va='center')
 
 ax[0].text(35,70+70,r'$\rho=$'+str(density[1])+' $\mathrm{kg/m^3}$', fontsize=7, ha='left', va='center')
-ax[0].text(35,70+180,'$\eta_{\mathrm{v}}=$'+str(viscosity[1])+ '$\,\mathrm{Pa} \cdot \mathrm{s}$', fontsize=7, ha='left', va='center')
+ax[0].text(35,70+180,'$\eta_{\mathrm{v}}=$'+to_scientific_notation(viscosity[1])+ '$\,\mathrm{Pa} \cdot \mathrm{s}$', fontsize=7, ha='left', va='center')
 ax[0].text(35,70+290,'$G=$'+str(shear_modulus[1]/1e9)+'$\, \mathrm{GPa}$', fontsize=7, ha='left', va='center')
 ax[0].text(830,70+290,'$g=$'+str(gravity[1])+'$\, \mathrm{m/s^2}$', fontsize=7, ha='left', va='center')
 
 ax[0].add_patch(Rectangle((35, 680), 950, 490,fill=False,lw=1,edgecolor='palevioletred'))
 ax[0].arrow(70,680,100,-100,width=1,head_width=0, clip_on=False, fill=True, color='palevioletred')
 ax[0].text(55,670+100,r'$\rho=$'+str(density[2])+' $\mathrm{kg/m^3}$', fontsize=8, ha='left', va='center')
-ax[0].text(55,670+210,'$\eta_{\mathrm{v}}=$'+str(viscosity[2])+ '$\,\mathrm{Pa} \cdot \mathrm{s}$', fontsize=8, ha='left', va='center')
+ax[0].text(55,670+210,'$\eta_{\mathrm{v}}=$'+to_scientific_notation(viscosity[2])+ '$\,\mathrm{Pa} \cdot \mathrm{s}$', fontsize=8, ha='left', va='center')
 ax[0].text(55,670+320,'$G=$'+str(shear_modulus[2]/1e9)+'$\, \mathrm{GPa}$', fontsize=8, ha='left', va='center')
 ax[0].text(55,670+430,'$g=$'+str(gravity[2])+'$\, \mathrm{m/s^2}$', fontsize=8, ha='left', va='center')
 
 ax[0].text(750,2891-640,r'$\rho=$'+str(density[3])+' $\mathrm{kg/m^3}$', fontsize=8, ha='center', va='center')
-ax[0].text(750,2891-530,'$\eta_{\mathrm{v}}=$'+str(viscosity[3])+ '$\,\mathrm{Pa} \cdot \mathrm{s}$', fontsize=8, ha='center', va='center')
+ax[0].text(750,2891-530,'$\eta_{\mathrm{v}}=$'+to_scientific_notation(viscosity[3])+ '$\,\mathrm{Pa} \cdot \mathrm{s}$', fontsize=8, ha='center', va='center')
 ax[0].text(750,2891-420,'$G=$'+str(shear_modulus[3]/1e9)+'$\, \mathrm{GPa}$', fontsize=8, ha='center', va='center')
 ax[0].text(750,2891-310,'$g=$'+str(gravity[3])+'$\, \mathrm{m/s^2}$', fontsize=8, ha='center', va='center')
 
 # Save Figure
-plt.savefig('9_viscoelastic_3D_loading_setup.png',bbox_inches="tight")
+plt.savefig('9_viscoelastic_3D_loading_setup.png',bbox_inches="tight",dpi=300)
 plt.close()
