@@ -155,7 +155,7 @@ ax[0].plot(x,errors_08,label=labels[2],color=colors[2],linestyle=linestyles[2],m
 def f(x, A, B):
     return A*x**B
 x2 = np.array([0.05,0.01,0.005,0.001,0.0001])
-ax[0].plot(x2,f(x2,4,0.5),label="0.5 order",color="black",linestyle="dotted",linewidth=1)
+ax[0].plot(x2,f(x2,4,0.5),label="0.5th order",color="black",linestyle="dotted",linewidth=1)
 ax[0].plot(x2,f(x2,40,1),label="1st order",color="black",linestyle="dashed",linewidth=1)
 #ax[0].plot(x2,f(x2,2200,2),label="2nd order",color="black",linestyle="dashdot",linewidth=1)
 plt.semilogx()
