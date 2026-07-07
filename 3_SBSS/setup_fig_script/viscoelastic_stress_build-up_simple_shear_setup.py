@@ -37,7 +37,7 @@ for i in range(len(M[:,0])):
 fig, (ax) = plt.subplots(1,1,figsize=(4,4),sharex=False, squeeze=True)
 
 cmap = colors.ListedColormap(['lightsteelblue', 'pink','darkblue']) # Create customized discrete colormap
-im=ax.imshow(M,extent=[x_left, x_right, z_surface, z_bottom], cmap=cmap)
+im=ax.imshow(M,extent=[x_left, x_right, z_surface, z_bottom], cmap=cmap, aspect='equal')
 #ax.spines['top'].set_visible(False)
 ax.set_yticks([z_bottom/2, z_surface])
 ax.set_xticks([x_left,x_right/2, x_right])
