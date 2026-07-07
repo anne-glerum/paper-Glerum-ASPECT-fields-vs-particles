@@ -24,10 +24,10 @@ tail = r"/statistics"
 
 # The labels the graphs will get in the plot
 labels = [
-          'dtc = dte = 0.02 s',
-          'dtc = dte = 0.01 s',
-          'dtc = dte = 0.005 s',
-          'dtc = dte = 0.0025 s',
+          'dt = 0.02 s',
+          'dt = 0.01 s',
+          'dt = 0.005 s',
+          'dt = 0.0025 s',
          ]
 # Set the colors available for plotting
 color1=[0.0051932, 0.098238, 0.34984]

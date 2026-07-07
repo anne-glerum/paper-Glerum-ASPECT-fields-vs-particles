@@ -3,10 +3,10 @@ from os.path import exists
 
 # Generate a new prm file and jobscript for each refinement level and timestep.
 def generate_and_run( refine, timestep, elastic_timestep, reps):
-  prmfile = open("viscoelastic_stress_build-up_dtc_isnot_dte.prm", "r")
-  base_label = "ve_build-up_"
+  prmfile = open("viscoelastic_stress_build-up_pure_shear.prm", "r")
+  base_label = "ve_build-up_main_"
   label = "dtc" + str(timestep) + "_dte" + str(elastic_timestep) + "_GR" + str(refine) + "_" + str(reps)
-  new_prmfile = "viscoelastic_stress_build-up_" + label + ".prm"
+  new_prmfile = "viscoelastic_stress_build-up_pure_shear_" + label + ".prm"
   outfile = open(new_prmfile, "w")
   for l in prmfile.readlines():
     if 'Output directory' in l:
@@ -31,11 +31,8 @@ def generate_and_run( refine, timestep, elastic_timestep, reps):
   for l in jobscript.readlines():
     if '#SBATCH -J' in l:
       outjobscript.write('#SBATCH -J ' + base_label + label + '\n')
-#    elif '#SBATCH --tasks' in l and refine == 8:
-#      outjobscript.write('#SBATCH --tasks-per-node 96\n')
     elif 'mpirun' in l:
-      outjobscript.write('mpirun --map-by socket:pe=$OMP_NUM_THREADS /home/bbpanneg/software/aspect/build_release__fix_stresses_elasticity_dealii_9.4.0_on_main_14072023/aspect ' + new_prmfile + ' > /scratch/usr/bbpanneg/runs/fix_stresses_elasticity/paper_14072023/BM2/' + base_label + label + '/opla' )
-      #outjobscript.write('mpirun --map-by socket:pe=$OMP_NUM_THREADS /home/bbpanneg/software/aspect/build_debug__hack_2023/aspect ' + new_prmfile + ' > /scratch/usr/bbpanneg/runs/fix_stresses_elasticity/paper_14072023/BM2/' + base_label + label + '/opla' )
+      outjobscript.write('mpirun --map-by socket:pe=$OMP_NUM_THREADS ~/../projects/bbp00039/aspect_subtopic/aspect_rift/aspect_initial_conditions_rift_dealii_v9.6.0/build_01072025/aspect-release ' + new_prmfile + ' > /scratch/usr/bbpanneg/runs/fix_stresses_elasticity/paper_14072023/BM2/' + base_label + label + '/opla' )
     else:
       outjobscript.write(l)
   jobscript.close()
@@ -53,8 +50,8 @@ def generate_and_run( refine, timestep, elastic_timestep, reps):
 
 # Run the model at different refinement levels and timesteps
 refinements = [2]
-elastic_timesteps = [500]
-timesteps = [500]
+elastic_timesteps = [31.25]
+timesteps = [31.25]
 repeats = [1,2,3] 
 for r in refinements:
   for et in elastic_timesteps:
