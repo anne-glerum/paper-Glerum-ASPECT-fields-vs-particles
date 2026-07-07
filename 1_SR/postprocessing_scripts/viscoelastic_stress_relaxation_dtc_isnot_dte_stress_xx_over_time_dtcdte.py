@@ -21,10 +21,10 @@ tail = r"/statistics"
 
 # The labels the graphs will get in the plot
 labels = [
-          'dt = 500 yr, dh = 25km',
-          'dt = 250 yr, dh = 25km',
-          'dt = 125 yr, dh = 25km',
-          'dt = 62.5 yr, dh = 25km',
+          'dt = 500 yr',
+          'dt = 250 yr',
+          'dt = 125 yr',
+          'dt = 62.5 yr',
          ]
 # Set the colors available for plotting
 color1=[0.0051932, 0.098238, 0.34984]
