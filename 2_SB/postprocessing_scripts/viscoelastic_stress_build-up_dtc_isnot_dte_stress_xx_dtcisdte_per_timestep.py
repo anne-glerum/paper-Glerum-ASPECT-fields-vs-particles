@@ -170,7 +170,7 @@ ax[0].plot(x,errors_200000,label=labels[2],color=colors[2],linestyle=linestyles[
 def f(x, A, B):
     return A*x**B
 x2 = np.array([5000,2500,500,250,125,62.5,1])
-ax[0].plot(x2,f(x2,0.02,0.5),label="0.5 order",color="black",linestyle="dotted",linewidth=1)
+ax[0].plot(x2,f(x2,0.02,0.5),label="0.5th order",color="black",linestyle="dotted",linewidth=1)
 ax[0].plot(x2,f(x2,4e-4,1),label="1st order",color="black",linestyle="dashed",linewidth=1)
 ax[0].plot(x2,f(x2,1.6e-7,2),label="2nd order",color="black",linestyle="dashdot",linewidth=1)
 plt.semilogx()
@@ -178,9 +178,9 @@ plt.semilogy()
 # Place legend
 #ax[0].set_xticks([1e3,5e2,250,1e2,125,62.5])
 ax[0].set_yticks([1e-3,1e-2,1e-1,1e0,1e1])
-ax[0].legend(loc='upper right',ncol=1,handlelength=4)
+ax[0].legend(loc='lower right',ncol=1,handlelength=4)
 # Ranges of the axes
-ax[0].set_xlim(2e3,9e0) # yr
+ax[0].set_xlim(9e0,2e3) # yr
 ax[0].set_ylim(9e-4,2e0) # %
 # Add labels
 ax[0].text(2950,2,"c)")
