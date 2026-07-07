@@ -72,7 +72,7 @@ counter = 0
 # with edot_ii = 0.03154/yr_in_secs/model_width 1/s, eta = 1e22 Pas, mu = 1e10 Pa.
 # Return stress in Pa.
 def tau_xx_analytical(time):
-  yr_in_secs=3600.0*24.0*365.25
+  yr_in_secs=3600.0*24.0*365.2425
   edot_ii=0.03154/yr_in_secs/100000.
   eta=1e22
   mu=1e10
