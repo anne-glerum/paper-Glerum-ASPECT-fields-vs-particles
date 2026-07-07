@@ -88,6 +88,7 @@ for k in range(len(label_as)):
     cbar.set_label('Surface displacement [m]',
                 labelpad=5, fontsize=6)
     cbar.ax.tick_params(labelsize=5)
+    ax[0,0].text(-180,500,"a)",fontsize=6)
     filename = output_dir_base + model_name[k] + '/' + label_as[k] + '_surface_topo2.png'
     plt.savefig(filename, dpi=300)
     plt.cla()
